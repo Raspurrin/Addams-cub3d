@@ -4,8 +4,8 @@ NAME	=	cub3d
 DEBUG	=	-fsanitize=address
 LIBFT	=	./libs/libft/
 MLX		=	./libs/mlx/
-LIBS	=	-framework OpenGL -framework AppKit
 SRCS	=	./srcs/main.c
+OS		=	$(shell uname -s)
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -30,6 +30,14 @@ else
 SUBM_FLAG	= 
 endif
 
+ifeq ($(OS), Darwin)
+LIBS	= -framework OpenGL -framework AppKit
+MLXLIB	= libmlx.a
+else
+LIBS	= -lXext -lX11 -lm -lz
+MLXLIB	= libmlx_Linux.a
+endif
+
 all: $(SUBM_FLAG) mlx libft cub3d
 
 submodule:
@@ -52,7 +60,7 @@ mlx:
 	@$(MAKE) -C $(MLX)
 
 $(NAME): banner $(OBJS)
-	@$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBS) $(OBJS) $(MLX)libmlx.a $(LIBFT)libft.a $(READLINE) $(FSAN) -o $(NAME)
+	$(CC) $(FLAGS_OS) $(CFLAGS) $(OBJS) $(MLX)$(MLXLIB) $(LIBFT)libft.a $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
