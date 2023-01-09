@@ -7,5 +7,6 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <stdint.h>
+# include "../libs/mlx/mlx.h"
 
 #endif

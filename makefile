@@ -3,6 +3,8 @@ CFLAGS	=	-Wall -Wextra -Werror -g
 NAME	=	cub3d
 DEBUG	=	-fsanitize=address
 LIBFT	=	./libs/libft/
+MLX		=	./libs/mlx/
+LIBS	=	-framework OpenGL -framework AppKit
 SRCS	=	./srcs/main.c
 
 OBJS	= $(SRCS:.c=.o)
@@ -28,7 +30,7 @@ else
 SUBM_FLAG	= 
 endif
 
-all: $(SUBM_FLAG) libft cub3d
+all: $(SUBM_FLAG) mlx libft cub3d
 
 submodule:
 	@git submodule init 
@@ -45,12 +47,16 @@ libft:
 	@echo "\n${BLUE}======== Libft ========${NC}"
 	@$(MAKE) -C $(LIBFT)
 
+mlx:
+	@echo "\n${BLUE}======== MLX ========${NC}"
+	@$(MAKE) -C $(MLX)
+
 $(NAME): banner $(OBJS)
-	@$(CC) $(FLAGS_OS) $(CFLAGS) $(ADDUSER) $(OBJS) $(LIBFT)libft.a $(READLINE) $(FSAN) -o $(NAME)
+	@$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBS) $(OBJS) $(MLX)libmlx.a $(LIBFT)libft.a $(READLINE) $(FSAN) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
-	@echo "$(PINK)✨Minishell successfully cleaned!✨$(RESET)"
+	@echo "$(PURPLE)✨Minishell successfully cleaned!✨$(RESET)"
 
 fclean: clean
 	@rm -f philo
