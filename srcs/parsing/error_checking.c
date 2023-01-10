@@ -9,4 +9,5 @@ bool	extension_check(char *map_name, char *ext)
 		len--;
 	if (ft_strcmp(&map_name[len], ext) != 0)
 		return (errno(INV_EXT, ""), false);
+	return (true);
 }

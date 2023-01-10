@@ -6,7 +6,7 @@
  * @param nbr Signifies with error message from the array to be used.
  * @param msg additional message after the error message.
  */
-static void	errno(int8_t nbr, char *msg)
+void	errno(int8_t nbr, char *msg)
 {
 	static const char	*errors[] = {
 		"Contains invalid characters",
@@ -20,5 +20,5 @@ static void	errno(int8_t nbr, char *msg)
 		"Incomplete file"
 	};
 
-	ft_printf_fd(STDERR_FILENO, "Error\n%s%s\n", errors[nbr]);
+	ft_printf_fd(STDERR_FILENO, "Error\n%s%s\n", errors[nbr], msg);
 }

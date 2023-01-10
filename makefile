@@ -3,7 +3,10 @@ CFLAGS	=	-Wall -Wextra -Werror -g
 NAME	=	cub3d
 DEBUG	=	-fsanitize=address
 LIBFT	=	./libs/libft/
-SRCS	=	./srcs/main.c
+SRCS	=	./srcs/main.c \
+			./srcs/errno.c \
+			./srcs/keyhooks.c \
+			./srcs/parsing/error_checking.c
 OS		=	$(shell uname -s)
 
 OBJS	= $(SRCS:.c=.o)
@@ -59,7 +62,7 @@ mlx:
 	@$(MAKE) -C $(MLX)
 
 $(NAME): banner $(OBJS)
-	@$(CC) $(FLAGS_OS) $(CFLAGS) $(OBJS) $(MLX)libmlx.a $(LIBFT)libft.a $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
+	$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBFT)libft.a $(MLX)libmlx.a $(OBJS) $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)

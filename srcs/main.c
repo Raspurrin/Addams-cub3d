@@ -2,12 +2,13 @@
 
 int32_t	main(int argc, char const *argv[])
 {
+	t_data	data;
+
 	(void)argc;
 	(void)argv;
-	void	*mlx;
-
-	mlx = mlx_init();
-	mlx_new_window(mlx, 1920, 1080, "yo");
-	mlx_loop(mlx);
+	data.mlx = mlx_init();
+	data.win = mlx_new_window(data.mlx, 1920, 1080, "yo");
+	key_hooks(&data);
+	mlx_loop(data.mlx);
 	return (0);
 }
