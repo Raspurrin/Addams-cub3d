@@ -44,15 +44,13 @@
 
 #ifndef MLX_H
 
-#define	MLX_H
+# define MLX_H
 
-
-void	*mlx_init();
+void	*mlx_init(void);
 /*
 **  needed before everything else.
 **  return (void *)0 if failed
 */
-
 
 /*
 ** Basic actions

@@ -59,16 +59,18 @@ mlx:
 	@$(MAKE) -C $(MLX)
 
 $(NAME): banner $(OBJS)
-	$(CC) $(FLAGS_OS) $(CFLAGS) $(OBJS) $(MLX)libmlx.a $(LIBFT)libft.a $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
+	@$(CC) $(FLAGS_OS) $(CFLAGS) $(OBJS) $(MLX)libmlx.a $(LIBFT)libft.a $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
-	@echo "$(PURPLE)✨Minishell successfully cleaned!✨$(RESET)"
+	@$(MAKE) -C $(LIBFT) fclean
+	@$(MAKE) -C $(MLX) clean
+	@echo "${B_RED}🧹 Cleaning: ${RED} object files $(NC)"
 
 fclean: clean
-	@rm -f philo
+	@rm -f $(NAME)
+	@echo "${B_RED}🧹 Cleaning: ${RED} $(NAME)$(NC)"
 
 re: fclean all
-	cd includes
 
-.PHONY: all clean fclean re banner $(NAME) libft e submodule
+.PHONY: all clean fclean re banner $(NAME) libft mlx submodule
