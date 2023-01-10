@@ -9,4 +9,17 @@
 # include <stdint.h>
 # include "../libs/mlx/mlx.h"
 
+typedef enum errno
+{
+	INV_CHAR,
+	INV_EXT,
+	WALLS,
+	SPACES,
+	ORDER,
+	TEXTURE,
+	ELEMENT,
+	COLOUR,
+	INCOMPLETE
+}	t_errno;
+
 #endif
