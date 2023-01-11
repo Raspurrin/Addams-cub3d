@@ -1,6 +1,9 @@
+
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -9,6 +12,11 @@
 # include <stdint.h>
 # include "../libs/mlx/mlx.h"
 # include "../libs/libft/includes/libft.h"
+
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 500
+
+# define BUFFERSIZE 20
 
 # define KEY_PRESS 2
 # define RED_CROSS 17
@@ -51,6 +59,9 @@
 
 typedef enum errno
 {
+	ARGS,
+	READ_FAIL,
+	NO_CUB,
 	INV_CHAR,
 	INV_EXT,
 	WALLS,
@@ -62,13 +73,40 @@ typedef enum errno
 	INCOMPLETE
 }	t_errno;
 
+typedef struct texture
+{
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	int32_t	floor;
+	int32_t	ceiling;
+}	t_texture;
+
 typedef struct data
 {
-	void	*mlx;
-	void	*win;
+	void		*mlx;
+	void		*win;
+	char		**map;
+	int32_t		map_width;
+	int32_t		map_height;
+	t_texture	*texture;
 }	t_data;
 
+// /* general functions */
+void	errno(int8_t nbr, char *msg, t_data *data);
+// void	free_data(t_data *data);
+// void	error_checking(t_data *data, int32_t argc, char **argv);
+
+/* mlx */
 void	key_hooks(t_data *data);
-void	errno(int8_t nbr, char *msg);
+
+/* parsing */
+void	extract_map(t_data *data, char *file);
+char	*read_file(int32_t fd);
+
+// hooks 
+int	key_handler(int keycode, t_data *data);
+int	x_close(t_data *data);
 
 #endif

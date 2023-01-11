@@ -1,5 +1,5 @@
 CC 		= gcc
-CFLAGS	=	-Wall -Wextra -Werror -g
+CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
 NAME	=	cub3d
 DEBUG	=	-fsanitize=address
 LIBFT	=	./libs/libft/
@@ -64,10 +64,17 @@ mlx:
 $(NAME): banner $(OBJS)
 	$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBFT)libft.a $(MLX)libmlx.a $(OBJS) $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
 
+git:
+	git add .
+	@read -p "Enter the commit message: " halp; \
+	git commit -m "$$halp"
+	git push
+	@echo "$(BLUE)git auto add & push with message performed.$(RESET)"
+
 clean:
 	@rm -f $(OBJS)
 	@$(MAKE) -C $(LIBFT) fclean
-	@$(MAKE) -C $(MLX) clean
+# @$(MAKE) -C $(MLX) clean
 	@echo "${B_RED}🧹 Cleaning: ${RED} object files $(NC)"
 
 fclean: clean
