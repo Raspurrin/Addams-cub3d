@@ -69,7 +69,7 @@ git:
 	@read -p "Enter the commit message: " halp; \
 	git commit -m "$$halp"
 	git push
-	@echo "$(BLUE)git auto add & push with message performed.$(RESET)"
+	@echo "$(BLUE)All added, commited and pushed✨$(RESET)"
 
 clean:
 	@rm -f $(OBJS)
