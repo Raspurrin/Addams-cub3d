@@ -1,6 +1,7 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
+# include <fcntl.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -90,10 +91,16 @@ typedef struct data
 	t_texture	*texture;
 }	t_data;
 
-void	key_hooks(t_data *data);
+/* general functions */
 void	errno(int8_t nbr, char *msg, t_data *data);
-void	extract_map(t_data *data, char *file);
-void	error_checking(t_data *data, int32_t argc, char **argv);
 void	free_data(t_data *data);
+void	error_checking(t_data *data, int32_t argc, char **argv);
+
+/* mlx */
+void	key_hooks(t_data *data);
+
+/* parsing */
+void	extract_map(t_data *data, char *file);
+char	*read_file(int32_t fd);
 
 #endif

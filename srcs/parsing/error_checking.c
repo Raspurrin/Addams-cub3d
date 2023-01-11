@@ -33,11 +33,11 @@ static void	direction_check(t_data *data, t_texture *texture, char **file)
 	if (len < 1 || len > 2)
 		return (errno(INV_CHAR, "", data));
 	*file += len;
-	if (!texture->ceiling && ft_strcmp(word, "C"))
-		texture->ceiling = skip_spaces(file);
-	else if (!texture->floor && ft_strcmp(word, "F"))
-		texture->floor = skip_spaces(file);
-	else if (!texture->north && ft_strcmp(word, "NO"))
+	// if (!texture->ceiling && ft_strcmp(word, "C"))
+	// 	texture->ceiling = skip_spaces(file);
+	// else if (!texture->floor && ft_strcmp(word, "F"))
+	// 	texture->floor = skip_spaces(file);
+	if (!texture->north && ft_strcmp(word, "NO"))
 		texture->north = skip_spaces(file);
 	else if (!texture->south && ft_strcmp(word, "SO"))
 		texture->south = skip_spaces(file);
@@ -68,11 +68,11 @@ void	error_checking(t_data *data, int32_t argc, char **argv)
 	char	*file;
 
 	if (argc > 2)
-		return (errno(ARGS, "", data), false);
+		errno(ARGS, "", data);
 	if (argc <= 1)
-		return (errno(NO_CUB, "", data), false);
+		errno(NO_CUB, "", data);
 	extension_check(data, argv[1], ".cub");
-	fd = open(argv[1]);
+	fd = open(argv[1], O_RDWR);
 	file = read_file(fd);
 	element_check(data, &file);
 	extract_map(data, file);
