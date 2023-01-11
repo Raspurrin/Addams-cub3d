@@ -1,6 +1,6 @@
 #include "../../includes/cub3d.h"
 
-bool	extension_check(char *map_name, char *ext)
+static void	extension_check(t_data *data, char *map_name, char *ext)
 {
 	size_t	len;
 
@@ -8,6 +8,72 @@ bool	extension_check(char *map_name, char *ext)
 	while (len > 0 || map_name[len] != '.')
 		len--;
 	if (ft_strcmp(&map_name[len], ext) != 0)
-		return (errno(INV_EXT, ""), false);
+		return (errno(INV_EXT, "", data));
+}
+
+static char	*skip_spaces(char *file)
+{
+	size_t	start;
+	size_t	end;
+
+	start = 0;
+	end = 0;
+	while (ft_isspace(file))
+		start++;
+	while (ft_isascii(file[start]))
+		end++;
+	return (ft_substr(file, start, end));
+}
+
+static void	direction_check(t_data *data, t_texture *texture, char *file)
+{
+	size_t	len;
+	char	*word;
+
+	word = skip_spaces(file);
+	len = ft_strlen(word);
+	if (len < 1 || len > 2)
+		return (errno(INV_CHAR, "", data));
+	if (!texture->ceiling && ft_strcmp(word, "C"))
+		texture->ceiling = skip_spaces(file + 1);
+	else if (!texture->floor && ft_strcmp(word, "F"))
+		texture->floor = skip_spaces(file + 1);
+	else if (!texture->north && ft_strcmp(word, "NO"))
+		texture->north = skip_spaces(file + 2);
+	else if (!texture->south && ft_strcmp(word, "SO"))
+		texture->south = skip_spaces(file + 2);
+	else if (!texture->west && ft_strcmp(word, "WE"))
+		texture->west = skip_spaces(file + 2);
+	else if (!texture->east && ft_strcmp(word, "EA"))
+		texture->east = skip_spaces(file + 2);
+	else
+		return (errno(INV_CHAR, "", data));
+}
+
+static void	element_check(t_data *data, char *file)
+{
+	size_t	i;
+
+	i = 0;
+	while (i < 6)
+	{
+		direction_check(data, data->texture, file);
+		i++;
+	}
+	read_map(file);
 	return (true);
+}
+
+void	error_checking(t_data *data, int32_t argc, char **argv)
+{
+	int32_t	fd;
+	char	*file;
+
+	if (argc > 2)
+		return (errno(ARGS, "", data), false);
+	if (argc <= 1)
+		return (errno(NO_CUB, "", data), false);
+	extension_check(data, argv[1], ".cub");
+	fd = open(argv[1]);
+	file = read_file(fd);
 }

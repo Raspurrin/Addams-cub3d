@@ -10,6 +10,11 @@
 # include "../libs/mlx/mlx.h"
 # include "../libs/libft/includes/libft.h"
 
+# define SCREEN_WIDTH 800
+# define SCREEN_HEIGHT 500
+
+# define BUFFERSIZE 20
+
 # define KEY_PRESS 2
 # define RED_CROSS 17
 # define MOUSE_MOVE 6
@@ -51,6 +56,9 @@
 
 typedef enum errno
 {
+	ARGS,
+	READ_FAIL,
+	NO_CUB,
 	INV_CHAR,
 	INV_EXT,
 	WALLS,
@@ -62,13 +70,27 @@ typedef enum errno
 	INCOMPLETE
 }	t_errno;
 
+typedef struct texture
+{
+	char	*north;
+	char	*south;
+	char	*west;
+	char	*east;
+	int32_t	floor;
+	int32_t	ceiling;
+}	t_texture;
+
 typedef struct data
 {
-	void	*mlx;
-	void	*win;
+	void		*mlx;
+	void		*win;
+	char		**map;
+	int32_t		map_width;
+	int32_t		map_height;
+	t_texture	*texture;
 }	t_data;
 
 void	key_hooks(t_data *data);
-void	errno(int8_t nbr, char *msg);
+void	errno(int8_t nbr, char *msg, t_data *data);
 
 #endif
