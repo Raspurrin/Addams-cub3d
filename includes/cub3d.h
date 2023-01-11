@@ -92,5 +92,8 @@ typedef struct data
 
 void	key_hooks(t_data *data);
 void	errno(int8_t nbr, char *msg, t_data *data);
+void	extract_map(t_data *data, char *file);
+void	error_checking(t_data *data, int32_t argc, char **argv);
+void	free_data(t_data *data);
 
 #endif

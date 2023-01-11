@@ -43,7 +43,7 @@ char	*read_file(int32_t fd)
 // 	str[i] = '\0';
 // }
 
-void	largest_row(t_data *data, char *file)
+static void	largest_row(t_data *data, char *file)
 {
 	size_t	row_len;
 	size_t	largest_row;
@@ -61,24 +61,24 @@ void	largest_row(t_data *data, char *file)
 	data->map_width = largest_row;
 }
 
-void	get_start_mapcheck(t_data *data, char **map)
-{
-	size_t	x;
-	size_t	y;
+// static void	mapcheck(t_data *data, char **map)
+// {
+// 	size_t	x;
+// 	size_t	y;
 
-	x = 0;
-	y = 0;
-	while (y < data->map_height)
-	{
-		while (x < data->map_width)
-		{
-			if (ft_isspace(map[y][x]))
-				x++;
-		}
-		y++;
-	}
-	map_check(x, y);
-}
+// 	x = 0;
+// 	y = 0;
+// 	while (y < data->map_height)
+// 	{
+// 		while (x < data->map_width)
+// 		{
+// 			if (ft_isspace(map[y][x]))
+// 				x++;
+// 		}
+// 		y++;
+// 	}
+// 	map_check(x, y);
+// }
 
 void	extract_map(t_data *data, char *file)
 {

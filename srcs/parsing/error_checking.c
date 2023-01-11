@@ -11,21 +11,19 @@ static void	extension_check(t_data *data, char *map_name, char *ext)
 		return (errno(INV_EXT, "", data));
 }
 
-static char	*skip_spaces(char *file)
+static char	*skip_spaces(char **file)
 {
-	size_t	start;
 	size_t	end;
 
-	start = 0;
 	end = 0;
-	while (ft_isspace(file))
-		start++;
-	while (ft_isascii(file[start]))
+	while (ft_isspace(**file))
+		(*file)++;
+	while (ft_isascii(*file[end]))
 		end++;
-	return (ft_substr(file, start, end));
+	return (ft_substr(*file, 0, end));
 }
 
-static void	direction_check(t_data *data, t_texture *texture, char *file)
+static void	direction_check(t_data *data, t_texture *texture, char **file)
 {
 	size_t	len;
 	char	*word;
@@ -34,23 +32,25 @@ static void	direction_check(t_data *data, t_texture *texture, char *file)
 	len = ft_strlen(word);
 	if (len < 1 || len > 2)
 		return (errno(INV_CHAR, "", data));
+	*file += len;
 	if (!texture->ceiling && ft_strcmp(word, "C"))
-		texture->ceiling = skip_spaces(file + 1);
+		texture->ceiling = skip_spaces(file);
 	else if (!texture->floor && ft_strcmp(word, "F"))
-		texture->floor = skip_spaces(file + 1);
+		texture->floor = skip_spaces(file);
 	else if (!texture->north && ft_strcmp(word, "NO"))
-		texture->north = skip_spaces(file + 2);
+		texture->north = skip_spaces(file);
 	else if (!texture->south && ft_strcmp(word, "SO"))
-		texture->south = skip_spaces(file + 2);
+		texture->south = skip_spaces(file);
 	else if (!texture->west && ft_strcmp(word, "WE"))
-		texture->west = skip_spaces(file + 2);
+		texture->west = skip_spaces(file);
 	else if (!texture->east && ft_strcmp(word, "EA"))
-		texture->east = skip_spaces(file + 2);
+		texture->east = skip_spaces(file);
 	else
-		return (errno(INV_CHAR, "", data));
+		errno(INV_CHAR, "", data);
+	file += len;
 }
 
-static void	element_check(t_data *data, char *file)
+static void	element_check(t_data *data, char **file)
 {
 	size_t	i;
 
@@ -60,8 +60,6 @@ static void	element_check(t_data *data, char *file)
 		direction_check(data, data->texture, file);
 		i++;
 	}
-	read_map(file);
-	return (true);
 }
 
 void	error_checking(t_data *data, int32_t argc, char **argv)
@@ -76,4 +74,6 @@ void	error_checking(t_data *data, int32_t argc, char **argv)
 	extension_check(data, argv[1], ".cub");
 	fd = open(argv[1]);
 	file = read_file(fd);
+	element_check(data, &file);
+	extract_map(data, file);
 }
