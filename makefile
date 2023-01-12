@@ -9,7 +9,7 @@ SRCS	=	./srcs/main.c \
 			./srcs/free.c \
 			./srcs/init.c \
 			./srcs/graphics/colour.c \
-			./srcs/parsing/agenda_check.c \
+			./srcs/parsing/legenda_check.c \
 			./srcs/parsing/error_check.c \
 			./srcs/parsing/read_map.c \
 			./srcs/parsing/validate_map.c \

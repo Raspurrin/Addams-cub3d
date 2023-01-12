@@ -11,31 +11,25 @@
  */
 int32_t	argb_to_int(int32_t a, int32_t r, int32_t g, int32_t b)
 {
-	return (a << 24 | r << 16 | g << 8 | b);
+	return (a << 24 | b << 16 | g << 8 | r);
 }
 
 int32_t	add_channel(int32_t colour, int32_t channel, int8_t bitshift)
 {
-	return (channel >> bitshift | colour);
+	return (channel << bitshift | colour);
 }
 
-char	*print_bits(int32_t nbr)
+void	print_bits(int32_t nbr)
 {
 	size_t	i;
 
 	i = 32;
 	while (i > 0)
 	{
-		if (nbr >> i & 1 == '1')
+		if (((nbr >> i) & 1) == '1')
 			write(STDOUT_FILENO, "1", 1);
 		else
 			write(STDOUT_FILENO, "0", 1);
 		i--;
 	}
 }
- struct {
-	char a;
-	char b;
-	char g;
-	char r;
- }
