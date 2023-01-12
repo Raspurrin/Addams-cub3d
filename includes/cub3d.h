@@ -59,6 +59,7 @@ typedef enum errno
 {
 	ARGS,
 	READ_FAIL,
+	COLOUR,
 	NO_CUB,
 	INV_CHAR,
 	INV_EXT,
@@ -66,7 +67,6 @@ typedef enum errno
 	ORDER,
 	TEXTURE,
 	ELEMENT,
-	COLOUR,
 	INCOMPLETE
 }	t_errno;
 
@@ -76,8 +76,8 @@ typedef struct texture
 	char	*south;
 	char	*west;
 	char	*east;
-	char	*floor;
-	char	*ceiling;
+	int32_t	floor;
+	int32_t	ceiling;
 }	t_texture;
 
 typedef struct data
@@ -104,5 +104,6 @@ void	extract_map(t_data *data, char *file);
 char	*read_file(int32_t fd);
 bool	is_space_or_1(char c);
 bool	is_valid_char(char c);
+int32_t	extract_colour(t_data *data, char *colour_str);
 
 #endif

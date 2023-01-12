@@ -40,9 +40,9 @@ static void	direction_check(t_data *data, t_texture *texture, char **file)
 	*file += len;
 	path = skip_spaces(file);
 	if (!texture->ceiling && ft_strcmp(word, "C") == 0)
-		texture->ceiling = ft_strdup(path);
+		texture->ceiling = extract_colour(data, path);
 	else if (!texture->floor && ft_strcmp(word, "F") == 0)
-		texture->floor = ft_strdup(path);
+		texture->floor = extract_colour(data, path);
 	else if (!texture->north && ft_strcmp(word, "NO") == 0)
 		texture->north = ft_strdup(path);
 	else if (!texture->south && ft_strcmp(word, "SO") == 0)

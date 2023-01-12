@@ -8,6 +8,7 @@ SRCS	=	./srcs/main.c \
 			./srcs/keyhooks.c \
 			./srcs/free.c \
 			./srcs/init.c \
+			./srcs/graphics/colour.c \
 			./srcs/parsing/error_checking.c \
 			./srcs/parsing/read_map.c \
 			./srcs/parsing/validate_map.c \
