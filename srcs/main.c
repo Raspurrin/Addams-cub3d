@@ -8,7 +8,7 @@ int32_t	main(int argc, char *argv[])
 	(void)argv;
 
 	init(&data);
-	error_checking(&data, argc, argv);
+	error_check(&data, argc, argv);
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, SCREEN_HEIGHT, SCREEN_WIDTH, "yo");
 	key_hooks(&data);

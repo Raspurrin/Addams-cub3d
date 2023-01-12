@@ -1,18 +1,31 @@
 #include "../../includes/cub3d.h"
 
-static void	extension_check(t_data *data, char *map_name, char *ext)
+/**
+ * Extracting the string for the colour of the ceiling or the floor
+ * and converting it to a usable integer.
+ * @param colour_str example: "220,100,0"
+ */
+int32_t	extract_colour(t_data *data, char *colour_str)
 {
-	size_t	len;
+	char	*channel_str;
+	int32_t	channel_nbr;
+	int32_t	bitshift;
+	int32_t	colour;
 
-	len = ft_strlen(map_name);
-	while (len > 0)
+	colour = 0;
+	bitshift = 0;
+	while (*colour_str)
 	{
-		if (map_name[len] == '.')
-			break ;
-		len--;
+		channel_str = ft_subcstr(colour_str, ',');
+		channel_nbr = ft_atoi(channel_str);
+		if (channel_nbr < 0 || channel_nbr > 255)
+			return (free(channel_str), errno(COLOUR, "", data), 0);
+		colour = add_channel(colour, ft_atoi(channel_str), bitshift);
+		free(channel_str);
+		bitshift += 8;
+		colour_str += (ft_strclen(colour_str, ',') + 1);
 	}
-	if (ft_strcmp(&map_name[len], ext) != 0)
-		return (errno(INV_EXT, "", data));
+	return (colour);
 }
 
 static char	*skip_spaces(char **file)
@@ -56,7 +69,7 @@ static void	direction_check(t_data *data, t_texture *texture, char **file)
 	*file += ft_strlen(path);
 }
 
-static void	element_check(t_data *data, char **file)
+void	element_check(t_data *data, char **file)
 {
 	size_t	i;
 
@@ -66,20 +79,4 @@ static void	element_check(t_data *data, char **file)
 		direction_check(data, &data->texture, file);
 		i++;
 	}
-}
-
-void	error_checking(t_data *data, int32_t argc, char **argv)
-{
-	int32_t	fd;
-	char	*file;
-
-	if (argc > 2)
-		errno(ARGS, "", data);
-	if (argc <= 1)
-		errno(NO_CUB, "", data);
-	extension_check(data, argv[1], ".cub");
-	fd = open(argv[1], O_RDWR);
-	file = read_file(fd);
-	element_check(data, &file);
-	extract_map(data, file);
 }

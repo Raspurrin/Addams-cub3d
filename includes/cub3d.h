@@ -93,7 +93,7 @@ typedef struct data
 /* general functions */
 void	errno(int8_t nbr, char *msg, t_data *data);
 void	free_data(t_data *data);
-void	error_checking(t_data *data, int32_t argc, char **argv);
+void	error_check(t_data *data, int32_t argc, char **argv);
 
 /* mlx */
 void	key_hooks(t_data *data);
@@ -104,6 +104,11 @@ void	extract_map(t_data *data, char *file);
 char	*read_file(int32_t fd);
 bool	is_space_or_1(char c);
 bool	is_valid_char(char c);
+void	element_check(t_data *data, char **file);
+
+/* graphics */
+int32_t	rgb_to_int(int32_t r, int32_t g, int32_t b, int32_t a);
+int32_t	add_channel(int32_t colour, int32_t channel, int8_t bitshift);
 int32_t	extract_colour(t_data *data, char *colour_str);
 
 #endif
