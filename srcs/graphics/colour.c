@@ -9,19 +9,33 @@
  * 
  * @return int32_t 
  */
-int32_t	rgb_to_int(int32_t r, int32_t g, int32_t b, int32_t a)
+int32_t	argb_to_int(int32_t a, int32_t r, int32_t g, int32_t b)
 {
-	int32_t	colour;
-
-	colour = 0;
-	colour = r >> 0 | colour;
-	colour = g >> 8 | colour;
-	colour = b >> 16 | colour;
-	colour = a >> 24 | colour;
-	return (colour);
+	return (a << 24 | r << 16 | g << 8 | b);
 }
 
 int32_t	add_channel(int32_t colour, int32_t channel, int8_t bitshift)
 {
 	return (channel >> bitshift | colour);
 }
+
+char	*print_bits(int32_t nbr)
+{
+	size_t	i;
+
+	i = 32;
+	while (i > 0)
+	{
+		if (nbr >> i & 1 == '1')
+			write(STDOUT_FILENO, "1", 1);
+		else
+			write(STDOUT_FILENO, "0", 1);
+		i--;
+	}
+}
+ struct {
+	char a;
+	char b;
+	char g;
+	char r;
+ }

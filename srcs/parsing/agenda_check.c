@@ -80,3 +80,4 @@ void	element_check(t_data *data, char **file)
 		i++;
 	}
 }
+// 6 might be a problem
