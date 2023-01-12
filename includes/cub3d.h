@@ -12,6 +12,9 @@
 # include <stdint.h>
 # include "../libs/mlx/mlx.h"
 # include "../libs/libft/includes/libft.h"
+# include "../includes/engine.h"
+
+typedef struct data	t_data;
 
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 500
@@ -91,6 +94,8 @@ typedef struct data
 	int32_t		map_width;
 	int32_t		map_height;
 	t_texture	*texture;
+	t_img		img;
+	t_colour	colour;
 }	t_data;
 
 // /* general functions */
@@ -104,9 +109,5 @@ void	key_hooks(t_data *data);
 /* parsing */
 void	extract_map(t_data *data, char *file);
 char	*read_file(int32_t fd);
-
-// hooks 
-int	key_handler(int keycode, t_data *data);
-int	x_close(t_data *data);
 
 #endif

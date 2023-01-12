@@ -6,7 +6,9 @@ LIBFT	=	./libs/libft/
 SRCS	=	./srcs/main.c \
 			./srcs/errno.c \
 			./srcs/keyhooks.c \
-			./srcs/parsing/error_checking.c
+			./srcs/parsing/error_checking.c \
+			./srcs/engine/mlx.c \
+			./srcs/engine/draw.c
 OS		=	$(shell uname -s)
 
 OBJS	= $(SRCS:.c=.o)
