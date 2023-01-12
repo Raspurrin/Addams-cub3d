@@ -77,8 +77,8 @@ typedef struct texture
 	char	*south;
 	char	*west;
 	char	*east;
-	int32_t	floor;
-	int32_t	ceiling;
+	char	*floor;
+	char	*ceiling;
 }	t_texture;
 
 typedef struct data
@@ -88,7 +88,7 @@ typedef struct data
 	char		**map;
 	int32_t		map_width;
 	int32_t		map_height;
-	t_texture	*texture;
+	t_texture	texture;
 }	t_data;
 
 /* general functions */
@@ -100,6 +100,7 @@ void	error_checking(t_data *data, int32_t argc, char **argv);
 void	key_hooks(t_data *data);
 
 /* parsing */
+void	init(t_data *data);
 void	extract_map(t_data *data, char *file);
 char	*read_file(int32_t fd);
 

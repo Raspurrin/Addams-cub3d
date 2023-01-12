@@ -33,11 +33,11 @@ char	*read_file(int32_t fd)
 }
 
 // not sure if we are gonna need this
-static void	fill_str(char *str, size_t end, char c)
+static void	fill_str(char *str, size_t start, size_t end, char c)
 {
 	size_t	i;
 
-	i = 0;
+	i = start;
 	while (i < end)
 		str[i++] = c;
 	str[i] = '\0';
@@ -91,7 +91,7 @@ void	extract_map(t_data *data, char *file)
 	{
 		if (file[i] == '\n')
 		{
-			file += i;
+			file += (i + 1);
 			i = 0;
 		}
 		i++;
@@ -99,11 +99,11 @@ void	extract_map(t_data *data, char *file)
 	i = 0;
 	largest_row(data, file);
 	map = ft_calloc(data->map_height, sizeof(char *));
-	while (map[i])
+	while (i < (size_t)data->map_height)
 	{
-		map[i] = malloc(data->map_width * sizeof(char));
+		map[i] = ft_calloc(data->map_width + 1 * sizeof(char));
 		row_length = ft_strccpy(map[i], file, '\n');
-		fill_str(map[i], ' ', data->map_width);
+		fill_str(map[i], row_length - 1, data->map_width, ' ');
 		file += row_length;
 		i++;
 	}

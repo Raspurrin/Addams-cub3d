@@ -7,6 +7,7 @@ SRCS	=	./srcs/main.c \
 			./srcs/errno.c \
 			./srcs/keyhooks.c \
 			./srcs/free.c \
+			./srcs/init.c \
 			./srcs/parsing/error_checking.c \
 			./srcs/parsing/read_map.c
 
@@ -27,12 +28,6 @@ ifeq ($(DEBUG),1)
 FSAN 	=	-fsanitize=address
 else 
 FSAN 	=
-endif
-
-ifeq ($(SUBM_STATE),)
-SUBM_FLAG	= submodule
-else 
-SUBM_FLAG	= 
 endif
 
 ifeq ($(OS), Darwin)
@@ -65,7 +60,7 @@ mlx:
 	@$(MAKE) -C $(MLX)
 
 $(NAME): banner $(OBJS)
-	$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBFT)libft.a $(MLX)libmlx.a $(OBJS) $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
+	@$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBFT)libft.a $(MLX)libmlx.a $(OBJS) $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
 
 clean:
 	@rm -f $(OBJS)
