@@ -11,7 +11,7 @@ void	errno(int8_t nbr, char *msg, t_data *data)
 	static const char	*errors[] = {
 		"Too many arguments",
 		"Failed reading the file",
-		"Wrong colour channel given in input file. Ex: C 220,100,0"
+		"Wrong colour channel given in input file. Ex: C 220,100,0",
 		"You need to give a .cub file as argument",
 		"Contains invalid characters",
 		"Wrong file extension",
