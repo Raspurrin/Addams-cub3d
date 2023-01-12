@@ -62,8 +62,7 @@ typedef enum errno
 	NO_CUB,
 	INV_CHAR,
 	INV_EXT,
-	WALLS,
-	SPACES,
+	INV_MAP,
 	ORDER,
 	TEXTURE,
 	ELEMENT,
@@ -103,5 +102,7 @@ void	key_hooks(t_data *data);
 void	init(t_data *data);
 void	extract_map(t_data *data, char *file);
 char	*read_file(int32_t fd);
+bool	is_space_or_1(char c);
+bool	is_valid_char(char c);
 
 #endif

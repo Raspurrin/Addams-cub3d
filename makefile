@@ -9,7 +9,9 @@ SRCS	=	./srcs/main.c \
 			./srcs/free.c \
 			./srcs/init.c \
 			./srcs/parsing/error_checking.c \
-			./srcs/parsing/read_map.c
+			./srcs/parsing/read_map.c \
+			./srcs/parsing/validate_map.c \
+			./srcs/parsing/is_char_checks.c
 
 OS		=	$(shell uname -s)
 

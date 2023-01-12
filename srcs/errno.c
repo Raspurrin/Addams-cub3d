@@ -15,7 +15,6 @@ void	errno(int8_t nbr, char *msg, t_data *data)
 		"Contains invalid characters",
 		"Wrong file extension",
 		"The map must be closed/surrounded by walls",
-		"Map content cannot be seperated by spaces",
 		"Map content needs to come last in the file",
 		"Invalid texture",
 		"Element typed wrong:",
