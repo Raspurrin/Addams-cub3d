@@ -59,7 +59,7 @@ libft:
 
 mlx:
 	@echo "\n${BLUE}======== MLX ========${NC}"
-	@$(MAKE) -C $(MLX)
+# @$(MAKE) -C $(MLX)
 
 $(NAME): banner $(OBJS)
 	$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBFT)libft.a $(MLX)libmlx.a $(OBJS) $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
