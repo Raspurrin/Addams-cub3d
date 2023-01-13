@@ -70,6 +70,19 @@ typedef enum errno
 	INCOMPLETE
 }	t_errno;
 
+typedef union colour
+{
+	int32_t	colour;
+	char	abgr[4];
+	struct
+	{
+		int8_t	a;
+		int8_t	b;
+		int8_t	g;
+		int8_t	r;
+	};
+}	t_colour;
+
 typedef struct texture
 {
 	char	*north;
