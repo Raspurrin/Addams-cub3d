@@ -20,16 +20,26 @@ void	draw_addams_cube(t_data *data)
 	x = 0;
 	while (x < SCREEN_WIDTH)
 	{
-		y = y+x;
-		while (y < SCREEN_HEIGHT)
+		y = 0;
+		while (y < SCREEN_HEIGHT/2)
 		{
-            my_mlx_pixel_put(&data->img, x, y, 0x00FF0000);
-			y++;
+            my_mlx_pixel_put(&data->img, x, y, 0xBA7CE7 );
+			y+=10;
 		}
 		x++;
 	}
-
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0,0);
-
+	x = 0;
+	while (x < SCREEN_WIDTH/2)
+	{
+		y = 0;
+		while (y < SCREEN_HEIGHT)
+		{
+            my_mlx_pixel_put(&data->img, x, y, 0xBA7CE7 );
+			y++;
+		}
+		x+=10;
+	}
+	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0,0);
     
 }

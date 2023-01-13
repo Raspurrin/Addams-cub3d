@@ -16,8 +16,8 @@
 
 typedef struct data	t_data;
 
-# define SCREEN_WIDTH 800
-# define SCREEN_HEIGHT 500
+# define SCREEN_WIDTH 1024
+# define SCREEN_HEIGHT 512
 
 # define BUFFERSIZE 20
 
