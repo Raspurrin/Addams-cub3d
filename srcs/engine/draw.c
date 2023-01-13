@@ -12,6 +12,13 @@ int	colour_func(t_data *data, int iter)
 	return (get_colour(data->colour));
 }
 
+void	move_up(t_data *data)
+{
+	data->player->x += 5;
+	data->player->y += 5;
+	draw_addams_cube(data);
+}
+
 void	draw_addams_cube(t_data *data)
 {
 	int	x;
@@ -24,7 +31,7 @@ void	draw_addams_cube(t_data *data)
 		while (y < SCREEN_HEIGHT/2)
 		{
             my_mlx_pixel_put(&data->img, x, y, 0xBA7CE7 );
-			y+=10;
+			y += 20;
 		}
 		x++;
 	}
@@ -38,8 +45,8 @@ void	draw_addams_cube(t_data *data)
             my_mlx_pixel_put(&data->img, x, y, 0xBA7CE7 );
 			y++;
 		}
-		x+=10;
+		x += 20;
 	}
+    my_mlx_pixel_put(&data->img, data->player->x, data->player->y, 0xF0ED18);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0,0);
-    
 }

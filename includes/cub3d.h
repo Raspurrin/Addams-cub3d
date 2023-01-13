@@ -96,6 +96,7 @@ typedef struct data
 	t_texture	*texture;
 	t_img		img;
 	t_colour	colour;
+	t_player	*player;
 }	t_data;
 
 // /* general functions */

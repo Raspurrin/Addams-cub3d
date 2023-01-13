@@ -4,6 +4,8 @@ int	key_handler(int keycode, t_data *data)
 {
 	if (keycode == ESC)
 		x_close(data);
+	else if (keycode == ARROW_UP)
+		move_up(data);
 	//else if(all other keys)
 		//the functions return bools
 	// if bool == true render else not
