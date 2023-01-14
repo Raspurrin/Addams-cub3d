@@ -6,6 +6,12 @@ int	key_handler(int keycode, t_data *data)
 		x_close(data);
 	else if (keycode == ARROW_UP)
 		move_up(data);
+	else if (keycode == ARROW_DWN)
+		move_down(data);
+	else if (keycode == ARROW_RIGHT)
+		move_right(data);
+	else if (keycode == ARROW_LEFT)
+		move_left(data);
 	//else if(all other keys)
 		//the functions return bools
 	// if bool == true render else not

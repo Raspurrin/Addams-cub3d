@@ -8,6 +8,12 @@
 // 	ft_bzero(data->texture, sizeof(t_texture));
 // }
 
+void	innit(t_data *data)
+{
+	data->plyr_x = 50;
+	data->plyr_y = 50;
+}
+
 int32_t	main(int argc, char const *argv[])
 {
 	t_data	data;
@@ -19,8 +25,7 @@ int32_t	main(int argc, char const *argv[])
 	data.img.img_ptr = mlx_new_image(data.mlx,  SCREEN_WIDTH, SCREEN_HEIGHT);
 	data.img.data = mlx_get_data_addr(data.img.img_ptr,
 			&data.img.bpp, &data.img.size_l, &data.img.endian);
-	data.player->x = 25;
-	data.player->y = 75;
+	innit(&data);
 	draw_addams_cube(&data);
 	mlx_hook(data.win, KEY_PRESS, 0, key_handler, &data);
 	mlx_hook(data.win, RED_CROSS, 0, x_close, &data);

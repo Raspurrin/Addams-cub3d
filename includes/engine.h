@@ -36,7 +36,12 @@ int	key_handler(int keycode, t_data *data);
 int	x_close(t_data *data);
 
 int	get_colour(t_colour colour);
+/* move */
 void	move_up(t_data *data);
+void	move_down(t_data *data);
+void	move_right(t_data *data);
+void	move_left(t_data *data);
+
 
 
 #endif

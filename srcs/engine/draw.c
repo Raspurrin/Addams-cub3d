@@ -14,8 +14,29 @@ int	colour_func(t_data *data, int iter)
 
 void	move_up(t_data *data)
 {
-	data->player->x += 5;
-	data->player->y += 5;
+	// data->plyr_x += 5;
+	data->plyr_y -= 50;
+	draw_addams_cube(data);
+}
+
+void	move_down(t_data *data)
+{
+	// data->plyr_x += 5;
+	data->plyr_y += 50;
+	draw_addams_cube(data);
+}
+
+void	move_right(t_data *data)
+{
+	data->plyr_x += 50;
+	// data->plyr_y -= 5;
+	draw_addams_cube(data);
+}
+
+void	move_left(t_data *data)
+{
+	data->plyr_x -= 50;
+	// data->plyr_y -= 5;
 	draw_addams_cube(data);
 }
 
@@ -28,16 +49,26 @@ void	draw_addams_cube(t_data *data)
 	while (x < SCREEN_WIDTH)
 	{
 		y = 0;
-		while (y < SCREEN_HEIGHT/2)
+		while (y < SCREEN_HEIGHT)
 		{
-            my_mlx_pixel_put(&data->img, x, y, 0xBA7CE7 );
-			y += 20;
+            my_mlx_pixel_put(&data->img, x, y, 0x0000000);
+			y ++;
 		}
 		x++;
 	}
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0,0);
 	x = 0;
-	while (x < SCREEN_WIDTH/2)
+	while (x < SCREEN_WIDTH)
+	{
+		y = 0;
+		while (y < SCREEN_HEIGHT)
+		{
+            my_mlx_pixel_put(&data->img, x, y, 0xBA7CE7 );
+			y += 50;
+		}
+		x++;
+	}
+	x = 0;
+	while (x < SCREEN_WIDTH)
 	{
 		y = 0;
 		while (y < SCREEN_HEIGHT)
@@ -45,8 +76,18 @@ void	draw_addams_cube(t_data *data)
             my_mlx_pixel_put(&data->img, x, y, 0xBA7CE7 );
 			y++;
 		}
-		x += 20;
+		x += 50;
 	}
-    my_mlx_pixel_put(&data->img, data->player->x, data->player->y, 0xF0ED18);
+	x = 0;
+	while (x < 50)
+	{
+		y = 0;
+		while (y < 50)
+		{
+	    	my_mlx_pixel_put(&data->img, data->plyr_x + x, data->plyr_y + y, 0xFFF791);
+			y++;		
+		}
+		x++;
+	}
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0,0);
 }
