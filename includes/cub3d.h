@@ -16,6 +16,7 @@
 # include "../includes/engine.h"
 
 typedef struct data	t_data;
+typedef struct s_vector t_vector;
 
 # define SCREEN_WIDTH 2000
 # define SCREEN_HEIGHT 1000

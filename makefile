@@ -8,7 +8,8 @@ SRCS	=	./srcs/main.c \
 			./srcs/keyhooks.c \
 			./srcs/parsing/error_checking.c \
 			./srcs/engine/mlx.c \
-			./srcs/engine/draw.c
+			./srcs/engine/draw.c \
+			./srcs/engine/vectors.c
 OS		=	$(shell uname -s)
 
 OBJS	= $(SRCS:.c=.o)

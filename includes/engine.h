@@ -12,6 +12,8 @@
 # define ON_RED 	"\033[41m"
 # define ON_PURPLE	"\033[44m"
 # define ON_PINK	"\033[45m"
+
+typedef struct s_vector t_vector;
 typedef struct data	t_data;
 
 typedef struct s_img
@@ -31,6 +33,12 @@ typedef struct s_colour
 	int	b;
 }	t_colour;
 
+typedef struct s_vector
+{
+	int	x;
+	int	y;
+}	t_vector;
+
 typedef struct s_player
 {
 	int			x;
@@ -38,11 +46,6 @@ typedef struct s_player
 	t_vector	direction;
 }	t_player;
 
-typedef struct s_vector
-{
-	int	x;
-	int	y;
-}	t_vector;
 
 /* mlx */
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
