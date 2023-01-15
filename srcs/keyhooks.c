@@ -5,13 +5,13 @@ int	key_handler(int keycode, t_data *data)
 	if (keycode == ESC)
 		x_close(data);
 	else if (keycode == ARROW_UP)
-		move_up(data);
+		move_up(data); // +0x - 15y
 	else if (keycode == ARROW_DWN)
-		move_down(data);
+		move_down(data); // +0x + 15y
 	else if (keycode == ARROW_RIGHT)
-		move_right(data);
+		move_right(data); // +15x + 0y
 	else if (keycode == ARROW_LEFT)
-		move_left(data);
+		move_left(data);  // -15x + 0y
 	//else if(all other keys)
 		//the functions return bools
 	// if bool == true render else not

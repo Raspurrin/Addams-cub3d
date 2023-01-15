@@ -2,8 +2,9 @@
 
 void	move_up(t_data *data)
 {
+	if (!(data->player.y - 15 <= SCREEN_HEIGHT && data->player.y - 15 > 0))
+		return ;
 	data->player.y -= 15;
-
 	draw_addams_cube(data);
 }
 
@@ -27,7 +28,7 @@ void	move_left(t_data *data)
 
 void	draw_addams_cube(t_data *data)
 {
-	draw_background(data);
+	// draw_background(data);
 	char map[10][20] =	{"11111111111111111111",
 							"10000001100000001001",
 							"1000P001100000001001",
@@ -130,7 +131,7 @@ void	draw_the_grid(t_data *data)
 		y = 0;
 		while (y < SCREEN_HEIGHT)
 		{
-            my_mlx_pixel_put(&data->img, x, y, 0xBA7CE7 );
+            my_mlx_pixel_put(&data->img, x, y, 0xF3C4FF );
 			y += 100;
 		}
 		x++;
@@ -141,7 +142,7 @@ void	draw_the_grid(t_data *data)
 		y = 0;
 		while (y < SCREEN_HEIGHT)
 		{
-            my_mlx_pixel_put(&data->img, x, y, 0xBA7CE7 );
+            my_mlx_pixel_put(&data->img, x, y, 0xF3C4FF );
 			y++;
 		}
 		x += 100;

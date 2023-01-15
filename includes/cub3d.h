@@ -10,6 +10,7 @@
 # include <limits.h>
 # include <stdbool.h>
 # include <stdint.h>
+# include <math.h>
 # include "../libs/mlx/mlx.h"
 # include "../libs/libft/includes/libft.h"
 # include "../includes/engine.h"
