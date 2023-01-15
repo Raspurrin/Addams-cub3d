@@ -33,9 +33,16 @@ typedef struct s_colour
 
 typedef struct s_player
 {
-	int x;
-	int	y;
+	int			x;
+	int			y;
+	t_vector	direction;
 }	t_player;
+
+typedef struct s_vector
+{
+	int	x;
+	int	y;
+}	t_vector;
 
 /* mlx */
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
@@ -54,6 +61,10 @@ void	draw_player(t_data *data);
 void	draw_the_grid(t_data *data);
 void	draw_background(t_data *data);
 void	draw_the_walls(t_data *data, int x, int y, bool wall);
+/* vector */
+t_vector	vector_multpl(t_vector first, t_vector second);
+t_vector	vector_substr(t_vector first, t_vector second);
+t_vector	vector_add(t_vector first, t_vector second);
 
 
 #endif

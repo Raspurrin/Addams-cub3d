@@ -100,6 +100,7 @@ typedef struct data
 	t_img		img;
 	t_colour	colour;
 	t_player	player;
+	t_vector	vector;
 }	t_data;
 
 // /* general functions */

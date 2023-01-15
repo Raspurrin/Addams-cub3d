@@ -10,6 +10,9 @@ void	move_up(t_data *data)
 
 void	move_down(t_data *data)
 {
+	
+	if (!(data->player.y + 15 <= SCREEN_HEIGHT && data->player.y + 15 > 0))
+		return ;
 	data->player.y += 15;
 	draw_addams_cube(data);
 }
