@@ -16,8 +16,8 @@
 
 typedef struct data	t_data;
 
-# define SCREEN_WIDTH 1024
-# define SCREEN_HEIGHT 512
+# define SCREEN_WIDTH 2000
+# define SCREEN_HEIGHT 1000
 
 # define BUFFERSIZE 20
 
@@ -93,11 +93,12 @@ typedef struct data
 	char		**map;
 	int32_t		map_width;
 	int32_t		map_height;
+	int			player_x;
+	int			player_y;
 	t_texture	*texture;
 	t_img		img;
 	t_colour	colour;
-	int			plyr_x;
-	int			plyr_y;
+	t_player	player;
 }	t_data;
 
 // /* general functions */
