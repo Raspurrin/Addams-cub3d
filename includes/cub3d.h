@@ -115,3 +115,8 @@ void	extract_map(t_data *data, char *file);
 char	*read_file(int32_t fd);
 
 #endif
+
+//13 w
+//0 a
+//1 s
+//2	d

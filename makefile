@@ -49,8 +49,9 @@ submodule:
 	@git submodule update
 
 %.o : %.c
-	@echo "$(B_BLUE)Compiling: $(BLUE)$(notdir $<) 🔨$(NC)"
+# @echo "$(B_BLUE)Compiling: $(BLUE)$(notdir $<) 🔨$(NC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "\033[0;35m••••\033[0m\c"
 
 banner:
 	@echo "\n${PURPLE}======== Cub3d ========$(NC)"
