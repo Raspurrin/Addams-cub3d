@@ -51,21 +51,21 @@ submodule:
 %.o : %.c
 # @echo "$(B_BLUE)Compiling: $(BLUE)$(notdir $<) 🔨$(NC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "\033[0;35m••••\033[0m\c"
+	@echo "\033[0;35m•\033[0;35m\c"
 
 banner:
-	@echo "\n${PURPLE}======== Cub3d ========$(NC)"
+# @echo "\n${PURPLE}======== Cub3d ========$(NC)"
 
 libft:
-	@echo "\n${BLUE}======== Libft ========${NC}"
+# @echo "\n${BLUE}======== Libft ========${NC}"
 	@$(MAKE) -C $(LIBFT)
 
 mlx:
-	@echo "\n${BLUE}======== MLX ========${NC}"
+# @echo "\n${BLUE}======== MLX ========${NC}"
 # @$(MAKE) -C $(MLX)
 
 $(NAME): banner $(OBJS)
-	$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBFT)libft.a $(MLX)libmlx.a $(OBJS) $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
+	@$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBFT)libft.a $(MLX)libmlx.a $(OBJS) $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
 
 git:
 	git add .
@@ -78,11 +78,12 @@ clean:
 	@rm -f $(OBJS)
 	@$(MAKE) -C $(LIBFT) fclean
 # @$(MAKE) -C $(MLX) clean
-	@echo "${B_RED}🧹 Cleaning: ${RED} object files $(NC)"
+# @echo "${B_RED}🧹 Cleaning: ${RED} object files $(NC)"
 
 fclean: clean
 	@rm -f $(NAME)
-	@echo "${B_RED}🧹 Cleaning: ${RED} $(NAME)$(NC)"
+	@echo "\033[0;33m•\033[0;33m\c"
+# @echo "${B_RED}🧹 Cleaning: ${RED} $(NAME)$(NC)"
 
 re: fclean all
 

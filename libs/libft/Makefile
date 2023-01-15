@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
+#    By: akasaman <akasaman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:53:09 by jkaczmar          #+#    #+#              #
-#    Updated: 2022/11/21 19:14:51 by mialbert         ###   ########.fr        #
+#    Updated: 2023/01/15 19:30:43 by akasaman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -106,8 +106,10 @@ BONUS_OBJS = $(BONUS_SRCS:.c=.o)
 all: gnl $(NAME)
 
 %.o: %.c
-	@echo "$(B_GREEN)Compiling: $(GREEN)$(notdir $<) 🔨$(NC)"
+# @echo "$(B_GREEN)Compiling: $(GREEN)$(notdir $<) 🔨$(NC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
+	@echo "\033[92m•\033[0m\c"
+
 
 gnl:
 	@$(MAKE) -C $(GNL)
@@ -119,13 +121,16 @@ bonus : $(BONUS_OBJS) $(OBJS)
 	@ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 
 clean:
-	@echo "$(B_RED)🧹 Cleaning: $(RED) libft object files $(NC)"
+# @echo "$(B_RED)🧹 Cleaning: $(RED) libft object files $(NC)"
 	@rm -f $(OBJS) $(BONUS_OBJS)
 	@$(MAKE) -C $(GNL) fclean
+	@echo "\033[0;33m•\033[0;33m\c"
 
 fclean: clean
-	@echo "$(B_RED)🧹 Cleaning: $(RED) $(NAME) $(NC)"
+# @echo "$(B_RED)🧹 Cleaning: $(RED) $(NAME) $(NC)"
 	@rm -f $(NAME)
+	@echo "\033[0;33m•\033[0;33m\c"
+
 
 re: fclean all
 
