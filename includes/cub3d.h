@@ -59,6 +59,11 @@ typedef struct s_vector t_vector;
 #  define RIGHT_CLICK 2
 #  define MIDDLE_CLICK 3
 #  define ARROW_RIGHT 124
+#  define W_KEY 13
+#  define A_KEY 0
+#  define S_KEY 1
+#  define D_KEY 2
+
 
 # endif
 
