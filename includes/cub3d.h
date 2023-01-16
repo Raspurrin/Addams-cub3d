@@ -64,10 +64,7 @@ typedef enum errno
 	INV_CHAR,
 	INV_EXT,
 	INV_MAP,
-	ORDER,
-	TEXTURE,
-	ELEMENT,
-	INCOMPLETE
+	TEXTURE
 }	t_errno;
 
 typedef union colour
@@ -85,13 +82,20 @@ typedef union colour
 
 typedef struct texture
 {
-	char		*north;
-	char		*south;
-	char		*west;
-	char		*east;
+	void	*img;
+	int32_t	width;
+	int32_t	height;
+}	t_texture;
+
+typedef struct legenda
+{
+	t_texture	*north;
+	t_texture	*south;
+	t_texture	*west;
+	t_texture	*east;
 	t_colour	*floor;
 	t_colour	*ceiling;
-}	t_texture;
+}	t_legenda;
 
 typedef struct s_data
 {
@@ -100,7 +104,7 @@ typedef struct s_data
 	char		**map;
 	int32_t		map_width;
 	int32_t		map_height;
-	t_texture	texture;
+	t_legenda	legenda;
 }	t_data;
 
 /* general functions */
@@ -117,6 +121,7 @@ void	error_check(t_data *data, int32_t argc, char **argv);
 void	extract_map(t_data *data, char *file);
 void	extract_colour(t_data *data, char *colour_str, t_colour *colour);
 void	element_check(t_data *data, char **file);
+char	*skip_spaces(char **file);
 bool	is_space_or_1(char c);
 bool	is_valid_char(char c);
 

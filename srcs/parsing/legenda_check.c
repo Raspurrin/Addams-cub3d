@@ -29,19 +29,40 @@ void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 	}
 }
 
-static char	*skip_spaces(char **file)
+static void	legenda_innit(t_data *data, t_texture *texture, char *path)
 {
-	size_t	end;
-
-	end = 0;
-	while (ft_isspace(**file))
-		(*file)++;
-	while (!ft_isspace((*file)[end]))
-		end++;
-	return (ft_substr(*file, 0, end));
+	texture->img = mlx_xpm_file_to_image(data->mlx, path, \
+						&texture->width, &texture->height);
+	if (!texture->img)
+		errno(TEXTURE, path, data);
 }
 
-static void	direction_check(t_data *data, t_texture *texture, char **file)
+static void	legenda_check(t_data *data, t_legenda *legenda, \
+										char *word, char *path)
+{
+	if (!legenda->ceiling && ft_strcmp(word, "C") == 0)
+	{
+		legenda->ceiling = malloc(sizeof(t_colour));
+		extract_colour(data, path, legenda->ceiling);
+	}
+	else if (!legenda->floor && ft_strcmp(word, "F") == 0)
+	{
+		legenda->floor = malloc(sizeof(t_colour));
+		extract_colour(data, path, legenda->floor);
+	}
+	else if (!legenda->north->img && ft_strcmp(word, "NO") == 0)
+		legenda_innit(data, legenda->north, path);
+	else if (!legenda->south->img && ft_strcmp(word, "SO") == 0)
+		legenda_innit(data, legenda->south, path);
+	else if (!legenda->west->img && ft_strcmp(word, "WE") == 0)
+		legenda_innit(data, legenda->west, path);
+	else if (!legenda->east->img && ft_strcmp(word, "EA") == 0)
+		legenda_innit(data, legenda->east, path);
+	else
+		errno(INV_CHAR, "", data);
+}
+
+static void	direction_check(t_data *data, t_legenda *legenda, char **file)
 {
 	size_t	len;
 	char	*word;
@@ -53,26 +74,7 @@ static void	direction_check(t_data *data, t_texture *texture, char **file)
 		errno(INV_CHAR, "", data);
 	*file += len;
 	path = skip_spaces(file);
-	if (!texture->ceiling && ft_strcmp(word, "C") == 0)
-	{
-		texture->ceiling = malloc(sizeof(t_colour));
-		extract_colour(data, path, texture->ceiling);
-	}
-	else if (!texture->floor && ft_strcmp(word, "F") == 0)
-	{
-		texture->floor = malloc(sizeof(t_colour));
-		extract_colour(data, path, texture->floor);
-	}
-	else if (!texture->north && ft_strcmp(word, "NO") == 0)
-		texture->north = ft_strdup(path);
-	else if (!texture->south && ft_strcmp(word, "SO") == 0)
-		texture->south = ft_strdup(path);
-	else if (!texture->west && ft_strcmp(word, "WE") == 0)
-		texture->west = ft_strdup(path);
-	else if (!texture->east && ft_strcmp(word, "EA") == 0)
-		texture->east = ft_strdup(path);
-	else
-		errno(INV_CHAR, "", data);
+	legenda_check(data, legenda, word, path);
 	*file += ft_strlen(path);
 }
 
@@ -83,7 +85,7 @@ void	element_check(t_data *data, char **file)
 	i = 0;
 	while (i < 6 && *file && **file)
 	{
-		direction_check(data, &data->texture, file);
+		direction_check(data, &data->legenda, file);
 		i++;
 	}
 }

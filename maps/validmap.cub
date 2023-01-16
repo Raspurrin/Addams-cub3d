@@ -1,12 +1,9 @@
-NO ./path_to_the_north_texture
-WE ./path_to_the_west_texture
+NO ./textures/Brickwall3_Texture.xpm
+SO ./textures/Brickwall4_Texture.xpm
+WE ./textures/Brickwall5_Texture.xpm
+EA ./textures/Stonewall_Texture.xpm
 
-C 					     225,30,0
-
-
-SO 			./path_to_the_south_texture
-EA ./path_to_the_east_texture
-
+C 250,0,0
 F 220,100,0
 
 1111111111111111111111111111

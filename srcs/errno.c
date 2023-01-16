@@ -16,11 +16,7 @@ void	errno(int8_t nbr, char *msg, t_data *data)
 		"Contains invalid characters",
 		"Wrong file extension",
 		"The map must be closed/surrounded by walls",
-		"Map content needs to come last in the file",
-		"Invalid texture",
-		"Element typed wrong:",
-		"Wrong colour range:",
-		"Incomplete file"
+		"Invalid texture: "
 	};
 
 	ft_printf_fd(STDERR_FILENO, "Error\n%s%s\n", errors[nbr], msg);
