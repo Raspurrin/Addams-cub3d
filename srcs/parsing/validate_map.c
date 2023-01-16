@@ -71,20 +71,28 @@ static void	mapcheck(t_data *data, char **map)
 {
 	int32_t	x;
 	int32_t	y;
+	int8_t	player;
 
 	x = 0;
 	y = 0;
+	player = 0;
 	while (y < data->map_height)
 	{
 		while (x < data->map_width)
 		{
 			if (!around_space_valid(data, map, x, y) || !is_valid_char(map[y][x]))
 				errno(INV_MAP, "", data);
+			if (is_player(&data->player, map[y][x], x, y))
+				player++;
+			if (player > 1)
+				errno(PLAYERS, "", data);
 			x++;
 		}
 		x = 0;
 		y++;
 	}
+	if (player < 1)
+		errno(NOPLAYER, "", data);
 }
 
 void	extract_map(t_data *data, char *file)

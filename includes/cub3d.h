@@ -13,6 +13,7 @@
 
 # define SCREEN_WIDTH 800
 # define SCREEN_HEIGHT 500
+# define TILE 100
 
 # define BUFFERSIZE 20
 
@@ -64,7 +65,9 @@ typedef enum errno
 	INV_CHAR,
 	INV_EXT,
 	INV_MAP,
-	TEXTURE
+	TEXTURE,
+	PLAYERS,
+	NOPLAYER
 }	t_errno;
 
 typedef union colour
@@ -79,6 +82,18 @@ typedef union colour
 		uint8_t	r;
 	};
 }	t_colour;
+
+typedef struct vector
+{
+	int32_t	x;
+	int32_t	y;
+}	t_vector;
+
+typedef struct player
+{
+	t_vector	dir;
+	t_vector	pos;
+}	t_player;
 
 typedef struct texture
 {
@@ -102,6 +117,7 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	char		**map;
+	t_player	player;
 	int32_t		map_width;
 	int32_t		map_height;
 	t_legenda	legenda;
@@ -124,6 +140,7 @@ void	element_check(t_data *data, char **file);
 char	*skip_spaces(char **file);
 bool	is_space_or_1(char c);
 bool	is_valid_char(char c);
+bool	is_player(t_player *player, char c, int32_t x, int32_t y);
 
 /* graphics */
 int32_t	rgb_to_int(int32_t r, int32_t g, int32_t b, int32_t a);

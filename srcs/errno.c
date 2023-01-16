@@ -16,7 +16,9 @@ void	errno(int8_t nbr, char *msg, t_data *data)
 		"Contains invalid characters",
 		"Wrong file extension",
 		"The map must be closed/surrounded by walls",
-		"Invalid texture: "
+		"Invalid texture: ",
+		"Too many players",
+		"Map doesn't contain a player"
 	};
 
 	ft_printf_fd(STDERR_FILENO, "Error\n%s%s\n", errors[nbr], msg);

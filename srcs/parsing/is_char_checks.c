@@ -15,3 +15,20 @@ bool	is_valid_char(char c)
 		return (true);
 	return (false);
 }
+
+bool	is_player(t_player *player, char c, int32_t x, int32_t y)
+{
+	if (c != 'N' && c != 'E' && c != 'O' && c != 'W')
+		return (false);
+	player->pos.x = x * TILE;
+	player->pos.y = y * TILE;
+	if (c == 'N')
+		player->dir.y = -1;
+	if (c == 'S')
+		player->dir.y = 1;
+	if (c == 'E')
+		player->dir.x = 1;
+	if (c == 'W')
+		player->dir.x = -1;
+	return (true);
+}

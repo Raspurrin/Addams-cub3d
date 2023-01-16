@@ -6,8 +6,8 @@ void	free_data(t_data *data)
 		free(data->mlx);
 	if (data->win)
 		free(data->win);
-	if (data->map)
-		free_2d_guard(&data->map);
+	// if (data->map)
+	// 	free_2d_guard(&data->map);
 	// if (data.texture)
 	// {
 	// 	if (data.texture->north)
