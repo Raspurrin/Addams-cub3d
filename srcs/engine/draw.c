@@ -70,9 +70,9 @@ void	draw_addams_cube(t_data *data)
 }
 
 // bool	is_wall(t_data *data, int x, int y)
-{
+// {
 	
-}
+// }
 // void	draw_the_ray(t_data *data)
 // {
 // 	int	i;
