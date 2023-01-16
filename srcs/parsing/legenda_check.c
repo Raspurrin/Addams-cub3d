@@ -8,19 +8,23 @@
 void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 {
 	size_t	i;
+	size_t	channel_count;
 	int32_t	colour_int;
-	char	*channel_str;
+	char	**channels;
 
 	i = 3;
+	channels = ft_split(colour_str, ',');
+	channel_count = ft_2darrlen(channels);
+	if (channel_count > 4 || channel_count < 3)
+		errno(COLOUR, "", data);
 	while (i > 0 && *colour_str)
 	{
-		channel_str = ft_subcstr(colour_str, ',');
-		colour_int = ft_atoi(channel_str);
-		free(channel_str);
+		colour_int = ft_atoi(*channels);
 		if (colour_int < 0 || colour_int > 255)
 			errno(COLOUR, "", data);
 		colour->abgr[i] = (int8_t)colour_int;
 		colour_str += (ft_strclen(colour_str, ',') + 1);
+		channels++;
 		i--;
 	}
 }
