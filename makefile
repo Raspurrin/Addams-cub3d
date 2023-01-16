@@ -6,10 +6,17 @@ LIBFT	=	./libs/libft/
 SRCS	=	./srcs/main.c \
 			./srcs/errno.c \
 			./srcs/keyhooks.c \
-			./srcs/parsing/error_checking.c \
-			./srcs/engine/mlx.c \
-			./srcs/engine/draw.c \
-			./srcs/engine/vectors.c
+			./srcs/free.c \
+			./srcs/init.c \
+			./srcs/graphics/colour.c \
+			./srcs/parsing/legenda_check.c \
+			./srcs/parsing/error_check.c \
+			./srcs/parsing/read_map.c \
+			./srcs/parsing/validate_map.c \
+			./srcs/parsing/validate_map_utils.c \
+			./srcs/parsing/is_char_checks.c \
+			./srcs/parsing/legenda_util.c
+
 OS		=	$(shell uname -s)
 
 OBJS	= $(SRCS:.c=.o)
@@ -27,12 +34,6 @@ ifeq ($(DEBUG),1)
 FSAN 	=	-fsanitize=address
 else 
 FSAN 	=
-endif
-
-ifeq ($(SUBM_STATE),)
-SUBM_FLAG	= submodule
-else 
-SUBM_FLAG	= 
 endif
 
 ifeq ($(OS), Darwin)

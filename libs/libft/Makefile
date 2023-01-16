@@ -74,7 +74,11 @@ SRCS = 			./srcs/ft_memmove.c \
 				./srcs/ft_strjoin_free.c \
 				./srcs/ft_strjoins.c \
 				./srcs/ft_strjoin_str2.c \
-				./srcs/error_line.c
+				./srcs/error_line.c \
+				./srcs/ft_strccpy.c \
+				./srcs/ft_strclen.c \
+				./srcs/ft_subcstr.c \
+				./srcs/ft_2darrlen.c
 
 BONUS_SRCS = 	./bonus/ft_lstadd_back.c \
 				./bonus/ft_lstdelone.c \

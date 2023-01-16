@@ -107,6 +107,13 @@ size_t		ft_strlen(const char *str);
  */
 int			ft_strlen_ignore(const char *str, char ignore);
 
+/**
+ * @brief Counts the amount of strings in an array of strings.
+ * @param arr the 2d array to be counted.
+ * @return size_t
+ */
+size_t	ft_2darrlen(char **arr);
+
 /** 
  * Fills src up to n with c.
  * @param src Appointed memory to be filled.
@@ -163,7 +170,7 @@ size_t		ft_strlcpy(char *dst, const char *src, size_t size);
  * @param c the character, you idiot.
  * @return the length of src up to c.
  */
-size_t		ft_strccpy(char *dst, const char *src, char c);
+size_t		ft_strccpy(char *dst, char *src, char c);
 
 /**
  * Appends the NUL-terminated string src to the end of dst. 
@@ -302,6 +309,11 @@ char		*ft_strdup(const char *str);
  * @return The substring. NULL if the allocation fails.
  */
 char		*ft_substr(char const *str, uint32_t start, size_t len);
+
+/**
+ * Returns a malloced string that takes the value of src up to c.
+ */
+char		*ft_subcstr(char *src, char c);
 
 /**
  * Allocates (with malloc(3)) and returns a new string, 

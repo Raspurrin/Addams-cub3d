@@ -1,5 +1,6 @@
 #include "../includes/cub3d.h"
 
+<<<<<<< HEAD
 // lol
 
 // void	init(t_data *data)
@@ -48,11 +49,15 @@ void	innit(t_data *data)
 }
 
 int32_t	main(int argc, char const *argv[])
+=======
+int32_t	main(int argc, char *argv[])
+>>>>>>> main
 {
 	t_data	data;
 
 	(void)argc;
 	(void)argv;
+<<<<<<< HEAD
 	data.mlx = mlx_init();
 	data.win = mlx_new_window(data.mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "ADDAMS_CUBE");
 	data.img.img_ptr = mlx_new_image(data.mlx,  SCREEN_WIDTH, SCREEN_HEIGHT);
@@ -62,6 +67,12 @@ int32_t	main(int argc, char const *argv[])
 	draw_addams_cube(&data);
 	mlx_hook(data.win, KEY_PRESS, 0, key_handler, &data);
 	mlx_hook(data.win, RED_CROSS, 0, x_close, &data);
+=======
+	init(&data);
+	error_check(&data, argc, argv);
+	mlx_hook(data.win, 2, 0, key_handler, &data);
+	mlx_hook(data.win, 17, 0, x_close, &data);
+>>>>>>> main
 	mlx_loop(data.mlx);
 	return (0);
 }
