@@ -34,7 +34,7 @@ void	draw_addams_cube(t_data *data)
 	// draw_background(data);
 	char map[10][20] =	{"11111111111111111111",
 							"10000001100000001001",
-							"1000P001100000001001",
+							"1000P001100000000001",
 							"10011111100000111111",
 							"10000000001110001101",
 							"10000000011100001101",
@@ -53,18 +53,54 @@ void	draw_addams_cube(t_data *data)
 		while (y < 20)
 		{
 			if (map[x][y] == '1')
+			{
 				draw_the_walls(data, y*100, x*100, 1);
+			}
 			else if (map[x][y] == '0' || map[x][y] == 'P')
+			{
 				draw_the_walls(data, y*100, x*100, 0);
+			}
 			y++;
 		}
 		x++;
 	}
-
 	draw_the_grid(data);
 	draw_player(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0,0);
 }
+
+// bool	is_wall(t_data *data, int x, int y)
+{
+	
+}
+// void	draw_the_ray(t_data *data)
+// {
+// 	int	i;
+// 	t_vector	start;
+// 	t_vector	ray;
+
+// 	start.x = data->player.x ;
+// 	start.y = data->player.y ;
+
+// 	i = 0;
+// 	while (i < 10)
+// 	{
+// 		ray = vector_add(data->player.direction, start);
+// 		my_mlx_pixel_put(&data->img, ray.y, ray.x, 0xBA7CE7);
+// 		i++;
+// 		// if (ray.x >= x && ray.y <= y)
+// 		// {
+// 		// 	data->wall = ray;
+// 		// 	break;
+// 		// }
+// 		// else
+// 		// {
+// 		// 	x += 100;
+// 		// 	y += 100;
+// 		// }
+// 	}
+	
+// }
 
 void	draw_the_walls(t_data *data, int x, int y, bool wall)
 {
@@ -78,7 +114,9 @@ void	draw_the_walls(t_data *data, int x, int y, bool wall)
 		while (j < 100)
 		{
 			if (wall)
+			{
 				my_mlx_pixel_put(&data->img, i + x, j + y, 0xBA7CE7);
+			}
 			else
 				my_mlx_pixel_put(&data->img, i + x, j + y, 0x000000);
 			j++;
@@ -151,3 +189,4 @@ void	draw_the_grid(t_data *data)
 		x += 100;
 	}
 }
+

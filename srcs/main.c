@@ -35,12 +35,16 @@ void	innit(t_data *data)
 			if (map[x][y] == 'P')
 			{
 				data->player.x = y * 100;
+				// printf("player x %d\n",data->player.x);
 				data->player.y = x * 100;
+				// printf("player y %d\n",data->player.y);
 			}
 			y++;
 		}
 		x++;
 	}
+	data->player.direction.x = 0;
+	data->player.direction.y = 10;
 }
 
 int32_t	main(int argc, char const *argv[])

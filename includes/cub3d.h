@@ -100,13 +100,12 @@ typedef struct data
 	char		**map;
 	int32_t		map_width;
 	int32_t		map_height;
-	int			player_x;
-	int			player_y;
 	t_texture	*texture;
 	t_img		img;
 	t_colour	colour;
 	t_player	player;
 	t_vector	vector;
+	t_vector 	wall;
 }	t_data;
 
 // /* general functions */

@@ -69,5 +69,7 @@ t_vector	vector_multpl(t_vector first, t_vector second);
 t_vector	vector_substr(t_vector first, t_vector second);
 t_vector	vector_add(t_vector first, t_vector second);
 
+void	draw_the_ray(t_data *data);
+
 
 #endif
