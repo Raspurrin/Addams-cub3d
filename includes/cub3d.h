@@ -27,6 +27,10 @@
 #  define ESC 65307
 #  define ZOOM_IN 105
 #  define ZOOM_OUT 111
+#  define W 
+#  define A
+#  define S
+#  define D
 #  define ARROW_UP 65362
 #  define ARROW_DWN 65364
 #  define ARROW_LEFT 65361
@@ -44,6 +48,10 @@
 #  define ESC 53
 #  define ZOOM_IN 34
 #  define ZOOM_OUT 31
+#  define W 13
+#  define A 0
+#  define S 1
+#  define D 2
 #  define ARROW_UP 126
 #  define ARROW_DWN 125
 #  define ARROW_LEFT 123
@@ -141,6 +149,8 @@ char	*skip_spaces(char **file);
 bool	is_space_or_1(char c);
 bool	is_valid_char(char c);
 bool	is_player(t_player *player, char c, int32_t x, int32_t y);
+void	fill_str(char *str, size_t start, size_t end, char c);
+int32_t	count_newlines(char *file);
 
 /* graphics */
 int32_t	rgb_to_int(int32_t r, int32_t g, int32_t b, int32_t a);

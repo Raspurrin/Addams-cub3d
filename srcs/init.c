@@ -10,4 +10,4 @@ void	init(t_data *data)
 	data->legenda.south = ft_calloc(1, sizeof(t_texture));
 	data->legenda.west = ft_calloc(1, sizeof(t_texture));
 	data->legenda.east = ft_calloc(1, sizeof(t_texture));
- }
+}

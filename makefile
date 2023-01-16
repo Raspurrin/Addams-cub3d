@@ -13,6 +13,7 @@ SRCS	=	./srcs/main.c \
 			./srcs/parsing/error_check.c \
 			./srcs/parsing/read_map.c \
 			./srcs/parsing/validate_map.c \
+			./srcs/parsing/validate_map_utils.c \
 			./srcs/parsing/is_char_checks.c \
 			./srcs/parsing/legenda_util.c
 

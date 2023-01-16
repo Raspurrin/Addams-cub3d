@@ -1,35 +1,5 @@
 #include "../../includes/cub3d.h"
 
-// not sure if we are gonna need this
-static void	fill_str(char *str, size_t start, size_t end, char c)
-{
-	size_t	i;
-
-	i = start;
-	while (i < end)
-		str[i++] = c;
-	str[i] = '\0';
-}
-
-/**
- * @brief counting newlines at the end of the file to adjust the mapheight
- * in largest_row()
- */
-static int32_t	count_newlines(char *file)
-{
-	size_t	i;
-	size_t	count;
-
-	count = 0;
-	i = ft_strlen(file);
-	while (i >= 0 && file[i] == '\n')
-	{
-		count++;
-		i--;
-	}
-	return (count);
-}
-
 static void	largest_row(t_data *data, char *file)
 {
 	size_t	row_len;
@@ -52,11 +22,11 @@ static bool	around_space_valid(t_data *data, char **map, int32_t x, int32_t y)
 {
 	if (ft_isspace(map[y][x]))
 	{
-		if ((y != data->map_height - 1	&& !is_space_or_1(map[y + 1][x])) || \
-			(y != 0 					&& !is_space_or_1(map[y - 1][x])) || \
-			(x != 0						&& !is_space_or_1(map[y][x - 1])) || \
-			(x != data->map_width - 1	&& !is_space_or_1(map[y][x + 1])))
-				return (false);
+		if ((y != data->map_height - 1 && !is_space_or_1(map[y + 1][x])) || \
+		(y != 0 && !is_space_or_1(map[y - 1][x])) || \
+		(x != 0 && !is_space_or_1(map[y][x - 1])) || \
+		(x != data->map_width - 1 && !is_space_or_1(map[y][x + 1])))
+			return (false);
 	}
 	return (true);
 }
@@ -80,7 +50,8 @@ static void	mapcheck(t_data *data, char **map)
 	{
 		while (x < data->map_width)
 		{
-			if (!around_space_valid(data, map, x, y) || !is_valid_char(map[y][x]))
+			if (!around_space_valid(data, map, x, y) || \
+								!is_valid_char(map[y][x]))
 				errno(INV_MAP, "", data);
 			if (is_player(&data->player, map[y][x], x, y))
 				player++;

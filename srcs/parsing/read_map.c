@@ -16,11 +16,9 @@ char	*read_file(int32_t fd)
 	buflen = 1;
 	line = ft_calloc(1, 1);
 	buf = malloc(BUFFERSIZE + 1 * sizeof(char));
-
 	while (buflen > 0)
 	{
 		buflen = read(fd, buf, BUFFERSIZE);
-
 		if (buflen <= 0)
 			free (buf);
 		if (buflen == 0)
@@ -29,7 +27,6 @@ char	*read_file(int32_t fd)
 			return (NULL);
 		buf[buflen] = '\0';
 		line = gnl_strjoin(line, buf);
-
 	}
 	close(fd);
 	return (line);
