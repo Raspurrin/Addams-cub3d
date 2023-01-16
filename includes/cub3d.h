@@ -1,3 +1,5 @@
+
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -78,7 +80,7 @@ typedef enum errno
 	NOPLAYER
 }	t_errno;
 
-typedef union colour
+typedef union s_colour
 {
 	uint32_t	colour;
 	uint8_t		abgr[4];
@@ -91,26 +93,26 @@ typedef union colour
 	};
 }	t_colour;
 
-typedef struct vector
+typedef struct s_vector
 {
 	int32_t	x;
 	int32_t	y;
 }	t_vector;
 
-typedef struct player
+typedef struct s_player
 {
 	t_vector	dir;
 	t_vector	pos;
 }	t_player;
 
-typedef struct texture
+typedef struct s_texture
 {
 	void	*img;
 	int32_t	width;
 	int32_t	height;
 }	t_texture;
 
-typedef struct legenda
+typedef struct s_legenda
 {
 	t_texture	*north;
 	t_texture	*south;
@@ -138,6 +140,10 @@ void	errno(int8_t nbr, char *msg, t_data *data);
 
 /* mlx */
 void	key_hooks(t_data *data);
+int		key_handler(int keycode, t_data *data);
+int		x_close(t_data *data);
+int		key_handler(int keycode, t_data *data);
+int		x_close(t_data *data);
 
 /* parsing */
 char	*read_file(int32_t fd);
