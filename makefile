@@ -15,7 +15,10 @@ SRCS	=	./srcs/main.c \
 			./srcs/parsing/validate_map.c \
 			./srcs/parsing/validate_map_utils.c \
 			./srcs/parsing/is_char_checks.c \
-			./srcs/parsing/legenda_util.c
+			./srcs/parsing/legenda_util.c \
+			./srcs/engine/mlx.c \
+			./srcs/engine/draw.c \
+			./srcs/engine/vectors.c
 
 OS		=	$(shell uname -s)
 

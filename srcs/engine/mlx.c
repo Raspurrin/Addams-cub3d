@@ -1,12 +1,12 @@
 #include "../../includes/cub3d.h"
 
-int	get_colour(t_colour colour)
-{
-	int	trgb;
+// int	get_colour(t_colour colour)
+// {
+// 	int	trgb;
 
-	trgb = colour.t << 24 | colour.r << 16 | colour.g << 8 | colour.b;
-	return (trgb);
-}
+// 	trgb = colour.t << 24 | colour.r << 16 | colour.g << 8 | colour.b;
+// 	return (trgb);
+// }
 
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {

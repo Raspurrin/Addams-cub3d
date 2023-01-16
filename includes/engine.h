@@ -14,7 +14,7 @@
 # define ON_PINK	"\033[45m"
 
 typedef struct s_vector t_vector;
-typedef struct data	t_data;
+typedef struct s_data	t_data;
 
 typedef struct s_img
 {
@@ -25,31 +25,25 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-typedef struct s_colour
-{
-	int	t;
-	int	r;
-	int	g;
-	int	b;
-}	t_colour;
+// typedef struct s_colour
+// {
+// 	int	t;
+// 	int	r;
+// 	int	g;
+// 	int	b;
+// }	t_colour;
 
-typedef struct s_vector
-{
-	int	x;
-	int	y;
-}	t_vector;
+// typedef struct s_vector
+// {
+// 	int	x;
+// 	int	y;
+// }	t_vector;
 
-typedef struct s_player
-{
-	int			x;
-	int			y;
-	t_vector	direction;
-}	t_player;
 
 
 /* mlx */
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color);
-int		get_colour(t_colour colour);
+// int		get_colour(t_colour colour);
 /* hooks */
 int		key_handler(int keycode, t_data *data);
 int		x_close(t_data *data);

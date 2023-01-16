@@ -15,8 +15,8 @@
 # include "../libs/libft/includes/libft.h"
 # include "../includes/engine.h"
 
-# define SCREEN_WIDTH 800
-# define SCREEN_HEIGHT 500
+# define SCREEN_WIDTH 2000
+# define SCREEN_HEIGHT 1000
 # define TILE 100
 
 # define BUFFERSIZE 20
@@ -129,10 +129,9 @@ typedef struct s_data
 	t_player	player;
 	int32_t		map_width;
 	int32_t		map_height;
-	t_texture	*texture;
+	t_legenda	legenda;
 	t_img		img;
 	t_colour	colour;
-	t_player	player;
 	t_vector	vector;
 	t_vector 	wall;
 }	t_data;
@@ -146,10 +145,10 @@ void	errno(int8_t nbr, char *msg, t_data *data);
 void	key_hooks(t_data *data);
 int		key_handler(int keycode, t_data *data);
 int		x_close(t_data *data);
-int		key_handler(int keycode, t_data *data);
-int		x_close(t_data *data);
 
 /* parsing */
+char	*read_file(int32_t fd);
+void	error_check(t_data *data, int32_t argc, char **argv);
 void	extract_map(t_data *data, char *file);
 void	extract_colour(t_data *data, char *colour_str, t_colour *colour);
 void	element_check(t_data *data, char **file);
