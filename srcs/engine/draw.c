@@ -69,39 +69,6 @@ void	draw_addams_cube(t_data *data)
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0,0);
 }
 
-// bool	is_wall(t_data *data, int x, int y)
-// {
-	
-// }
-// void	draw_the_ray(t_data *data)
-// {
-// 	int	i;
-// 	t_vector	start;
-// 	t_vector	ray;
-
-// 	start.x = data->player.x ;
-// 	start.y = data->player.y ;
-
-// 	i = 0;
-// 	while (i < 10)
-// 	{
-// 		ray = vector_add(data->player.direction, start);
-// 		my_mlx_pixel_put(&data->img, ray.y, ray.x, 0xBA7CE7);
-// 		i++;
-// 		// if (ray.x >= x && ray.y <= y)
-// 		// {
-// 		// 	data->wall = ray;
-// 		// 	break;
-// 		// }
-// 		// else
-// 		// {
-// 		// 	x += 100;
-// 		// 	y += 100;
-// 		// }
-// 	}
-	
-// }
-
 void	draw_the_walls(t_data *data, int x, int y, bool wall)
 {
 	int	i;
