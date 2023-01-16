@@ -26,6 +26,8 @@ void	error_check(t_data *data, int32_t argc, char **argv)
 		errno(NO_CUB, "", data);
 	extension_check(data, argv[1], ".cub");
 	fd = open(argv[1], O_RDWR);
+	if (fd == -1)
+		errno(READ_FAIL, "", data);
 	file = read_file(fd);
 	element_check(data, &file);
 	extract_map(data, file);

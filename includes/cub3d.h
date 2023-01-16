@@ -72,28 +72,28 @@ typedef enum errno
 
 typedef union colour
 {
-	int32_t	colour;
-	char	abgr[4];
+	uint32_t	colour;
+	uint8_t		abgr[4];
 	struct
 	{
-		int8_t	a;
-		int8_t	b;
-		int8_t	g;
-		int8_t	r;
+		uint8_t	a;
+		uint8_t	b;
+		uint8_t	g;
+		uint8_t	r;
 	};
 }	t_colour;
 
 typedef struct texture
 {
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-	int32_t	floor;
-	int32_t	ceiling;
+	char		*north;
+	char		*south;
+	char		*west;
+	char		*east;
+	t_colour	*floor;
+	t_colour	*ceiling;
 }	t_texture;
 
-typedef struct data
+typedef struct s_data
 {
 	void		*mlx;
 	void		*win;
@@ -115,7 +115,7 @@ void	key_hooks(t_data *data);
 char	*read_file(int32_t fd);
 void	error_check(t_data *data, int32_t argc, char **argv);
 void	extract_map(t_data *data, char *file);
-int32_t	extract_colour(t_data *data, char *colour_str);
+void	extract_colour(t_data *data, char *colour_str, t_colour *colour);
 void	element_check(t_data *data, char **file);
 bool	is_space_or_1(char c);
 bool	is_valid_char(char c);

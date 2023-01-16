@@ -10,7 +10,7 @@ bool	is_space_or_1(char c)
 
 bool	is_valid_char(char c)
 {
-	if (c == '0' || c == '1' || c == 'N' || \
+	if (ft_isspace(c) || c == '0' || c == '1' || c == 'N' || \
 		c == 'E' || c == 'O' || c == 'W')
 		return (true);
 	return (false);

@@ -5,27 +5,24 @@
  * and converting it to a usable integer.
  * @param colour_str example: "220,100,0"
  */
-int32_t	extract_colour(t_data *data, char *colour_str)
+void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 {
+	size_t	i;
+	int32_t	colour_int;
 	char	*channel_str;
-	int32_t	channel_nbr;
-	int32_t	bitshift;
-	int32_t	colour;
 
-	colour = 0;
-	bitshift = 0;
-	while (*colour_str)
+	i = 3;
+	while (i > 0 && *colour_str)
 	{
 		channel_str = ft_subcstr(colour_str, ',');
-		channel_nbr = ft_atoi(channel_str);
-		if (channel_nbr < 0 || channel_nbr > 255)
-			return (free(channel_str), errno(COLOUR, "", data), 0);
-		colour = add_channel(colour, ft_atoi(channel_str), bitshift);
+		colour_int = ft_atoi(channel_str);
 		free(channel_str);
-		bitshift += 8;
+		if (colour_int < 0 || colour_int > 255)
+			errno(COLOUR, "", data);
+		colour->abgr[i] = (int8_t)colour_int;
 		colour_str += (ft_strclen(colour_str, ',') + 1);
+		i--;
 	}
-	return (colour);
 }
 
 static char	*skip_spaces(char **file)
@@ -49,13 +46,19 @@ static void	direction_check(t_data *data, t_texture *texture, char **file)
 	word = skip_spaces(file);
 	len = ft_strlen(word);
 	if (len < 1 || len > 2)
-		return (errno(INV_CHAR, "", data));
+		errno(INV_CHAR, "", data);
 	*file += len;
 	path = skip_spaces(file);
 	if (!texture->ceiling && ft_strcmp(word, "C") == 0)
-		texture->ceiling = extract_colour(data, path);
+	{
+		texture->ceiling = malloc(sizeof(t_colour));
+		extract_colour(data, path, texture->ceiling);
+	}
 	else if (!texture->floor && ft_strcmp(word, "F") == 0)
-		texture->floor = extract_colour(data, path);
+	{
+		texture->floor = malloc(sizeof(t_colour));
+		extract_colour(data, path, texture->floor);
+	}
 	else if (!texture->north && ft_strcmp(word, "NO") == 0)
 		texture->north = ft_strdup(path);
 	else if (!texture->south && ft_strcmp(word, "SO") == 0)
@@ -74,10 +77,9 @@ void	element_check(t_data *data, char **file)
 	size_t	i;
 
 	i = 0;
-	while (i < 6)
+	while (i < 6 && *file && **file)
 	{
 		direction_check(data, &data->texture, file);
 		i++;
 	}
 }
-// 6 might be a problem
