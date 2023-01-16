@@ -157,7 +157,8 @@ bool	is_space_or_1(char c);
 bool	is_valid_char(char c);
 bool	is_player(t_player *player, char c, int32_t x, int32_t y);
 void	fill_str(char *str, size_t start, size_t end, char c);
-int32_t	count_newlines(char *file);
+int32_t	count_newlines_end(char *file);
+int32_t	count_newlines_start(char *file);
 
 /* graphics */
 int32_t	rgb_to_int(int32_t r, int32_t g, int32_t b, int32_t a);

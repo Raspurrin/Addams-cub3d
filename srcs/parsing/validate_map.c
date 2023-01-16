@@ -72,18 +72,9 @@ void	extract_map(t_data *data, char *file)
 	size_t	row_length;
 
 	i = 0;
-	while (file && file[i] && ft_isspace(file[i]))
-	{
-		if (file[i] == '\n')
-		{
-			file += (i + 1);
-			i = 0;
-		}
-		i++;
-	}
-	i = 0;
+	file += count_newlines_start(file);
 	largest_row(data, file);
-	data->map_height -= count_newlines(file);
+	data->map_height -= count_newlines_end(file);
 	data->map = ft_calloc(data->map_height, sizeof(char *));
 	while (i < (size_t)data->map_height)
 	{

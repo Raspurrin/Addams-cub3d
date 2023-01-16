@@ -51,6 +51,8 @@ int32_t	main(int argc, char *argv[])
 {
 	t_data	data;
 
+	(void)argv;
+	(void)argc;
 	init(&data);
 	data.img.img_ptr = mlx_new_image(data.mlx,  SCREEN_WIDTH, SCREEN_HEIGHT);
 	data.img.data = mlx_get_data_addr(data.img.img_ptr,
