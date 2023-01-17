@@ -178,6 +178,21 @@ void draw_line_img(t_img *img, t_vector eins, t_vector zwei, int color)
 
 void	draw_the_vector(t_data *data)
 {
+	// int	x;
+	// int	y;
+	t_vector map;
+	t_vector temp;
+	map.x = data->player.pos.y / TILE; //3
+	map.y = data->player.pos.x / TILE;  //6
+		printf("the x that is the y: %f\nthe y that is the x: %f\n",temp.x,temp.y);
+	// x = data->player.pos.y / TILE;
+	// y = data->player.pos.x / TILE;
+	while (data->map[(int)map.x][(int)map.y] != '0' || data->map[(int)map.x][(int)map.y]  != 'W')
+	{
+		temp = vector_add(temp, data->player.dir); 
+	}
+	printf("%f %f\n", temp.x, temp.y);
 	draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
+	
 }
  

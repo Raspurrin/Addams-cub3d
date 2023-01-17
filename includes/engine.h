@@ -25,22 +25,6 @@ typedef struct s_img
 	int		endian;
 }	t_img;
 
-// typedef struct s_colour
-// {
-// 	int	t;
-// 	int	r;
-// 	int	g;
-// 	int	b;
-// }	t_colour;
-
-// typedef struct s_vector
-// {
-// 	int	x;
-// 	int	y;
-// }	t_vector;
-
-
-
 /* mlx */
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 // int		get_colour(t_colour colour);
