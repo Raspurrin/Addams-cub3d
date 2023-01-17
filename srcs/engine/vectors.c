@@ -35,6 +35,4 @@ void rotatevectorlol(t_vector *vct, int angle)
 	tmp.y = vct->y;
 	vct->x = (tmp.x * cos(angle * M_PI/180)) - (tmp.y * sin(angle * M_PI/180));
 	vct->y = (tmp.x * sin(angle * M_PI/180)) + (tmp.y * cos(angle * M_PI/180));
-	
-	// printf("%f %f \n", lol.x, lol.y);
 }

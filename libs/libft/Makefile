@@ -6,7 +6,7 @@
 #    By: akasaman <akasaman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/22 13:53:09 by jkaczmar          #+#    #+#              #
-#    Updated: 2023/01/15 19:30:43 by akasaman         ###   ########.fr        #
+#    Updated: 2023/01/17 18:14:59 by akasaman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -112,7 +112,7 @@ all: gnl $(NAME)
 %.o: %.c
 # @echo "$(B_GREEN)Compiling: $(GREEN)$(notdir $<) 🔨$(NC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "\033[92m•\033[0m\c"
+	@echo "\033[0;36m•\033[0m\c"
 
 
 gnl:
