@@ -23,12 +23,12 @@ bool	is_player(t_player *player, char c, int32_t x, int32_t y)
 	player->pos.x = x * TILE;
 	player->pos.y = y * TILE;
 	if (c == 'N')
-		player->dir.y = -10;
+		player->dir.y = -1 * DIR_VECTOR;
 	if (c == 'S')
-		player->dir.y = 10;
+		player->dir.y = DIR_VECTOR;
 	if (c == 'E')
-		player->dir.x = 10;
+		player->dir.x = DIR_VECTOR;
 	if (c == 'W')
-		player->dir.x = -10;
+		player->dir.x = -1 * DIR_VECTOR;
 	return (true);
 }

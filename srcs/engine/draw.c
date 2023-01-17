@@ -180,16 +180,20 @@ void	draw_the_vector(t_data *data)
 {
 	// int	x;
 	// int	y;
-	t_vector map;
-	t_vector temp;
-	map.x = data->player.pos.y / TILE; //3
-	map.y = data->player.pos.x / TILE;  //6
+	// t_vector map; // the /100 one 
+	t_vector temp; // the *100 one
+	temp.x = data->player.pos.y / TILE;  //3
+	temp.y = data->player.pos.x / TILE;  //6
 		printf("the x that is the y: %f\nthe y that is the x: %f\n",temp.x,temp.y);
 	// x = data->player.pos.y / TILE;
 	// y = data->player.pos.x / TILE;
-	while (data->map[(int)map.x][(int)map.y] != '0' || data->map[(int)map.x][(int)map.y]  != 'W')
+	while (data->map[(int)temp.x][(int)temp.y] != '0' && data->map[(int)temp.x][(int)temp.y] != 'W')
 	{
-		temp = vector_add(temp, data->player.dir); 
+		temp.x = temp.x * TILE;  //300
+		temp.y = temp.y * TILE;  //600
+		temp = vector_add(temp, data->player.dir);
+		temp.x = temp.x / TILE;  //3
+		temp.y = temp.y / TILE;  //6
 	}
 	printf("%f %f\n", temp.x, temp.y);
 	draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);

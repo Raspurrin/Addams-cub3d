@@ -18,6 +18,7 @@
 # define SCREEN_WIDTH 2000
 # define SCREEN_HEIGHT 1000
 # define TILE 100
+# define DIR_VECTOR 10
 
 # define BUFFERSIZE 20
 
