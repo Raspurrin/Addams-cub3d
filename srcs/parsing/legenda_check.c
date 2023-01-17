@@ -15,7 +15,7 @@ void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 	i = 3;
 	channels = ft_split(colour_str, ',');
 	channel_count = ft_2darrlen(channels);
-	if (channel_count > 4 || channel_count < 3)
+	if (channel_count != 3)
 		errno(COLOUR, "", data);
 	while (i > 0 && *colour_str)
 	{
@@ -62,30 +62,24 @@ static void	legenda_check(t_data *data, t_legenda *legenda, \
 		errno(INV_CHAR, "", data);
 }
 
-static void	direction_check(t_data *data, t_legenda *legenda, char **file)
+void	element_check(t_data *data, char **file)
 {
 	size_t	len;
 	char	*word;
 	char	*path;
-
-	word = skip_spaces(file);
-	len = ft_strlen(word);
-	if (len < 1 || len > 2)
-		errno(INV_CHAR, "", data);
-	*file += len;
-	path = skip_spaces(file);
-	legenda_check(data, legenda, word, path);
-	*file += ft_strlen(path);
-}
-
-void	element_check(t_data *data, char **file)
-{
 	size_t	i;
 
 	i = 0;
 	while (i < 6 && *file && **file)
 	{
-		direction_check(data, &data->legenda, file);
+		word = skip_spaces(file);
+		len = ft_strlen(word);
+		if (len < 1 || len > 2)
+			errno(INV_CHAR, "", data);
+		*file += len;
+		path = skip_spaces(file);
+		legenda_check(data, &data->legenda, word, path);
+		*file += ft_strlen(path);
 		i++;
 	}
 }
