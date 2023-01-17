@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+         #
+#    By: akasaman <akasaman@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/08 21:37:57 by mialbert          #+#    #+#              #
-#    Updated: 2022/10/14 04:53:08 by mialbert         ###   ########.fr        #
+#    Updated: 2023/01/17 18:03:22 by akasaman         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,9 @@ valgrind: test
 	@valgrind --leak-check=full ./a.out
 
 clean:
-	@echo "${B_RED}🧹 Cleaning: ${RED} $(notdir $(OBJS))"
+#@echo "${B_RED}🧹 Cleaning: ${RED} $(notdir $(OBJS))"
 	@rm -f $(OBJS)
+	@echo "\033[0;33m•\033[0;33m\c"
 
 fclean: clean
 	@rm -rf $(NAME)

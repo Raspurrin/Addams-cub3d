@@ -94,8 +94,8 @@ typedef union s_colour
 
 typedef struct s_vector
 {
-	int32_t	x;
-	int32_t	y;
+	double	x;
+	double	y;
 }	t_vector;
 
 typedef struct s_player

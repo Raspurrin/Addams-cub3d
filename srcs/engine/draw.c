@@ -31,18 +31,6 @@ void	move_left(t_data *data)
 
 void	draw_addams_cube(t_data *data)
 {
-	// draw_background(data);
-	// char map[10][20] =	{"11111111111111111111",
-	// 						"10000001100000001001",
-	// 						"1000P001100000000001",
-	// 						"10011111100000111111",
-	// 						"10000000001110001101",
-	// 						"10000000011100001101",
-	// 						"10000000000000000001",
-	// 						"10001111000001000001",
-	// 						"10000000000011100001",
-	// 						"11111111111111111111"
-	// 					};
 	int	x;
 	int	y;
 
@@ -69,6 +57,7 @@ void	draw_addams_cube(t_data *data)
 	}
 	draw_the_grid(data);
 	draw_player(data);
+	draw_the_vector(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0,0);
 }
 
@@ -163,3 +152,32 @@ void	draw_the_grid(t_data *data)
 	}
 }
 
+void draw_line_img(t_img *img, t_vector eins, t_vector zwei, int color)
+{
+	double	deltaX;
+	double	deltaY;
+	int 	pixels;
+	double 	pixelX;
+	double 	pixelY;
+
+	deltaX = zwei.x - eins.x;
+	deltaY = zwei.y - eins.y;
+	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+	pixelX = eins.x;
+	pixelY = eins.y;
+	deltaX /= pixels;
+	deltaY /= pixels;
+	while (pixels)
+	{
+		my_mlx_pixel_put(img, pixelX, pixelY, color);
+		pixelX += deltaX;
+		pixelY += deltaY;
+		--pixels;
+	}
+}
+
+void	draw_the_vector(t_data *data)
+{
+	draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
+}
+ 

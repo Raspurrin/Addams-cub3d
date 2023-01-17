@@ -59,7 +59,7 @@ int32_t	main(int argc, char *argv[])
 			&data.img.bpp, &data.img.size_l, &data.img.endian);
 	error_check(&data, argc, argv);
 	// printf("halp\n");
-	print_2d_fd(data.map,1);
+	// print_2d_fd(data.map,1);
 	draw_addams_cube(&data);
 	mlx_hook(data.win, KEY_PRESS, 0, key_handler, &data);
 	mlx_hook(data.win, RED_CROSS, 0, x_close, &data);
