@@ -16,19 +16,21 @@ bool	is_valid_char(char c)
 	return (false);
 }
 
-bool	is_player(t_player *player, char c, int32_t x, int32_t y)
+bool	is_player(t_data *data, t_player *player, int32_t x, int32_t y)
 {
-	if (c != 'N' && c != 'E' && c != 'O' && c != 'W')
+	if (data->map[y][x] != 'N' && data->map[y][x] != 'E' \
+	&& data->map[y][x] != 'O' && data->map[y][x] != 'W')
 		return (false);
 	player->pos.x = x * TILE;
 	player->pos.y = y * TILE;
-	if (c == 'N')
+	if (data->map[y][x] == 'N')
 		player->dir.y = -100;
-	if (c == 'S')
+	if (data->map[y][x] == 'S')
 		player->dir.y = 100;
-	if (c == 'E')
+	if (data->map[y][x] == 'E')
 		player->dir.x = 100;
-	if (c == 'W')
+	if (data->map[y][x] == 'W')
 		player->dir.x = -100;
+	data->map[y][x] = '0';
 	return (true);
 }
