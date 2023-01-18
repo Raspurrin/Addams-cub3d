@@ -24,13 +24,13 @@ bool	is_player(t_data *data, t_player *player, int32_t x, int32_t y)
 	player->pos.x = x * TILE;
 	player->pos.y = y * TILE;
 	if (data->map[y][x] == 'N')
-		player->dir.y = -100;
+		player->dir.y = -1 * DIR_VECTOR;
 	if (data->map[y][x] == 'S')
-		player->dir.y = 100;
+		player->dir.y =  DIR_VECTOR;
 	if (data->map[y][x] == 'E')
-		player->dir.x = 100;
+		player->dir.x =  DIR_VECTOR;
 	if (data->map[y][x] == 'W')
-		player->dir.x = -100;
+		player->dir.x = -1 * DIR_VECTOR;
 	data->map[y][x] = '0';
 	return (true);
 }

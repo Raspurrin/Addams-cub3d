@@ -27,12 +27,13 @@ t_vector	vector_multpl(t_vector first, t_vector second)
 	return (vector);
 }
 
-void rotatevectorlol(t_vector *vct, int angle)
+t_vector rotatevectorlol(t_vector vct, int angle)
 {
 	t_vector tmp;
 
-	tmp.x = vct->x;
-	tmp.y = vct->y;
-	vct->x = (tmp.x * cos(angle * M_PI/180)) - (tmp.y * sin(angle * M_PI/180));
-	vct->y = (tmp.x * sin(angle * M_PI/180)) + (tmp.y * cos(angle * M_PI/180));
+	tmp.x = vct.x;
+	tmp.y = vct.y;
+	vct.x = (tmp.x * cos(angle * M_PI/180)) - (tmp.y * sin(angle * M_PI/180));
+	vct.y = (tmp.x * sin(angle * M_PI/180)) + (tmp.y * cos(angle * M_PI/180));
+	return (vct);
 }

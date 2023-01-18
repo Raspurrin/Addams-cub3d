@@ -1,33 +1,43 @@
 #include "../../includes/cub3d.h"
 
-void	move_up(t_data *data)
+void	move(t_data *data, bool up, bool dwn, bool rht, bool lft)
 {
-	// if (!(data->player.y - 15 <= SCREEN_HEIGHT && data->player.y - 15 > 0))
+
+	// if (!(data->player.pos.y - 15 <= SCREEN_HEIGHT && data->player.pos.y - 15 > 0))
 	// 	return ;
-	data->player.pos.y -= 15;
-	draw_addams_cube(data);
+	// if (!(data->player.pos.y + 15 <= SCREEN_HEIGHT && data->player.pos.y + 15 > 0))
+	// 	return ;
+	// if (!(data->player.pos.x - 15 <= SCREEN_WIDTH && data->player.pos.x - 15 > 0))
+	// 	return ;
+	// if (!(data->player.pos.x + 15 <= SCREEN_WIDTH && data->player.pos.x + 15 > 0))
+	// 	return ;
+	if (up)
+		data->player.pos = vector_add(data->player.pos,  data->player.dir);
+	if (dwn)
+		data->player.pos = vector_substr(data->player.pos,  data->player.dir);
+	if (rht)
+		data->player.pos = vector_add(data->player.pos,  rotatevectorlol(data->player.dir, 90));
+	if (lft)
+		data->player.pos = vector_substr(data->player.pos,  rotatevectorlol(data->player.dir, 90));
 }
 
-void	move_down(t_data *data)
-{
+// void	move_down(t_data *data)
+// {
 	
-	// if (!(data->player.y + 15 <= SCREEN_HEIGHT && data->player.y + 15 > 0))
-	// 	return ;
-	data->player.pos.y += 15;
-	draw_addams_cube(data);
-}
+// 	// if (!(data->player.y + 15 <= SCREEN_HEIGHT && data->player.y + 15 > 0))
+// 	// 	return ;
+// 	data->player.pos.y += 15;
+// }
 
-void	move_right(t_data *data)
-{
-	data->player.pos.x += 15;
-	draw_addams_cube(data);
-}
+// void	move_right(t_data *data)
+// {
+// 	data->player.pos.x += 15;
+// }
 
-void	move_left(t_data *data)
-{
-	data->player.pos.x -= 15;
-	draw_addams_cube(data);
-}
+// void	move_left(t_data *data)
+// {
+// 	data->player.pos.x -= 15;
+// }
 
 void	draw_addams_cube(t_data *data)
 {
@@ -181,21 +191,29 @@ void	draw_the_vector(t_data *data)
 	// int	x;
 	// int	y;
 	// t_vector map; // the /100 one 
-	t_vector temp; // the *100 one
-	temp.x = data->player.pos.y / TILE;  //3
-	temp.y = data->player.pos.x / TILE;  //6
-		printf("the x that is the y: %f\nthe y that is the x: %f\n",temp.x,temp.y);
+	// t_vector temp; // the *100 one
+	// temp.x = data->player.pos.y / TILE;  //3
+	// temp.y = data->player.pos.x / TILE;  //6
+		// printf("the x that is the y: %f\nthe y that is the x: %f\n",temp.x,temp.y);
 	// x = data->player.pos.y / TILE;
 	// y = data->player.pos.x / TILE;
-	while (data->map[(int)temp.x][(int)temp.y] != '0' && data->map[(int)temp.x][(int)temp.y] != 'W')
-	{
-		temp.x = temp.x * TILE;  //300
-		temp.y = temp.y * TILE;  //600
-		temp = vector_add(temp, data->player.dir);
-		temp.x = temp.x / TILE;  //3
-		temp.y = temp.y / TILE;  //6
-	}
-	printf("%f %f\n", temp.x, temp.y);
+	// while (data->map[(int)temp.x][(int)temp.y] != '0' && data->map[(int)temp.x][(int)temp.y] != 'W')
+	// {
+	// 	temp.x = temp.x * TILE;  //300
+	// 	temp.y = temp.y * TILE;  //600
+	// 	temp = vector_add(temp, data->player.dir);
+	// 	temp.x = temp.x / TILE;  //3
+	// 	temp.y = temp.y / TILE;  //6
+	// }
+	// printf("%f %f\n", temp.x, temp.y);
+	// if (!(data->player.pos.y - DIR_VECTOR <= SCREEN_HEIGHT && data->player.pos.y - DIR_VECTOR > 0))
+	// 	return ;
+	// if (!(data->player.pos.y + DIR_VECTOR <= SCREEN_HEIGHT && data->player.pos.y + DIR_VECTOR > 0))
+	// 	return ;
+	// if (!(data->player.pos.x - DIR_VECTOR <= SCREEN_WIDTH && data->player.pos.x - DIR_VECTOR > 0))
+	// 	return ;
+	// if (!(data->player.pos.x + DIR_VECTOR <= SCREEN_WIDTH && data->player.pos.x + DIR_VECTOR > 0))
+	// 	return ;
 	draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
 	
 }
