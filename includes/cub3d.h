@@ -156,7 +156,7 @@ void	element_check(t_data *data, char **file);
 char	*skip_spaces(char **file);
 bool	is_space_or_1(char c);
 bool	is_valid_char(char c);
-bool	is_player(t_player *player, char c, int32_t x, int32_t y);
+bool	is_player(t_data *data, t_player *player, int32_t x, int32_t y);
 void	fill_str(char *str, size_t start, size_t end, char c);
 int32_t	count_newlines_end(char *file);
 int32_t	count_newlines_start(char *file);

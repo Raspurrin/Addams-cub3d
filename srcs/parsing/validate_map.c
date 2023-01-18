@@ -50,10 +50,11 @@ static void	mapcheck(t_data *data, char **map)
 	{
 		while (x < data->map_width)
 		{
-			if (!around_space_valid(data, map, x, y) || \
-								!is_valid_char(map[y][x]))
+			if (!is_valid_char(map[y][x]))
+				errno(INV_CHAR, "", data);
+			if (!around_space_valid(data, map, x, y))
 				errno(INV_MAP, "", data);
-			if (is_player(&data->player, map[y][x], x, y))
+			if (is_player(data, &data->player, x, y))
 				player++;
 			if (player > 1)
 				errno(PLAYERS, "", data);
