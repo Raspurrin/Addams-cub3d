@@ -3,13 +3,13 @@
 void	move(t_data *data, bool up, bool dwn, bool rht, bool lft)
 {
 	// tem vec
-	if (up)
+	if (up &&  !is_wall(data, vector_add(data->player.pos,  data->player.dir)))
 		data->player.pos = vector_add(data->player.pos,  data->player.dir);
-	if (dwn)
+	if (dwn && !is_wall(data, vector_substr(data->player.pos,  data->player.dir)))
 		data->player.pos = vector_substr(data->player.pos,  data->player.dir);
-	if (rht)
+	if (rht && !is_wall(data, vector_add(data->player.pos,  rotatevectorlol(data->player.dir, 90))))
 		data->player.pos = vector_add(data->player.pos,  rotatevectorlol(data->player.dir, 90));
-	if (lft)
+	if (lft && !is_wall(data, vector_substr(data->player.pos,  rotatevectorlol(data->player.dir, 90))))
 		data->player.pos = vector_substr(data->player.pos,  rotatevectorlol(data->player.dir, 90));
 	// check if tmp in wall
 	// only if !wall update pos player
@@ -155,4 +155,15 @@ void	draw_the_vector(t_data *data)
 	draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
 	
 }
- 
+
+bool	is_wall(t_data *data, t_vector pos)
+{
+	int	x;
+	int	y;
+
+	x = pos.y / 100;
+	y = pos.x / 100;
+	if (data->map[x][y] != '0')
+		return (true);
+	return (!true);
+}

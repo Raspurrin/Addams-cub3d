@@ -29,24 +29,26 @@ typedef struct s_img
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 // int		get_colour(t_colour colour);
 /* hooks */
-int			key_handler(int keycode, t_data *data);
 int			x_close(t_data *data);
+int			key_handler(int keycode, t_data *data);
 /* move */
-void	move(t_data *data, bool up, bool dwn, bool rht, bool lft);
+void		move(t_data *data, bool up, bool dwn, bool rht, bool lft);
 /* render stuff */
-void		draw_addams_cube(t_data *data);
 void		draw_player(t_data *data);
 void		draw_the_grid(t_data *data);
+void		draw_the_vector(t_data *data);
 void		draw_background(t_data *data);
+void		draw_addams_cube(t_data *data);
 void		draw_the_walls(t_data *data, int x, int y, bool wall);
+void		draw_line_img(t_img *img, t_vector eins, t_vector zwei, int color);
 /* vector */
 t_vector	vector_add(t_vector first, t_vector second);
 t_vector	vector_multpl(t_vector first, t_vector second);
 t_vector	vector_substr(t_vector first, t_vector second);
 t_vector	rotatevectorlol(t_vector vct, int angle); //do not rename!!!!!!!
 
-void		draw_the_vector(t_data *data);
-void		draw_line_img(t_img *img, t_vector eins, t_vector zwei, int color);
+/*  */
+bool		is_wall(t_data *data, t_vector pos);
 
 
 
