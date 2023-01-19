@@ -46,9 +46,10 @@ t_vector	vector_add(t_vector first, t_vector second);
 t_vector	vector_multpl(t_vector first, t_vector second);
 t_vector	vector_substr(t_vector first, t_vector second);
 t_vector	rotatevectorlol(t_vector vct, int angle); //do not rename!!!!!!!
-
 /*  */
 bool		is_wall(t_data *data, t_vector pos);
+double	single_raycast(t_data *data, t_vector pos, t_vector dir);
+
 
 
 

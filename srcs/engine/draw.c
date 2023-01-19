@@ -3,14 +3,14 @@
 void	move(t_data *data, bool up, bool dwn, bool rht, bool lft)
 {
 	// tem vec
-	if (up &&  !is_wall(data, vector_add(data->player.pos,  data->player.dir)))
-		data->player.pos = vector_add(data->player.pos,  data->player.dir);
-	if (dwn && !is_wall(data, vector_substr(data->player.pos,  data->player.dir)))
-		data->player.pos = vector_substr(data->player.pos,  data->player.dir);
-	if (rht && !is_wall(data, vector_add(data->player.pos,  rotatevectorlol(data->player.dir, 90))))
-		data->player.pos = vector_add(data->player.pos,  rotatevectorlol(data->player.dir, 90));
-	if (lft && !is_wall(data, vector_substr(data->player.pos,  rotatevectorlol(data->player.dir, 90))))
-		data->player.pos = vector_substr(data->player.pos,  rotatevectorlol(data->player.dir, 90));
+	if (up &&  !is_wall(data, vector_add(data->player.pos, data->player.dir)))
+		data->player.pos = vector_add(data->player.pos, data->player.dir);
+	if (dwn && !is_wall(data, vector_substr(data->player.pos, data->player.dir)))
+		data->player.pos = vector_substr(data->player.pos, data->player.dir);
+	if (rht && !is_wall(data, vector_add(data->player.pos, rotatevectorlol(data->player.dir, 90))))
+		data->player.pos = vector_add(data->player.pos, rotatevectorlol(data->player.dir, 90));
+	if (lft && !is_wall(data, vector_substr(data->player.pos, rotatevectorlol(data->player.dir, 90))))
+		data->player.pos = vector_substr(data->player.pos, rotatevectorlol(data->player.dir, 90));
 	// check if tmp in wall
 	// only if !wall update pos player
 }
@@ -19,7 +19,6 @@ void	draw_addams_cube(t_data *data)
 {
 	int	x;
 	int	y;
-
 	x = 0;
 	while (x < 10)
 	{
@@ -126,32 +125,9 @@ void	draw_the_grid(t_data *data)
 	}
 }
 
-void draw_line_img(t_img *img, t_vector eins, t_vector zwei, int color)
-{
-	double	deltaX;
-	double	deltaY;
-	int 	pixels;
-	double 	pixelX;
-	double 	pixelY;
-
-	deltaX = zwei.x - eins.x;
-	deltaY = zwei.y - eins.y;
-	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
-	pixelX = eins.x;
-	pixelY = eins.y;
-	deltaX /= pixels;
-	deltaY /= pixels;
-	while (pixels)
-	{
-		my_mlx_pixel_put(img, pixelX, pixelY, color);
-		pixelX += deltaX;
-		pixelY += deltaY;
-		--pixels;
-	}
-}
-
 void	draw_the_vector(t_data *data)
 {
+	single_raycast(data, data->player.pos, data->player.dir);
 	draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
 	
 }
@@ -166,4 +142,39 @@ bool	is_wall(t_data *data, t_vector pos)
 	if (data->map[x][y] != '0')
 		return (true);
 	return (!true);
+}
+
+bool	is_equal(double check_input, double value, double range)
+{
+	if (check_input > (value - range) && check_input < (value + range ))
+		return (true);
+	return (false);
+}
+
+double	single_raycast(t_data *data, t_vector pos, t_vector dir)
+{
+	double	og_x;
+	double	og_y;
+	double	ratio;
+	t_vector	ray;
+
+	if (!is_equal(dir.y, 0, 0.001))
+	{
+		printf("jelloooooooo\n");
+		ratio = dir.x / dir.y;
+	}
+	else
+	{
+		printf("jeeeeeeello\n");
+		ratio = dir.x / 0.1;
+	}
+
+	og_x = TILE - fmod(pos.x, TILE);
+	og_y = ratio / og_x;
+
+	ray.x = data->player.pos.x + og_x;
+	ray.y = data->player.pos.y + og_y;
+		// printf("x: %f, y: %f\n", ray.x, ray.y);
+	draw_line_img(&data->img, data->player.pos, ray, 0xFFE036);
+	return (og_y);
 }
