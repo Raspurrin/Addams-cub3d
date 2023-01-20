@@ -1,11 +1,23 @@
 #include "../../includes/cub3d.h"
 
+static char	*skip_spaces(char **file)
+{
+	size_t	end;
+
+	end = 0;
+	while (ft_isspace(**file))
+		(*file)++;
+	while (!ft_isspace((*file)[end]))
+		end++;
+	return (ft_substr(*file, 0, end));
+}
+
 /**
  * Extracting the string for the colour of the ceiling or the floor
  * and converting it to a usable integer.
  * @param colour_str example: "220,100,0"
  */
-void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
+static void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 {
 	size_t	i;
 	size_t	channel_count;
