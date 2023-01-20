@@ -15,10 +15,13 @@
 # include "../libs/libft/includes/libft.h"
 # include "../includes/engine.h"
 
+# define VIEW_PORT 
 # define SCREEN_WIDTH 2000
 # define SCREEN_HEIGHT 1000
 # define TILE 100
 # define DIR_VECTOR TILE/4
+/* This is the distance you want to keep the player from the wall */
+# define BOUNDARY 10
 
 # define BUFFERSIZE 20
 
@@ -80,6 +83,15 @@ typedef enum errno
 	NOPLAYER
 }	t_errno;
 
+typedef enum temp_textures
+{
+	NORTH,
+	WEST,
+	SOUTH,
+	EAST,
+	TEXTCOUNT
+}	t_temp_textures;
+
 typedef union s_colour
 {
 	uint32_t	colour;
@@ -111,6 +123,13 @@ typedef struct s_texture
 	int32_t	width;
 	int32_t	height;
 }	t_texture;
+
+typedef struct s_draw_textures
+{
+	char		distance;
+	int32_t		direction;
+	t_texture	*texture[TEXTCOUNT];
+}	t_draw_textures;
 
 typedef struct s_legenda
 {
