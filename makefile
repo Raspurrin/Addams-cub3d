@@ -18,8 +18,7 @@ SRCS	=	./srcs/main.c \
 			./srcs/engine/mlx.c \
 			./srcs/engine/draw.c \
 			./srcs/engine/vectors.c \
-			./srcs/keyhooks/key_handler.c \
-			./srcs/keyhooks/movement.c
+			./srcs/keyhooks.c
 
 OS		=	$(shell uname -s)
 
@@ -79,6 +78,7 @@ mlx:
 	@$(MAKE) -C $(MLXDIR)
 
 $(NAME): banner $(OBJS)
+	echo mlx_compile_state: $(MLX_COMPILE_FLAG) mlx_compile_flag: $(MLX_COMPILE_FLAG)
 	@$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBFT)libft.a $(MLXDIR)$(MLXLIB) $(OBJS) $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
 
 git:
