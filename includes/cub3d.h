@@ -11,7 +11,6 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <math.h>
-# include "../libs/mlx/mlx.h"
 # include "../libs/libft/includes/libft.h"
 # include "../includes/engine.h"
 
@@ -32,6 +31,7 @@
 
 # if __linux__
 
+#	include "../libs/minilibx-linux/mlx.h"
 #  define ESC 65307
 #  define ZOOM_IN 105
 #  define ZOOM_OUT 111
@@ -46,9 +46,15 @@
 #  define MIDDLE_CLICK 2
 #  define PLUS 112
 #  define MINUS 109
+#  define W_KEY 25
+#  define A_KEY 0
+#  define S_KEY 1
+#  define D_KEY 2
+
 
 # elif __APPLE__
 
+#  include "../libs/mlx/mlx.h"
 #  define ESC 53
 #  define ZOOM_IN 34
 #  define ZOOM_OUT 31
@@ -89,12 +95,13 @@ typedef enum temp_textures
 	WEST,
 	SOUTH,
 	EAST,
+	SKYBOX,
 	TEXTCOUNT
 }	t_temp_textures;
 
 typedef union s_colour
 {
-	uint32_t	colour;
+	uint32_t	abgr_i;
 	uint8_t		abgr[4];
 	struct
 	{
@@ -111,6 +118,12 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
+typedef struct s_intvector
+{
+	int32_t	x;
+	int32_t	y;
+}	t_intvector;
+
 typedef struct s_player
 {
 	t_vector	dir;
@@ -124,19 +137,18 @@ typedef struct s_texture
 	int32_t	height;
 }	t_texture;
 
-typedef struct s_draw_textures
+typedef struct s_wall
 {
+	t_intvector	pos;
 	char		distance;
 	int32_t		direction;
-	t_texture	*texture[TEXTCOUNT];
-}	t_draw_textures;
+	int32_t		height;
+	int32_t		offset;
+}	t_wall;
 
 typedef struct s_legenda
 {
-	t_texture	*north;
-	t_texture	*south;
-	t_texture	*west;
-	t_texture	*east;
+	t_texture	*texture[TEXTCOUNT];
 	t_colour	*floor;
 	t_colour	*ceiling;
 }	t_legenda;
@@ -170,9 +182,7 @@ int		x_close(t_data *data);
 char	*read_file(int32_t fd);
 void	error_check(t_data *data, int32_t argc, char **argv);
 void	extract_map(t_data *data, char *file);
-void	extract_colour(t_data *data, char *colour_str, t_colour *colour);
 void	element_check(t_data *data, char **file);
-char	*skip_spaces(char **file);
 bool	is_space_or_1(char c);
 bool	is_valid_char(char c);
 bool	is_player(t_data *data, t_player *player, int32_t x, int32_t y);
@@ -181,8 +191,10 @@ int32_t	count_newlines_end(char *file);
 int32_t	count_newlines_start(char *file);
 
 /* graphics */
+void	draw_textures(t_data *data);
 int32_t	rgb_to_int(int32_t r, int32_t g, int32_t b, int32_t a);
 int32_t	add_channel(int32_t colour, int32_t channel, int8_t bitshift);
 void	print_bits(int32_t nbr);
+void	init_image(t_data *data, t_img *img);
 
 #endif

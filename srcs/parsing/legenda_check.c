@@ -62,14 +62,14 @@ static void	legenda_check(t_data *data, t_legenda *legenda, \
 		legenda->floor = malloc(sizeof(t_colour));
 		extract_colour(data, path, legenda->floor);
 	}
-	else if (!legenda->north->img && ft_strcmp(word, "NO") == 0)
-		legenda_innit(data, legenda->north, path);
-	else if (!legenda->south->img && ft_strcmp(word, "SO") == 0)
-		legenda_innit(data, legenda->south, path);
-	else if (!legenda->west->img && ft_strcmp(word, "WE") == 0)
-		legenda_innit(data, legenda->west, path);
-	else if (!legenda->east->img && ft_strcmp(word, "EA") == 0)
-		legenda_innit(data, legenda->east, path);
+	else if (!legenda->texture[NORTH]->img && ft_strcmp(word, "NO") == 0)
+		legenda_innit(data, legenda->texture[NORTH], path);
+	else if (!legenda->texture[SOUTH]->img && ft_strcmp(word, "SO") == 0)
+		legenda_innit(data, legenda->texture[SOUTH], path);
+	else if (!legenda->texture[WEST]->img && ft_strcmp(word, "WE") == 0)
+		legenda_innit(data, legenda->texture[WEST], path);
+	else if (!legenda->texture[EAST]->img && ft_strcmp(word, "EA") == 0)
+		legenda_innit(data, legenda->texture[EAST], path);
 	else
 		errno(INV_CHAR, "", data);
 }

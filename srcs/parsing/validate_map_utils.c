@@ -16,7 +16,7 @@ void	fill_str(char *str, size_t start, size_t end, char c)
  */
 int32_t	count_newlines_end(char *file)
 {
-	size_t	i;
+	int32_t	i;
 	size_t	count;
 
 	count = 0;

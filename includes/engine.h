@@ -19,7 +19,7 @@ typedef struct s_data	t_data;
 typedef struct s_img
 {
 	void	*img_ptr;
-	void	*data;
+	char	*data;
 	int		size_l;
 	int		bpp;
 	int		endian;

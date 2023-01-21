@@ -3,7 +3,6 @@ CFLAGS	=	-Wall -Wextra -Werror -g
 NAME	=	cub3d
 DEBUG	=	-fsanitize=address
 LIBFT	=	./libs/libft/
-MLXDIR	=	./libs/mlx/
 SRCS	=	./srcs/main.c \
 			./srcs/errno.c \
 			./srcs/free.c \
@@ -42,10 +41,12 @@ endif
 
 ifeq ($(OS), Darwin)
 LIBS	= -framework OpenGL -framework AppKit
+MLXDIR	=	./libs/mlx/
 MLXLIB	= libmlx.a
 else
 LIBS	= -lXext -lX11 -lm -lz
-MLXLIB	= mlx_linux.a
+MLXDIR	=	./libs/minilibx-linux/
+MLXLIB	= libmlx_Linux.a
 endif
 
 MLX_COMPILE_STATE = $(shell find $(MLXDIR)$(MLXLIB))
@@ -56,7 +57,7 @@ else
 MLX_COMPILE_FLAG =
 endif
 
-all: $(MLX_COMPILE_FLAG) libft cub3d
+all: mlx libft cub3d
 
 submodule:
 	@git submodule init 
@@ -79,8 +80,7 @@ mlx:
 	@$(MAKE) -C $(MLXDIR)
 
 $(NAME): banner $(OBJS)
-	echo mlx_compile_state: $(MLX_COMPILE_FLAG) mlx_compile_flag: $(MLX_COMPILE_FLAG)
-	@$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBFT)libft.a $(MLXDIR)$(MLXLIB) $(OBJS) $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)libft.a $(MLXDIR)$(MLXLIB) $(FSAN) $(LIBS) -o $(NAME)
 
 git:
 	git add .
