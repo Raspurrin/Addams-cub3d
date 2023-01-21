@@ -25,3 +25,5 @@ void	errno(int8_t nbr, char *msg, t_data *data)
 	free_data(data);
 	exit(nbr);
 }
+
+// test
