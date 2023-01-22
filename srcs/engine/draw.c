@@ -125,7 +125,7 @@ void	draw_the_grid(t_data *data)
 	}
 }
 
-void	single_ray(t_data *data, t_vector direction)
+double	single_ray(t_data *data, t_vector direction)
 {
 	double	horizontal_dist;
 	double	vertikal_dist;
@@ -138,7 +138,7 @@ void	single_ray(t_data *data, t_vector direction)
 	else
 		akschuel_dist = horizontal_dist;
 	// printf("Ze akschuel %f\n", akschuel_dist);
-
+	return (akschuel_dist);
 }
 
 void	ray_the_caster(t_data *data)

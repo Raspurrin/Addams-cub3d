@@ -69,12 +69,6 @@ double	horizontal_raycast(t_data *data, t_vector direction)
 		first_inter = vector_substr(data->player.pos, first_inter); //the abs of those
 		dist = calc_the_theorem(first_inter);
 	}
-
-
-
-
-	
-	// printf("%sthe HORIZONTAL dist %f%s\n", PINK, dist, RESET);
 	return (dist);
 }
 
@@ -107,8 +101,6 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 	// printf("next a strich %f a %f b %f\n", a_strich, a,b );
 	first_inter.x = data->player.pos.x + a_strich;
 	first_inter.y = data->player.pos.y + b_strich;
-	// print_pos(data);
-	// printf("first inter x %f  y %f\n",first_inter.x, first_inter.y);
 	cond = end_condition(data, first_inter);
 	if(direction.x < 0)
 		a_strich += 0.001;
@@ -142,13 +134,6 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 		first_inter = vector_substr(data->player.pos, first_inter); //the abs of those
 		dist = calc_the_theorem(first_inter);
 	}
-
-
-
-
-	
-	// printf("x: %i y: %i\n", (int) first_inter.x / 100, (int) first_inter.y / 100);
-	// printf("%sthe VERTIKAL dist %f%s\n", YELLOW, dist, RESET);
 	return (dist);
 }
 

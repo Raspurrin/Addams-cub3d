@@ -56,6 +56,7 @@ double		vertikal_raycast(t_data *data, t_vector direction);
 double		just_abs(double i);
 
 double		calc_the_theorem(t_vector vect);
+double		single_ray(t_data *data, t_vector direction);
 
 
 
