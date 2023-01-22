@@ -26,7 +26,7 @@ void	print_bits(int32_t nbr)
 	i = 32;
 	while (i > 0)
 	{
-		if (((nbr >> i) & 1) == '1')
+		if (((nbr >> i) & 1) == 1)
 			write(STDOUT_FILENO, "1", 1);
 		else
 			write(STDOUT_FILENO, "0", 1);

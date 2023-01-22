@@ -1,11 +1,23 @@
 #include "../../includes/cub3d.h"
 
+static char	*skip_spaces(char **file)
+{
+	size_t	end;
+
+	end = 0;
+	while (ft_isspace(**file))
+		(*file)++;
+	while (!ft_isspace((*file)[end]))
+		end++;
+	return (ft_substr(*file, 0, end));
+}
+
 /**
  * Extracting the string for the colour of the ceiling or the floor
  * and converting it to a usable integer.
  * @param colour_str example: "220,100,0"
  */
-void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
+static void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 {
 	size_t	i;
 	size_t	channel_count;
@@ -29,35 +41,26 @@ void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 	}
 }
 
-static void	legenda_innit(t_data *data, t_texture *texture, char *path)
+static void	legenda_check(t_data *data, char *word, char *path)
 {
-	texture->img = mlx_xpm_file_to_image(data->mlx, path, \
-						&texture->width, &texture->height);
-	if (!texture->img)
-		errno(TEXTURE, path, data);
-}
-
-static void	legenda_check(t_data *data, t_legenda *legenda, \
-										char *word, char *path)
-{
-	if (!legenda->ceiling && ft_strcmp(word, "C") == 0)
+	if (!data->ceiling && ft_strcmp(word, "C") == 0)
 	{
-		legenda->ceiling = malloc(sizeof(t_colour));
-		extract_colour(data, path, legenda->ceiling);
+		data->ceiling = malloc(sizeof(t_colour));
+		extract_colour(data, path, data->ceiling);
 	}
-	else if (!legenda->floor && ft_strcmp(word, "F") == 0)
+	else if (!data->floor && ft_strcmp(word, "F") == 0)
 	{
-		legenda->floor = malloc(sizeof(t_colour));
-		extract_colour(data, path, legenda->floor);
+		data->floor = malloc(sizeof(t_colour));
+		extract_colour(data, path, data->floor);
 	}
-	else if (!legenda->north->img && ft_strcmp(word, "NO") == 0)
-		legenda_innit(data, legenda->north, path);
-	else if (!legenda->south->img && ft_strcmp(word, "SO") == 0)
-		legenda_innit(data, legenda->south, path);
-	else if (!legenda->west->img && ft_strcmp(word, "WE") == 0)
-		legenda_innit(data, legenda->west, path);
-	else if (!legenda->east->img && ft_strcmp(word, "EA") == 0)
-		legenda_innit(data, legenda->east, path);
+	else if (!data->texture[NORTH].img->ptr && ft_strcmp(word, "NO") == 0)
+		init_texture(data, &data->texture[NORTH], path);
+	else if (!data->texture[SOUTH].img->ptr && ft_strcmp(word, "SO") == 0)
+		init_texture(data, &data->texture[SOUTH], path);
+	else if (!data->texture[WEST].img->ptr && ft_strcmp(word, "WE") == 0)
+		init_texture(data, &data->texture[WEST], path);
+	else if (!data->texture[EAST].img->ptr && ft_strcmp(word, "EA") == 0)
+		init_texture(data, &data->texture[EAST], path);
 	else
 		errno(INV_CHAR, "", data);
 }
@@ -78,8 +81,9 @@ void	element_check(t_data *data, char **file)
 			errno(INV_CHAR, "", data);
 		*file += len;
 		path = skip_spaces(file);
-		legenda_check(data, &data->legenda, word, path);
+		legenda_check(data, word, path);
 		*file += ft_strlen(path);
 		i++;
 	}
+	printf("texture check: %p\n", data->texture[NORTH].img->ptr);
 }
