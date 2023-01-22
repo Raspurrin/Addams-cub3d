@@ -34,16 +34,17 @@ static void	draw_vertical_line(t_data *data, char *texture, \
 	(void)texture;
 	// t_x = get_column(wall);
 	// interval = calc_interval(wall->distance);
-	wall->height = TILE * SCREEN_HEIGHT / wall->distance;
-	wall->offset = SCREEN_HEIGHT - wall->height / 2;
+	wall->height = SCREEN_HEIGHT * TILE / wall->distance;
+	wall->offset = (SCREEN_HEIGHT - wall->height) / 2;
+	printf("height: %d offset: %d screenheight: %d\n", wall->height, wall->offset, SCREEN_HEIGHT);
 	while (y < SCREEN_HEIGHT)
 	{
 		if (y < wall->offset)
-			my_mlx_pixel_put(data->win, w_x, y, data->legenda.ceiling->abgr_i);
+			my_mlx_pixel_put(&data->img, w_x, y, 0x4080FF);
 		else if (y > wall->height + wall->offset)
-			my_mlx_pixel_put(data->win, w_x, y, data->legenda.floor->abgr_i);
+			my_mlx_pixel_put(&data->img, w_x, y, 0x968335);
 		else
-			my_mlx_pixel_put(data->win, w_x, y, data->legenda.floor->abgr_i);
+			my_mlx_pixel_put(&data->img, w_x, y, 0xBA7CE7);
 		y++;
 	}
 	// calculate which percentage of texture height the distance is
@@ -56,11 +57,10 @@ void	draw_textures(t_data *data)
 {
 	int32_t	w_x;
 	t_wall	wall;
-	t_img	texture;
 
 	w_x = 0;
 	wall.direction = EAST;
-	wall.distance = 50;
+	wall.distance = 200;
 	wall.pos.y = 2;
 	wall.pos.x = 2;
 	wall.height = 0;
@@ -68,9 +68,8 @@ void	draw_textures(t_data *data)
 	while (w_x < SCREEN_WIDTH)
 	{
 		// raycaster(data, &wall);
-		init_image(data, &texture);
 		// calculate distance and get direction wall put direction in struct and return texture
-		draw_vertical_line(data, texture.data, &wall, w_x);
+		draw_vertical_line(data, data->texture[wall.direction]->img->data, &wall, w_x);
 		w_x++;
 	}
 }

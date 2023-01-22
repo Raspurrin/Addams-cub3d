@@ -18,7 +18,7 @@ typedef struct s_data	t_data;
 
 typedef struct s_img
 {
-	void	*img_ptr;
+	void	*ptr;
 	char	*data;
 	int		size_l;
 	int		bpp;
@@ -47,7 +47,5 @@ t_vector	rotatevectorlol(t_vector vct, int angle); //do not rename!!!!!!!
 
 void		draw_the_vector(t_data *data);
 void		draw_line_img(t_img *img, t_vector eins, t_vector zwei, int color);
-
-
 
 #endif

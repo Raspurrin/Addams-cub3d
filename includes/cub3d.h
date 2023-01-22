@@ -1,5 +1,3 @@
-
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -18,7 +16,7 @@
 # define SCREEN_WIDTH 2000
 # define SCREEN_HEIGHT 1000
 # define TILE 100
-# define DIR_VECTOR TILE/4
+# define DIR_VECTOR TILE / 4
 /* This is the distance you want to keep the player from the wall */
 # define BOUNDARY 10
 
@@ -31,7 +29,7 @@
 
 # if __linux__
 
-#	include "../libs/minilibx-linux/mlx.h"
+#  include "../libs/minilibx-linux/mlx.h"
 #  define ESC 65307
 #  define ZOOM_IN 105
 #  define ZOOM_OUT 111
@@ -50,7 +48,6 @@
 #  define A_KEY 0
 #  define S_KEY 1
 #  define D_KEY 2
-
 
 # elif __APPLE__
 
@@ -71,7 +68,6 @@
 #  define A_KEY 0
 #  define S_KEY 1
 #  define D_KEY 2
-
 
 # endif
 
@@ -132,7 +128,7 @@ typedef struct s_player
 
 typedef struct s_texture
 {
-	void	*img;
+	t_img	*img;
 	int32_t	width;
 	int32_t	height;
 }	t_texture;
@@ -140,18 +136,11 @@ typedef struct s_texture
 typedef struct s_wall
 {
 	t_intvector	pos;
-	char		distance;
+	int32_t		distance;
 	int32_t		direction;
 	int32_t		height;
 	int32_t		offset;
 }	t_wall;
-
-typedef struct s_legenda
-{
-	t_texture	*texture[TEXTCOUNT];
-	t_colour	*floor;
-	t_colour	*ceiling;
-}	t_legenda;
 
 typedef struct s_data
 {
@@ -161,11 +150,13 @@ typedef struct s_data
 	t_player	player;
 	int32_t		map_width;
 	int32_t		map_height;
-	t_legenda	legenda;
 	t_img		img;
+	t_texture	*texture[TEXTCOUNT];
+	t_colour	*floor;
+	t_colour	*ceiling;
 	t_colour	colour;
 	t_vector	vector;
-	t_vector 	wall;
+	t_vector	wall;
 }	t_data;
 
 /* general functions */
@@ -183,6 +174,7 @@ char	*read_file(int32_t fd);
 void	error_check(t_data *data, int32_t argc, char **argv);
 void	extract_map(t_data *data, char *file);
 void	element_check(t_data *data, char **file);
+void	init_texture(t_data *data, t_texture *texture, char *path);
 bool	is_space_or_1(char c);
 bool	is_valid_char(char c);
 bool	is_player(t_data *data, t_player *player, int32_t x, int32_t y);

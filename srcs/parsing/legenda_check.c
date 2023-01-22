@@ -41,35 +41,32 @@ static void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 	}
 }
 
-static void	legenda_innit(t_data *data, t_texture *texture, char *path)
+static void	legenda_check(t_data *data, char *word, char *path)
 {
-	texture->img = mlx_xpm_file_to_image(data->mlx, path, \
-						&texture->width, &texture->height);
-	if (!texture->img)
-		errno(TEXTURE, path, data);
-}
-
-static void	legenda_check(t_data *data, t_legenda *legenda, \
-										char *word, char *path)
-{
-	if (!legenda->ceiling && ft_strcmp(word, "C") == 0)
+	if (!data->ceiling && ft_strcmp(word, "C") == 0)
 	{
-		legenda->ceiling = malloc(sizeof(t_colour));
-		extract_colour(data, path, legenda->ceiling);
+		data->ceiling = malloc(sizeof(t_colour));
+		extract_colour(data, path, data->ceiling);
 	}
-	else if (!legenda->floor && ft_strcmp(word, "F") == 0)
+	else if (!data->floor && ft_strcmp(word, "F") == 0)
 	{
-		legenda->floor = malloc(sizeof(t_colour));
-		extract_colour(data, path, legenda->floor);
+		data->floor = malloc(sizeof(t_colour));
+		extract_colour(data, path, data->floor);
 	}
-	else if (!legenda->texture[NORTH]->img && ft_strcmp(word, "NO") == 0)
-		legenda_innit(data, legenda->texture[NORTH], path);
-	else if (!legenda->texture[SOUTH]->img && ft_strcmp(word, "SO") == 0)
-		legenda_innit(data, legenda->texture[SOUTH], path);
-	else if (!legenda->texture[WEST]->img && ft_strcmp(word, "WE") == 0)
-		legenda_innit(data, legenda->texture[WEST], path);
-	else if (!legenda->texture[EAST]->img && ft_strcmp(word, "EA") == 0)
-		legenda_innit(data, legenda->texture[EAST], path);
+	else if (!data->texture[NORTH]->img->ptr && ft_strcmp(word, "NO") == 0)
+	{
+		printf("yo");
+		init_texture(data, data->texture[NORTH], path);
+	}
+	else if (!data->texture[SOUTH]->img->ptr && ft_strcmp(word, "SO") == 0)
+		init_texture(data, data->texture[SOUTH], path);
+	else if (!data->texture[WEST]->img->ptr && ft_strcmp(word, "WE") == 0)
+		init_texture(data, data->texture[WEST], path);
+	else if (!data->texture[EAST]->img->ptr && ft_strcmp(word, "EA") == 0)
+	{
+		printf("EA\n");
+		init_texture(data, data->texture[EAST], path);
+	}
 	else
 		errno(INV_CHAR, "", data);
 }
@@ -90,7 +87,7 @@ void	element_check(t_data *data, char **file)
 			errno(INV_CHAR, "", data);
 		*file += len;
 		path = skip_spaces(file);
-		legenda_check(data, &data->legenda, word, path);
+		legenda_check(data, word, path);
 		*file += ft_strlen(path);
 		i++;
 	}

@@ -68,7 +68,7 @@ void	draw_addams_cube(t_data *data)
 	draw_the_grid(data);
 	draw_player(data);
 	draw_the_vector(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0,0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.ptr, 0,0);
 }
 
 void	draw_the_walls(t_data *data, int x, int y, bool wall)
