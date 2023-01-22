@@ -34,8 +34,8 @@ void	draw_addams_cube(t_data *data)
 		x++;
 	}
 	draw_the_grid(data);
-	draw_player(data);
-	draw_the_vector(data);
+	draw_player(data); // i dont agree with this (angry exclamation mark)
+	ray_the_caster(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0,0);
 }
 
@@ -125,11 +125,36 @@ void	draw_the_grid(t_data *data)
 	}
 }
 
-void	draw_the_vector(t_data *data)
+void	single_ray(t_data *data, t_vector direction)
 {
-	single_raycast(data, data->player.pos, data->player.dir);
+	double	horizontal_dist;
+	double	vertikal_dist;
+	double	akschuel_dist;
+
+	horizontal_dist = horizontal_raycast(data, direction);
+	vertikal_dist = vertikal_raycast(data, direction);
+	if (horizontal_dist > vertikal_dist)
+		akschuel_dist = vertikal_dist;
+	else
+		akschuel_dist = horizontal_dist;
+	// printf("Ze akschuel %f\n", akschuel_dist);
+
+}
+
+void	ray_the_caster(t_data *data)
+{
+	int	count;
+	double angle_view;
+
+	angle_view = ((double) FOV) / ((double)RAY_COUNT);
+	count = 0;
+	while (count < RAY_COUNT)
+	{
+		// printf("fov %i ray count %i angle view %f count %i\n", FOV, RAY_COUNT, angle_view, count);
+		single_ray(data, rotatevectorlol(data->player.dir, (-1 * FOV/2) + (angle_view * count)));
+		count ++;
+	}
 	draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
-	
 }
 
 bool	is_wall(t_data *data, t_vector pos)
@@ -139,6 +164,11 @@ bool	is_wall(t_data *data, t_vector pos)
 
 	x = pos.y / 100;
 	y = pos.x / 100;
+	if(x < 0 || y < 0 || y > data->map_width - 1|| x > data->map_height - 1)
+	{
+		printf("SZTOPPPPPPPP!!!!!!!!, because x is %d,,,, and y is %i\n",y ,x);
+		exit(1);
+	}
 	if (data->map[x][y] != '0')
 		return (true);
 	return (!true);
@@ -151,30 +181,7 @@ bool	is_equal(double check_input, double value, double range)
 	return (false);
 }
 
-double	single_raycast(t_data *data, t_vector pos, t_vector dir)
+void	print_pos(t_data *data)
 {
-	double	og_x;
-	double	og_y;
-	double	ratio;
-	t_vector	ray;
-
-	if (!is_equal(dir.y, 0, 0.001))
-	{
-		printf("jelloooooooo\n");
-		ratio = dir.x / dir.y;
-	}
-	else
-	{
-		printf("jeeeeeeello\n");
-		ratio = dir.x / 0.1;
-	}
-
-	og_x = TILE - fmod(pos.x, TILE);
-	og_y = ratio / og_x;
-
-	ray.x = data->player.pos.x + og_x;
-	ray.y = data->player.pos.y + og_y;
-		// printf("x: %f, y: %f\n", ray.x, ray.y);
-	draw_line_img(&data->img, data->player.pos, ray, 0xFFE036);
-	return (og_y);
+	printf("Player position: x = %f y = %f\n", data->player.pos.x, data->player.pos.y);
 }

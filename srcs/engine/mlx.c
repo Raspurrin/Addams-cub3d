@@ -31,3 +31,11 @@ void draw_line_img(t_img *img, t_vector eins, t_vector zwei, int color)
 		--pixels;
 	}
 }
+
+double	just_abs(double i)
+{
+	if (i >= 0)
+		return (i);
+	else
+		return (-1 * i);
+}

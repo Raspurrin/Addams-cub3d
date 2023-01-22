@@ -13,6 +13,8 @@
 # define ON_PURPLE	"\033[44m"
 # define ON_PINK	"\033[45m"
 
+# define A_VERY_VERY_BIG_NUMMER 1000000000000000000
+
 typedef struct s_vector t_vector;
 typedef struct s_data	t_data;
 
@@ -36,7 +38,7 @@ void		move(t_data *data, bool up, bool dwn, bool rht, bool lft);
 /* render stuff */
 void		draw_player(t_data *data);
 void		draw_the_grid(t_data *data);
-void		draw_the_vector(t_data *data);
+void		ray_the_caster(t_data *data);
 void		draw_background(t_data *data);
 void		draw_addams_cube(t_data *data);
 void		draw_the_walls(t_data *data, int x, int y, bool wall);
@@ -45,10 +47,15 @@ void		draw_line_img(t_img *img, t_vector eins, t_vector zwei, int color);
 t_vector	vector_add(t_vector first, t_vector second);
 t_vector	vector_multpl(t_vector first, t_vector second);
 t_vector	vector_substr(t_vector first, t_vector second);
-t_vector	rotatevectorlol(t_vector vct, int angle); //do not rename!!!!!!!
+t_vector	rotatevectorlol(t_vector vct, double angle); //do not rename!!!!!!!
 /*  */
 bool		is_wall(t_data *data, t_vector pos);
-double	single_raycast(t_data *data, t_vector pos, t_vector dir);
+double		horizontal_raycast(t_data *data, t_vector direction);
+double		vertikal_raycast(t_data *data, t_vector direction);
+
+double		just_abs(double i);
+
+double		calc_the_theorem(t_vector vect);
 
 
 

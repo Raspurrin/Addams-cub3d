@@ -18,7 +18,8 @@ SRCS	=	./srcs/main.c \
 			./srcs/parsing/legenda_util.c \
 			./srcs/engine/mlx.c \
 			./srcs/engine/draw.c \
-			./srcs/engine/vectors.c
+			./srcs/engine/vectors.c \
+			./srcs/engine/raycast.c
 
 OS		=	$(shell uname -s)
 
@@ -56,7 +57,7 @@ submodule:
 %.o : %.c
 # @echo "$(B_BLUE)Compiling: $(BLUE)$(notdir $<) 🔨$(NC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "\033[0;35m•\033[0;35m\c"
+	@echo "\033[0;35m•\033[0m\c"
 
 banner:
 # @echo "\n${PURPLE}======== Cub3d ========$(NC)"

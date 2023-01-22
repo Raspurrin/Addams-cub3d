@@ -16,9 +16,14 @@
 # include "../includes/engine.h"
 
 # define SCREEN_WIDTH 2000
+# define WIDTH_FOR_CEDRIC 720
 # define SCREEN_HEIGHT 1000
+// # define WIDTH_FOR_CEDRIC 720
 # define TILE 100
 # define DIR_VECTOR TILE/4
+# define FOV 90
+# define RAY_COUNT WIDTH_FOR_CEDRIC
+
 
 # define BUFFERSIZE 20
 
