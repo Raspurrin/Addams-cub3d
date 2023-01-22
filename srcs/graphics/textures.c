@@ -9,34 +9,36 @@
 // 	return (height_pixels);
 // }
 
-// int32_t	get_column(t_wall *wall, t_texture *texture)
-// {
-// 	if (wall->direction == EAST || wall->direction == WEST)
-// 		return (wall->pos.y % texture->width);
-// 	else if (wall->direction == NORTH || wall->direction == SOUTH)
-// 		return (wall->pos.x % texture->width);
-// }
+int32_t	get_column(t_wall *wall, t_texture *texture)
+{
+	if (wall->direction == EAST || wall->direction == WEST)
+		return (wall->pos.y % texture->width);
+	else if (wall->direction == NORTH || wall->direction == SOUTH)
+		return (wall->pos.x % texture->width);
+	return (0);
+}
 
 // which distance do you want to make the texture at 100 % its image height? 
 // Or rather which distance determines how many pixels you want to draw? 
 // As texture heights can be different, that should be the deciding factor
 // I need to define a certain distance as starting point, where I basically draw the entire
 // texture over the screen. That 
-static void	draw_vertical_line(t_data *data, char *texture, \
+static void	draw_vertical_line(t_data *data, t_texture *texture, \
 											t_wall *wall, int32_t w_x)
 {
 	// int32_t	interval;
 	// int32_t	offset;
-	// int32_t	t_x;
+	int32_t	t_x;
 	int32_t	y;
 
 	y = 0;
 	(void)texture;
-	// t_x = get_column(wall);
+	t_x = get_column(wall, texture);
 	// interval = calc_interval(wall->distance);
 	wall->height = SCREEN_HEIGHT * TILE / wall->distance;
 	wall->offset = (SCREEN_HEIGHT - wall->height) / 2;
-	printf("height: %d offset: %d screenheight: %d\n", wall->height, wall->offset, SCREEN_HEIGHT);
+	printf("height: %d offset: %d screenheight: %d\n", wall->height, \
+											wall->offset, SCREEN_HEIGHT);
 	while (y < SCREEN_HEIGHT)
 	{
 		if (y < wall->offset)
@@ -44,7 +46,8 @@ static void	draw_vertical_line(t_data *data, char *texture, \
 		else if (y > wall->height + wall->offset)
 			my_mlx_pixel_put(&data->img, w_x, y, 0x968335);
 		else
-			my_mlx_pixel_put(&data->img, w_x, y, 0xBA7CE7);
+			my_mlx_pixel_put(&data->img, w_x, y, \
+			texture->img->data[y * texture->width + t_x]);
 		y++;
 	}
 	// calculate which percentage of texture height the distance is
@@ -69,7 +72,7 @@ void	draw_textures(t_data *data)
 	{
 		// raycaster(data, &wall);
 		// calculate distance and get direction wall put direction in struct and return texture
-		draw_vertical_line(data, data->texture[wall.direction]->img->data, &wall, w_x);
+		draw_vertical_line(data, &data->texture[wall.direction], &wall, w_x);
 		w_x++;
 	}
 }

@@ -5,14 +5,10 @@ void	init(t_data *data)
 	ft_bzero(data, sizeof(t_data));
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "yo");
-	data->texture[NORTH] = ft_calloc(1, sizeof(t_texture));
-	data->texture[NORTH]->img = ft_calloc(1, sizeof(t_img));
-	data->texture[SOUTH] = ft_calloc(1, sizeof(t_texture));
-	data->texture[SOUTH]->img = ft_calloc(1, sizeof(t_img));
-	data->texture[EAST] = ft_calloc(1, sizeof(t_texture));
-	data->texture[EAST]->img = ft_calloc(1, sizeof(t_img));
-	data->texture[WEST] = ft_calloc(1, sizeof(t_texture));
-	data->texture[WEST]->img = ft_calloc(1, sizeof(t_img));
+	data->texture[NORTH].img = ft_calloc(1, sizeof(t_img));
+	data->texture[SOUTH].img = ft_calloc(1, sizeof(t_img));
+	data->texture[EAST].img = ft_calloc(1, sizeof(t_img));
+	data->texture[WEST].img = ft_calloc(1, sizeof(t_img));
 }
 
 void	init_image(t_data *data, t_img *img)

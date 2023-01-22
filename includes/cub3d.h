@@ -151,7 +151,7 @@ typedef struct s_data
 	int32_t		map_width;
 	int32_t		map_height;
 	t_img		img;
-	t_texture	*texture[TEXTCOUNT];
+	t_texture	texture[TEXTCOUNT];
 	t_colour	*floor;
 	t_colour	*ceiling;
 	t_colour	colour;

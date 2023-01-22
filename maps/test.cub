@@ -1,7 +1,7 @@
-NO ./textures/Brickwall3_Texture.xpm
-SO ./textures/Brickwall4_Texture.xpm
-WE ./textures/Brickwall5_Texture.xpm
-EA ./textures/Stonewall_Texture.xpm
+NO ./textures/bricks.xpm
+SO ./textures/circles.xpm
+WE ./textures/hypno.xpm
+EA ./textures/wood.xpm
 
 C 250,0,0
 F 220,100,0

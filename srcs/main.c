@@ -11,6 +11,24 @@ int	game_loop(void *data)
 	return (0);
 }
 
+void	texturetest(t_data *data)
+{
+	int32_t	i;
+	int32_t	x;
+	int32_t	y;
+
+	i = 0;
+	printf("texture width: %d", data->texture[NORTH].width);
+	while (i < data->texture[NORTH].width * data->texture[NORTH].height)
+	{
+		x = i % data->texture[NORTH].width;
+		y = i / data->texture[NORTH].width;
+		printf("x: %d, y: %d\n", x, y);
+		my_mlx_pixel_put(&data->img, x, y, data->texture[NORTH].img->data[i]);
+		i++;
+	}
+}
+
 int32_t	main(int argc, char *argv[])
 {
 	t_data	data;
@@ -20,8 +38,9 @@ int32_t	main(int argc, char *argv[])
 	init(&data);
 	init_image(&data, &data.img);
 	error_check(&data, argc, argv);
-	draw_textures(&data);
-	mlx_put_image_to_window(data.mlx, data.win, data.img.ptr, 0,0);
+	// draw_textures(&data);
+	texturetest(&data);
+	mlx_put_image_to_window(data.mlx, data.win, data.img.ptr, 0, 0);
 	// printf("halp\n");
 	// print_2d_fd(data.map,1);
 	// draw_addams_cube(&data);

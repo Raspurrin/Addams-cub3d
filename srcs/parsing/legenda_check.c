@@ -53,20 +53,14 @@ static void	legenda_check(t_data *data, char *word, char *path)
 		data->floor = malloc(sizeof(t_colour));
 		extract_colour(data, path, data->floor);
 	}
-	else if (!data->texture[NORTH]->img->ptr && ft_strcmp(word, "NO") == 0)
-	{
-		printf("yo");
-		init_texture(data, data->texture[NORTH], path);
-	}
-	else if (!data->texture[SOUTH]->img->ptr && ft_strcmp(word, "SO") == 0)
-		init_texture(data, data->texture[SOUTH], path);
-	else if (!data->texture[WEST]->img->ptr && ft_strcmp(word, "WE") == 0)
-		init_texture(data, data->texture[WEST], path);
-	else if (!data->texture[EAST]->img->ptr && ft_strcmp(word, "EA") == 0)
-	{
-		printf("EA\n");
-		init_texture(data, data->texture[EAST], path);
-	}
+	else if (!data->texture[NORTH].img->ptr && ft_strcmp(word, "NO") == 0)
+		init_texture(data, &data->texture[NORTH], path);
+	else if (!data->texture[SOUTH].img->ptr && ft_strcmp(word, "SO") == 0)
+		init_texture(data, &data->texture[SOUTH], path);
+	else if (!data->texture[WEST].img->ptr && ft_strcmp(word, "WE") == 0)
+		init_texture(data, &data->texture[WEST], path);
+	else if (!data->texture[EAST].img->ptr && ft_strcmp(word, "EA") == 0)
+		init_texture(data, &data->texture[EAST], path);
 	else
 		errno(INV_CHAR, "", data);
 }
@@ -91,4 +85,5 @@ void	element_check(t_data *data, char **file)
 		*file += ft_strlen(path);
 		i++;
 	}
+	printf("texture check: %p\n", data->texture[NORTH].img->ptr);
 }
