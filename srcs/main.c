@@ -42,7 +42,6 @@ int32_t	main(int argc, char *argv[])
 	draw_textures(&data);
 	// texturetest(&data);
 	mlx_put_image_to_window(data.mlx, data.win, data.img.ptr, 0, 0);
-	mlx_put_image_to_window(data.mlx, data.win, data.texture[NORTH].img->ptr, 128, 0);
 	// printf("halp\n");
 	// print_2d_fd(data.map,1);
 	// draw_addams_cube(&data);

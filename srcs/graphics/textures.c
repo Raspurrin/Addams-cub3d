@@ -33,7 +33,9 @@ static void	draw_vertical_line(t_data *data, t_texture *texture, \
 
 	y = 0;
 	(void)texture;
-	t_x = get_column(wall, texture);
+	// t_x = get_column(wall, texture);
+	t_x = w_x % texture->width; // just for testing
+	// printf("t_x: %d\n", t_x);
 	// interval = calc_interval(wall->distance);
 	wall->height = SCREEN_HEIGHT * TILE / wall->distance;
 	wall->offset = (SCREEN_HEIGHT - wall->height) / 2;
@@ -47,9 +49,10 @@ static void	draw_vertical_line(t_data *data, t_texture *texture, \
 			my_mlx_pixel_put(&data->img, w_x, y, 0x968335);
 		else
 			my_mlx_pixel_put(&data->img, w_x, y, \
-			my_mlx_pixel_get(texture->img, t_x, y));
+			my_mlx_pixel_get(texture->img, t_x, y % texture->height ));
 		y++;
-	} 
+		// printf("w_x: %d t_x: %d y: %d\n", w_x, t_x, y);
+	}
 	// calculate which percentage of texture height the distance is
 	// calculate how many pixels that is to draw xd
 	// calculate interval to skip or duplicate pixels
@@ -62,8 +65,8 @@ void	draw_textures(t_data *data)
 	t_wall	wall;
 
 	w_x = 0;
-	wall.direction = EAST;
-	wall.distance = 200;
+	wall.direction = SOUTH;
+	wall.distance = 300;
 	wall.pos.y = 2;
 	wall.pos.x = 2;
 	wall.height = 0;
