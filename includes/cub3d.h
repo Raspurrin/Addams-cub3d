@@ -189,4 +189,5 @@ int32_t	add_channel(int32_t colour, int32_t channel, int8_t bitshift);
 void	print_bits(int32_t nbr);
 void	init_image(t_data *data, t_img *img);
 
+unsigned int	my_mlx_pixel_get(t_img *data, int x, int y);
 #endif

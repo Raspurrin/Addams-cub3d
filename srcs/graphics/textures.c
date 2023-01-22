@@ -47,9 +47,9 @@ static void	draw_vertical_line(t_data *data, t_texture *texture, \
 			my_mlx_pixel_put(&data->img, w_x, y, 0x968335);
 		else
 			my_mlx_pixel_put(&data->img, w_x, y, \
-			texture->img->data[y * texture->width + t_x]);
+			my_mlx_pixel_get(texture->img, t_x, y));
 		y++;
-	}
+	} 
 	// calculate which percentage of texture height the distance is
 	// calculate how many pixels that is to draw xd
 	// calculate interval to skip or duplicate pixels
