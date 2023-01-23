@@ -39,8 +39,8 @@ void	draw_vertical_line(t_data *data, t_texture *texture, \
 	// interval = calc_interval(wall->distance);
 	wall->height = SCREEN_HEIGHT * TILE / wall->distance;
 	wall->offset = (SCREEN_HEIGHT - wall->height) / 2;
-	printf("height: %d offset: %d screenheight: %d\n", wall->height, \
-											wall->offset, SCREEN_HEIGHT);
+	// printf("height: %d offset: %d screenheight: %d\n", wall->height, \
+	// 										wall->offset, SCREEN_HEIGHT);
 	while (y < SCREEN_HEIGHT)
 	{
 		if (y < wall->offset)
