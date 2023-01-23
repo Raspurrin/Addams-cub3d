@@ -17,6 +17,11 @@ int	key_handler(int keycode, t_data *data)
 	else if (keycode == ARROW_LEFT)
 		data->player.dir = rotatevectorlol(data->player.dir, -10);
 	draw_addams_cube(data);
+	//else if(all other keys)
+		//the functions return bools
+	// if bool == true render else not
+	// else 
+	// 	printf("%i\n", keycode);
 	return (0);
 }
 

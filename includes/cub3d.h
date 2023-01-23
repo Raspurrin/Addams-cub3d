@@ -1,5 +1,3 @@
-
-
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -11,19 +9,21 @@
 # include <stdbool.h>
 # include <stdint.h>
 # include <math.h>
-# include "../libs/mlx/mlx.h"
 # include "../libs/libft/includes/libft.h"
 # include "../includes/engine.h"
 
-# define SCREEN_WIDTH 2000
-# define WIDTH_FOR_CEDRIC 720
-# define SCREEN_HEIGHT 1000
+# define VIEW_PORT 
+# define SCREEN_WIDTH 1280
+# define WIDTH_FOR_CEDRIC SCREEN_WIDTH
+# define SCREEN_HEIGHT 720
 // # define WIDTH_FOR_CEDRIC 720
 # define TILE 100
-# define DIR_VECTOR TILE/4
 # define FOV 90
 # define RAY_COUNT WIDTH_FOR_CEDRIC
 
+# define DIR_VECTOR TILE / 4
+/* This is the distance you want to keep the player from the wall */
+# define BOUNDARY 10
 
 # define BUFFERSIZE 20
 
@@ -34,6 +34,7 @@
 
 # if __linux__
 
+#  include "../libs/minilibx-linux/mlx.h"
 #  define ESC 65307
 #  define ZOOM_IN 105
 #  define ZOOM_OUT 111
@@ -48,9 +49,14 @@
 #  define MIDDLE_CLICK 2
 #  define PLUS 112
 #  define MINUS 109
+#  define W_KEY 25
+#  define A_KEY 0
+#  define S_KEY 1
+#  define D_KEY 2
 
 # elif __APPLE__
 
+#  include "../libs/mlx/mlx.h"
 #  define ESC 53
 #  define ZOOM_IN 34
 #  define ZOOM_OUT 31
@@ -68,7 +74,6 @@
 #  define S_KEY 1
 #  define D_KEY 2
 
-
 # endif
 
 typedef enum errno
@@ -85,9 +90,19 @@ typedef enum errno
 	NOPLAYER
 }	t_errno;
 
+typedef enum temp_textures
+{
+	NORTH,
+	WEST,
+	SOUTH,
+	EAST,
+	SKYBOX,
+	TEXTCOUNT
+}	t_temp_textures;
+
 typedef union s_colour
 {
-	uint32_t	colour;
+	uint32_t	abgr_i;
 	uint8_t		abgr[4];
 	struct
 	{
@@ -104,6 +119,12 @@ typedef struct s_vector
 	double	y;
 }	t_vector;
 
+typedef struct s_intvector
+{
+	int32_t	x;
+	int32_t	y;
+}	t_intvector;
+
 typedef struct s_player
 {
 	t_vector	dir;
@@ -112,20 +133,19 @@ typedef struct s_player
 
 typedef struct s_texture
 {
-	void	*img;
+	t_img	*img;
 	int32_t	width;
 	int32_t	height;
 }	t_texture;
 
-typedef struct s_legenda
+typedef struct s_wall
 {
-	t_texture	*north;
-	t_texture	*south;
-	t_texture	*west;
-	t_texture	*east;
-	t_colour	*floor;
-	t_colour	*ceiling;
-}	t_legenda;
+	t_intvector	pos;
+	double		distance;
+	int32_t		direction;
+	int32_t		height;
+	int32_t		offset;
+}	t_wall;
 
 typedef struct s_data
 {
@@ -135,11 +155,13 @@ typedef struct s_data
 	t_player	player;
 	int32_t		map_width;
 	int32_t		map_height;
-	t_legenda	legenda;
 	t_img		img;
+	t_texture	texture[TEXTCOUNT];
+	t_colour	*floor;
+	t_colour	*ceiling;
 	t_colour	colour;
 	t_vector	vector;
-	t_vector 	wall;
+	t_wall		wall;
 }	t_data;
 
 /* general functions */
@@ -156,9 +178,8 @@ int		x_close(t_data *data);
 char	*read_file(int32_t fd);
 void	error_check(t_data *data, int32_t argc, char **argv);
 void	extract_map(t_data *data, char *file);
-void	extract_colour(t_data *data, char *colour_str, t_colour *colour);
 void	element_check(t_data *data, char **file);
-char	*skip_spaces(char **file);
+void	init_texture(t_data *data, t_texture *texture, char *path);
 bool	is_space_or_1(char c);
 bool	is_valid_char(char c);
 bool	is_player(t_data *data, t_player *player, int32_t x, int32_t y);
@@ -167,8 +188,12 @@ int32_t	count_newlines_end(char *file);
 int32_t	count_newlines_start(char *file);
 
 /* graphics */
+void	draw_textures(t_data *data);
 int32_t	rgb_to_int(int32_t r, int32_t g, int32_t b, int32_t a);
 int32_t	add_channel(int32_t colour, int32_t channel, int8_t bitshift);
 void	print_bits(int32_t nbr);
+void	init_image(t_data *data, t_img *img);
 
+unsigned int	my_mlx_pixel_get(t_img *data, int x, int y);
+void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, int32_t w_x);
 #endif

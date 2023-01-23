@@ -1,6 +1,6 @@
 #include "../includes/cub3d.h"
 
-/**
+/** 
  * @brief Writes an error message to STDERR.
  * You can add an additional message, otherwise add "" as 2nd argument.
  * @param nbr Signifies with error message from the array to be used.
@@ -25,3 +25,5 @@ void	errno(int8_t nbr, char *msg, t_data *data)
 	free_data(data);
 	exit(nbr);
 }
+
+// test

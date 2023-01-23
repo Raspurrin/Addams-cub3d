@@ -5,21 +5,21 @@ DEBUG	=	-fsanitize=address
 LIBFT	=	./libs/libft/
 SRCS	=	./srcs/main.c \
 			./srcs/errno.c \
-			./srcs/keyhooks.c \
 			./srcs/free.c \
 			./srcs/init.c \
 			./srcs/graphics/colour.c \
+			./srcs/graphics/textures.c \
 			./srcs/parsing/legenda_check.c \
 			./srcs/parsing/error_check.c \
 			./srcs/parsing/read_map.c \
 			./srcs/parsing/validate_map.c \
 			./srcs/parsing/validate_map_utils.c \
 			./srcs/parsing/is_char_checks.c \
-			./srcs/parsing/legenda_util.c \
 			./srcs/engine/mlx.c \
 			./srcs/engine/draw.c \
 			./srcs/engine/vectors.c \
-			./srcs/engine/raycast.c
+			./srcs/engine/raycast.c \
+			./srcs/keyhooks.c
 
 OS		=	$(shell uname -s)
 
@@ -42,13 +42,23 @@ endif
 
 ifeq ($(OS), Darwin)
 LIBS	= -framework OpenGL -framework AppKit
-MLX	= ./libs/mlx/
+MLXDIR	=	./libs/mlx/
+MLXLIB	= libmlx.a
 else
 LIBS	= -lXext -lX11 -lm -lz
-MLX	= ./libs/mlx_linux/
+MLXDIR	=	./libs/minilibx-linux/
+MLXLIB	= libmlx_Linux.a
 endif
 
-all: $(SUBM_FLAG) mlx libft cub3d
+MLX_COMPILE_STATE = $(shell find $(MLXDIR)$(MLXLIB))
+
+ifeq ($(MLX_COMPILE_STATE),$(MLX_COMPILE_STATE))
+MLX_COMPILE_FLAG = mlx
+else
+MLX_COMPILE_FLAG =
+endif
+
+all: mlx libft cub3d
 
 submodule:
 	@git submodule init 
@@ -68,10 +78,10 @@ libft:
 
 mlx:
 # @echo "\n${BLUE}======== MLX ========${NC}"
-# @$(MAKE) -C $(MLX)
+# @$(MAKE) -C $(MLXDIR)
 
 $(NAME): banner $(OBJS)
-	@$(CC) $(FLAGS_OS) $(CFLAGS) $(LIBFT)libft.a $(MLX)libmlx.a $(OBJS) $(READLINE) $(FSAN) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)libft.a $(MLXDIR)$(MLXLIB) $(FSAN) $(LIBS) -o $(NAME)
 
 git:
 	git add .
@@ -83,13 +93,13 @@ git:
 clean:
 	@rm -f $(OBJS)
 	@$(MAKE) -C $(LIBFT) fclean
-# @$(MAKE) -C $(MLX) clean
-# @echo "${B_RED}🧹 Cleaning: ${RED} object files $(NC)"
+# @$(MAKE) -C $(MLXDIR) clean
+	@echo "${B_RED}🧹 Cleaning: ${RED} object files $(NC)"
 
 fclean: clean
 	@rm -f $(NAME)
 	@echo "\033[0;33m•\033[0;33m\c"
-# @echo "${B_RED}🧹 Cleaning: ${RED} $(NAME)$(NC)"
+	@echo "${B_RED}🧹 Cleaning: ${RED} $(NAME)$(NC)"
 
 re: fclean all
 

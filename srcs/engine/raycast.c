@@ -65,7 +65,7 @@ double	horizontal_raycast(t_data *data, t_vector direction)
 		dist = A_VERY_VERY_BIG_NUMMER;
 	else
 	{
-		draw_line_img(&data->img, data->player.pos, first_inter, 0xFB00FF); //pink
+		// draw_line_img(&data->img, data->player.pos, first_inter, 0xFB00FF); //pink
 		first_inter = vector_substr(data->player.pos, first_inter); //the abs of those
 		dist = calc_the_theorem(first_inter);
 	}
@@ -130,7 +130,7 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 		dist = A_VERY_VERY_BIG_NUMMER;
 	else
 	{
-		draw_line_img(&data->img, data->player.pos, first_inter, 0xFFE036);
+		// draw_line_img(&data->img, data->player.pos, first_inter, 0xFFE036);
 		first_inter = vector_substr(data->player.pos, first_inter); //the abs of those
 		dist = calc_the_theorem(first_inter);
 	}

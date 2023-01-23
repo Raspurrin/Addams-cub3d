@@ -17,26 +17,26 @@ void	move(t_data *data, bool up, bool dwn, bool rht, bool lft)
 
 void	draw_addams_cube(t_data *data)
 {
-	int	x;
-	int	y;
-	x = 0;
-	while (x < 10)
-	{
-		y = 0;
-		while (y < 20)
-		{
-			if (data->map[x][y] == '1')
-				draw_the_walls(data, y*100, x*100, 1);
-			else
-				draw_the_walls(data, y*100, x*100, 0);
-			y++;
-		}
-		x++;
-	}
-	draw_the_grid(data);
-	draw_player(data); // i dont agree with this (angry exclamation mark)
+	// int	x;
+	// int	y;
+	// x = 0;
+	// while (x < 10)
+	// {
+	// 	y = 0;
+	// 	while (y < 20)
+	// 	{
+	// 		if (data->map[x][y] == '1')
+	// 			draw_the_walls(data, y*100, x*100, 1);
+	// 		else
+	// 			draw_the_walls(data, y*100, x*100, 0);
+	// 		y++;
+	// 	}
+	// 	x++;
+	// }
+	// draw_the_grid(data);
+	// draw_player(data); // i dont agree with this (angry exclamation mark)
 	ray_the_caster(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img.img_ptr, 0,0);
+	mlx_put_image_to_window(data->mlx, data->win, data->img.ptr, 0,0);
 }
 
 void	draw_the_walls(t_data *data, int x, int y, bool wall)
@@ -125,7 +125,7 @@ void	draw_the_grid(t_data *data)
 	}
 }
 
-double	single_ray(t_data *data, t_vector direction)
+void	single_ray(t_data *data, t_vector direction)
 {
 	double	horizontal_dist;
 	double	vertikal_dist;
@@ -134,17 +134,33 @@ double	single_ray(t_data *data, t_vector direction)
 	horizontal_dist = horizontal_raycast(data, direction);
 	vertikal_dist = vertikal_raycast(data, direction);
 	if (horizontal_dist > vertikal_dist)
+	{
+		if (direction.x < 0)
+			data->wall.direction = WEST;
+		else
+			data->wall.direction = EAST;
 		akschuel_dist = vertikal_dist;
+	}
 	else
+	{
+		if (direction.y < 0)
+			data->wall.direction = NORTH;
+		else
+			data->wall.direction = SOUTH;
 		akschuel_dist = horizontal_dist;
+	}
 	// printf("Ze akschuel %f\n", akschuel_dist);
-	return (akschuel_dist);
+	data->wall.distance = akschuel_dist;
 }
 
 void	ray_the_caster(t_data *data)
 {
 	int	count;
 	double angle_view;
+	data->wall.pos.y = 2;
+	data->wall.pos.x = 2;
+	data->wall.height = 0;
+	data->wall.offset = 0;
 
 	angle_view = ((double) FOV) / ((double)RAY_COUNT);
 	count = 0;
@@ -152,9 +168,10 @@ void	ray_the_caster(t_data *data)
 	{
 		// printf("fov %i ray count %i angle view %f count %i\n", FOV, RAY_COUNT, angle_view, count);
 		single_ray(data, rotatevectorlol(data->player.dir, (-1 * FOV/2) + (angle_view * count)));
+		draw_vertical_line(data, &data->texture[data->wall.direction], &data->wall, count);
 		count ++;
 	}
-	draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
+	// draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
 }
 
 bool	is_wall(t_data *data, t_vector pos)

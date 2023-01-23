@@ -20,8 +20,8 @@ typedef struct s_data	t_data;
 
 typedef struct s_img
 {
-	void	*img_ptr;
-	void	*data;
+	void	*ptr;
+	char	*data;
 	int		size_l;
 	int		bpp;
 	int		endian;
@@ -56,9 +56,7 @@ double		vertikal_raycast(t_data *data, t_vector direction);
 double		just_abs(double i);
 
 double		calc_the_theorem(t_vector vect);
-double		single_ray(t_data *data, t_vector direction);
-
-
+void		single_ray(t_data *data, t_vector direction);
 
 
 #endif
