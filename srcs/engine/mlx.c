@@ -1,13 +1,5 @@
 #include "../../includes/cub3d.h"
 
-// int	get_colour(t_colour colour)
-// {
-// 	int	trgb;
-
-// 	trgb = colour.t << 24 | colour.r << 16 | colour.g << 8 | colour.b;
-// 	return (trgb);
-// }
-
 void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
 	char	*dst;
@@ -16,6 +8,37 @@ void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 	*(unsigned int *)dst = color;
 }
 
+void draw_line_img(t_img *img, t_vector eins, t_vector zwei, int color)
+{
+	double	deltaX;
+	double	deltaY;
+	int 	pixels;
+	double 	pixelX;
+	double 	pixelY;
+
+	deltaX = zwei.x - eins.x;
+	deltaY = zwei.y - eins.y;
+	pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
+	pixelX = eins.x;
+	pixelY = eins.y;
+	deltaX /= pixels;
+	deltaY /= pixels;
+	while (pixels)
+	{
+		my_mlx_pixel_put(img, pixelX, pixelY, color);
+		pixelX += deltaX;
+		pixelY += deltaY;
+		--pixels;
+	}
+}
+
+double	just_abs(double i)
+{
+	if (i >= 0)
+		return (i);
+	else
+		return (-1 * i);
+}
 unsigned int	my_mlx_pixel_get(t_img *data, int x, int y)
 {
 	char	*dst;

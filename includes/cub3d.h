@@ -13,9 +13,14 @@
 # include "../includes/engine.h"
 
 # define VIEW_PORT 
-# define SCREEN_WIDTH 2000
-# define SCREEN_HEIGHT 1000
+# define SCREEN_WIDTH 1280
+# define WIDTH_FOR_CEDRIC SCREEN_WIDTH
+# define SCREEN_HEIGHT 720
+// # define WIDTH_FOR_CEDRIC 720
 # define TILE 100
+# define FOV 90
+# define RAY_COUNT WIDTH_FOR_CEDRIC
+
 # define DIR_VECTOR TILE / 4
 /* This is the distance you want to keep the player from the wall */
 # define BOUNDARY 10
@@ -136,7 +141,7 @@ typedef struct s_texture
 typedef struct s_wall
 {
 	t_intvector	pos;
-	int32_t		distance;
+	double		distance;
 	int32_t		direction;
 	int32_t		height;
 	int32_t		offset;
@@ -156,7 +161,7 @@ typedef struct s_data
 	t_colour	*ceiling;
 	t_colour	colour;
 	t_vector	vector;
-	t_vector	wall;
+	t_wall		wall;
 }	t_data;
 
 /* general functions */
@@ -190,4 +195,5 @@ void	print_bits(int32_t nbr);
 void	init_image(t_data *data, t_img *img);
 
 unsigned int	my_mlx_pixel_get(t_img *data, int x, int y);
+void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, int32_t w_x);
 #endif
