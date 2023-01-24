@@ -1,19 +1,31 @@
 #include "../../includes/cub3d.h"
 
 /**
- * @brief Simple check to see if pixels either need to be added
- * or skipped based on the height of the wall of one vertical line
- * compared to the original texture height.
+ * 150 / 100 = 1.5		| 196 / 128 = 1.5 * 100 = 150 percent		| every second pixel repeat one extra pixel
+ * 250 percent - every pixel repeats and every second pixel repeats twice
+ * int offset = 250 / 100 = 2.5  -  2  - repeat every line this many times
+ * 250 % 100 = 50. 100 / 50 = 2. Repeat or skip with this offset (depends if previous value is 0 or not)
  */
-bool	skip_or_addpixels(t_wall wall, t_texture texture)
+static int32_t	calc_percentage(int32_t new_value, int32_t whole)
 {
-	wall.height
+	return ((new_value / whole) * 100);
 }
 
-int32_t	calc_interval()
+static void	calc_interval(t_wall *wall, t_texture *texture, t_ratio *ratio)
 {
-	
-	return ();
+	int32_t	percentage;
+	int32_t	remainder;
+
+	percentage = calc_percentage(wall->height, texture->height);
+	remainder = percentage % 100;
+	if (remainder == 0)
+		ratio->interval = 0;
+	else
+		ratio->interval = 100 / remainder;
+	if (percentage == 0)
+		ratio->repeat = 0;
+	else
+		ratio->repeat = percentage / 100;
 }
 
 int32_t	get_column(t_wall *wall, t_texture *texture)
@@ -33,23 +45,21 @@ int32_t	get_column(t_wall *wall, t_texture *texture)
 void	draw_vertical_line(t_data *data, t_texture *texture, \
 											t_wall *wall, int32_t w_x)
 {
-	// int32_t	interval;
-	// int32_t	offset;
+	t_ratio ratio;
 	int32_t	t_x;
 	int32_t	y;
+	int32_t	i;
 
 	y = 0;
+	i = 0;
 	(void)texture;
+
 	// t_x = get_column(wall, texture);
-	t_x = w_x % texture->width; // just for testing
-	// printf("t_x: %d\n", t_x);
-	// interval = calc_interval(wall->distance);
+	t_x = w_x % texture->width;
 	wall->height = SCREEN_HEIGHT * TILE / wall->distance;
 	wall->offset = (SCREEN_HEIGHT - wall->height) / 2;
-	printf("r: %d g: %d b: %d a: %d rgba: %x\n", data->ceiling->r, data->ceiling->g, data->ceiling->b, data->ceiling->a, data->ceiling->bgra_i);
-	printf("height: %d offset: %d screenheight: %d\n", wall->height, \
-											wall->offset, SCREEN_HEIGHT);
-	while (y < SCREEN_HEIGHT)
+	calc_interval(wall, texture, &ratio);
+	while (i < SCREEN_HEIGHT)
 	{
 		if (y < wall->offset)
 			my_mlx_pixel_put(&data->img, w_x, y, data->ceiling->bgra_i);
@@ -58,8 +68,9 @@ void	draw_vertical_line(t_data *data, t_texture *texture, \
 		else
 			my_mlx_pixel_put(&data->img, w_x, y, \
 			my_mlx_pixel_get(texture->img, t_x, y % texture->height));
+		// if (i % ratio.interval == 0 || i % ratio.repeat != 0)
 		y++;
-		// printf("w_x: %d t_x: %d y: %d\n", w_x, t_x, y);
+		i++;
 	}
 	// calculate which percentage of texture height the distance is
 	// calculate how many pixels that is to draw xd
@@ -67,23 +78,16 @@ void	draw_vertical_line(t_data *data, t_texture *texture, \
 	// move pointer of texture image array
 }
 
-void	draw_textures(t_data *data)
-{
-	int32_t	w_x;
-	t_wall	wall;
+// void	draw_textures(t_data *data)
+// {
+// 	int32_t	w_x;
+// 	t_wall	wall;
 
-	w_x = 0;
-	wall.direction = SOUTH;
-	wall.distance = 500;
-	wall.pos.y = 2;
-	wall.pos.x = 2;
-	wall.height = 0;
-	wall.offset = 0;
-	while (w_x < SCREEN_WIDTH)
-	{
-		// raycaster(data, &wall);
-		// calculate distance and get direction wall put direction in struct and return texture
-		draw_vertical_line(data, &data->texture[wall.direction], &wall, w_x);
-		w_x++;
-	}
-}
+// 	while (w_x < SCREEN_WIDTH)
+// 	{
+// 		// raycaster(data, &wall);
+// 		// calculate distance and get direction wall put direction in struct and return texture
+// 		draw_vertical_line(data, &data->texture[wall.direction], &wall, w_x);
+// 		w_x++;
+// 	}
+// }

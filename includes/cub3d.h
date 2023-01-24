@@ -138,6 +138,12 @@ typedef struct s_texture
 	int32_t	height;
 }	t_texture;
 
+typedef struct	s_ratio
+{
+	int32_t	interval;
+	int32_t	repeat;
+}	t_ratio;
+
 typedef struct s_wall
 {
 	t_intvector	pos;
