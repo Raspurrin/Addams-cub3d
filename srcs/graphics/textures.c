@@ -30,7 +30,7 @@ int32_t	get_column(t_wall *wall, t_texture *texture)
 // As texture heights can be different, that should be the deciding factor
 // I need to define a certain distance as starting point, where I basically draw the entire
 // texture over the screen. That 
-static void	draw_vertical_line(t_data *data, t_texture *texture, \
+void	draw_vertical_line(t_data *data, t_texture *texture, \
 											t_wall *wall, int32_t w_x)
 {
 	// int32_t	interval;

@@ -27,7 +27,7 @@ t_vector	vector_multpl(t_vector first, t_vector second)
 	return (vector);
 }
 
-t_vector rotatevectorlol(t_vector vct, int angle)
+t_vector rotatevectorlol(t_vector vct, double angle)
 {
 	t_vector tmp;
 

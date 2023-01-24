@@ -1,5 +1,5 @@
 CC 		= gcc
-CFLAGS	=	-Wall -Wextra -Werror -g
+CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
 NAME	=	cub3d
 DEBUG	=	-fsanitize=address
 LIBFT	=	./libs/libft/
@@ -18,6 +18,7 @@ SRCS	=	./srcs/main.c \
 			./srcs/engine/mlx.c \
 			./srcs/engine/draw.c \
 			./srcs/engine/vectors.c \
+			./srcs/engine/raycast.c \
 			./srcs/keyhooks.c
 
 OS		=	$(shell uname -s)
@@ -66,7 +67,7 @@ submodule:
 %.o : %.c
 # @echo "$(B_BLUE)Compiling: $(BLUE)$(notdir $<) 🔨$(NC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
-	@echo "\033[0;35m•\033[0;35m\c"
+	@echo "\033[0;35m•\033[0m\c"
 
 banner:
 # @echo "\n${PURPLE}======== Cub3d ========$(NC)"
@@ -77,7 +78,7 @@ libft:
 
 mlx:
 # @echo "\n${BLUE}======== MLX ========${NC}"
-	@$(MAKE) -C $(MLXDIR)
+# @$(MAKE) -C $(MLXDIR)
 
 $(NAME): banner $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)libft.a $(MLXDIR)$(MLXLIB) $(FSAN) $(LIBS) -o $(NAME)
@@ -92,7 +93,7 @@ git:
 clean:
 	@rm -f $(OBJS)
 	@$(MAKE) -C $(LIBFT) fclean
-	@$(MAKE) -C $(MLXDIR) clean
+# @$(MAKE) -C $(MLXDIR) clean
 	@echo "${B_RED}🧹 Cleaning: ${RED} object files $(NC)"
 
 fclean: clean
