@@ -1,13 +1,20 @@
 #include "../../includes/cub3d.h"
 
-// int32_t	calc_interval(int32_t distance)
-// {
-// 	int32_t	interval;
-// 	int32_t	height_percentage;
-// 	int32_t	height_pixels;
+/**
+ * @brief Simple check to see if pixels either need to be added
+ * or skipped based on the height of the wall of one vertical line
+ * compared to the original texture height.
+ */
+bool	skip_or_addpixels(t_wall wall, t_texture texture)
+{
+	wall.height
+}
 
-// 	return (height_pixels);
-// }
+int32_t	calc_interval()
+{
+	
+	return ();
+}
 
 int32_t	get_column(t_wall *wall, t_texture *texture)
 {
