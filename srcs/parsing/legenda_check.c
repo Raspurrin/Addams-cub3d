@@ -19,27 +19,45 @@ static char	*skip_spaces(char **file)
  */
 static void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 {
-	size_t	i;
+	int32_t	i;
+	int32_t	j;
 	size_t	channel_count;
-	int32_t	colour_int;
+	uint8_t	colour_int;
 	char	**channels;
 
-	i = 3;
+	i = 2;
+	j = 0;
 	channels = ft_split(colour_str, ',');
 	channel_count = ft_2darrlen(channels);
 	if (channel_count != 3)
 		errno(COLOUR, "", data);
-	while (i > 0 && *colour_str)
+	colour->a = 0; 
+	while (i >= 0)
 	{
-		colour_int = ft_atoi(*channels);
+		colour_int = ft_atoi(channels[i]);
 		if (colour_int < 0 || colour_int > 255)
 			errno(COLOUR, "", data);
-		colour->abgr[i] = (int8_t)colour_int;
-		colour_str += (ft_strclen(colour_str, ',') + 1);
-		channels++;
+		colour->bgra[j] = colour_int;
 		i--;
+		j++;
 	}
 }
+	// colour->a = 0;
+	// colour->b = ft_atoi(channels[0]);
+	// colour->g = ft_atoi(channels[1]);
+	// colour->r = ft_atoi(channels[2]);
+
+	// while (i > 0 && *colour_str)
+	// {
+	// 	colour_int = ft_atoi(*channels);
+	// 	if (colour_int < 0 || colour_int > 255)
+	// 		errno(COLOUR, "", data);
+	// 	colour->abgr[i] = (uint8_t)colour_int;
+	// 	colour_str += (ft_strclen(colour_str, ',') + 1);
+	// 	channels++;
+	// 	i--;
+	// }
+	// colour->a = 0;
 
 static void	legenda_check(t_data *data, char *word, char *path)
 {

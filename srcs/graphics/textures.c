@@ -39,17 +39,18 @@ static void	draw_vertical_line(t_data *data, t_texture *texture, \
 	// interval = calc_interval(wall->distance);
 	wall->height = SCREEN_HEIGHT * TILE / wall->distance;
 	wall->offset = (SCREEN_HEIGHT - wall->height) / 2;
+	printf("r: %d g: %d b: %d a: %d rgba: %x\n", data->ceiling->r, data->ceiling->g, data->ceiling->b, data->ceiling->a, data->ceiling->bgra_i);
 	printf("height: %d offset: %d screenheight: %d\n", wall->height, \
 											wall->offset, SCREEN_HEIGHT);
 	while (y < SCREEN_HEIGHT)
 	{
 		if (y < wall->offset)
-			my_mlx_pixel_put(&data->img, w_x, y, 0x4080FF);
+			my_mlx_pixel_put(&data->img, w_x, y, data->ceiling->bgra_i);
 		else if (y > wall->height + wall->offset)
-			my_mlx_pixel_put(&data->img, w_x, y, 0x968335);
+			my_mlx_pixel_put(&data->img, w_x, y, data->floor->bgra_i);
 		else
 			my_mlx_pixel_put(&data->img, w_x, y, \
-			my_mlx_pixel_get(texture->img, t_x, y % texture->height ));
+			my_mlx_pixel_get(texture->img, t_x, y % texture->height));
 		y++;
 		// printf("w_x: %d t_x: %d y: %d\n", w_x, t_x, y);
 	}
@@ -66,7 +67,7 @@ void	draw_textures(t_data *data)
 
 	w_x = 0;
 	wall.direction = SOUTH;
-	wall.distance = 300;
+	wall.distance = 500;
 	wall.pos.y = 2;
 	wall.pos.x = 2;
 	wall.height = 0;
