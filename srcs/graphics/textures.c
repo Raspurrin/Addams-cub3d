@@ -11,13 +11,13 @@ static int32_t	calc_percentage(int32_t new_value, int32_t whole)
 	return ((new_value / whole) * 100);
 }
 
-static void	calc_interval(t_wall *wall, t_texture *texture, t_ratio *ratio)
+static int32_t	calc_interval(t_wall *wall, t_texture *texture, t_ratio *ratio)
 {
 	int32_t	percentage;
 	int32_t	remainder;
 
 	percentage = calc_percentage(wall->height, texture->height);
-	remainder = percentage % 100;
+	remainder = percentage % 100; 
 	if (remainder == 0)
 		ratio->interval = 0;
 	else
@@ -26,6 +26,7 @@ static void	calc_interval(t_wall *wall, t_texture *texture, t_ratio *ratio)
 		ratio->repeat = 0;
 	else
 		ratio->repeat = percentage / 100;
+	return ((((remainder / 100)) * texture->height) % texture->height);
 }
 
 int32_t	get_column(t_wall *wall, t_texture *texture)
@@ -50,7 +51,6 @@ void	draw_vertical_line(t_data *data, t_texture *texture, \
 	int32_t	y;
 	int32_t	i;
 
-	y = 0;
 	i = 0;
 	(void)texture;
 
@@ -58,7 +58,7 @@ void	draw_vertical_line(t_data *data, t_texture *texture, \
 	t_x = w_x % texture->width;
 	wall->height = SCREEN_HEIGHT * TILE / wall->distance;
 	wall->offset = (SCREEN_HEIGHT - wall->height) / 2;
-	calc_interval(wall, texture, &ratio);
+	y = calc_interval(wall, texture, &ratio);
 	while (i < SCREEN_HEIGHT)
 	{
 		if (y < wall->offset)
@@ -68,8 +68,8 @@ void	draw_vertical_line(t_data *data, t_texture *texture, \
 		else
 			my_mlx_pixel_put(&data->img, w_x, y, \
 			my_mlx_pixel_get(texture->img, t_x, y % texture->height));
-		// if (i % ratio.interval == 0 || i % ratio.repeat != 0)
-		y++;
+		if (i % ratio.repeat == 0 && i % ratio.interval != 0)
+			y++;
 		i++;
 	}
 	// calculate which percentage of texture height the distance is
