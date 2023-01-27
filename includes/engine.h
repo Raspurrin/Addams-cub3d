@@ -14,6 +14,7 @@
 # define ON_PINK	"\033[45m"
 
 # define A_VERY_VERY_BIG_NUMMER 1000000000000000000
+# define M_TILE 20
 
 typedef struct s_vector t_vector;
 typedef struct s_data	t_data;
@@ -59,7 +60,7 @@ double		calc_the_theorem(t_vector vect);
 void		single_ray(t_data *data, t_vector direction);
 
 /* minimap */
-// void	draw_minimap(t_data *data);
+void	draw_minimap(t_data *data);
 
 
 #endif
