@@ -17,25 +17,8 @@ void	move(t_data *data, bool up, bool dwn, bool rht, bool lft)
 
 void	draw_addams_cube(t_data *data)
 {
-	// int	x;
-	// int	y;
-	// x = 0;
-	// while (x < 10)
-	// {
-	// 	y = 0;
-	// 	while (y < 20)
-	// 	{
-	// 		if (data->map[x][y] == '1')
-	// 			draw_the_walls(data, y*100, x*100, 1);
-	// 		else
-	// 			draw_the_walls(data, y*100, x*100, 0);
-	// 		y++;
-	// 	}
-	// 	x++;
-	// }
-	// draw_the_grid(data);
-	// draw_player(data); // i dont agree with this (angry exclamation mark)
 	ray_the_caster(data);
+	// draw_minimap(data);
 	mlx_put_image_to_window(data->mlx, data->win, data->img.ptr, 0,0);
 }
 
@@ -118,7 +101,7 @@ void	draw_the_grid(t_data *data)
 		y = 0;
 		while (y < SCREEN_HEIGHT)
 		{
-            my_mlx_pixel_put(&data->img, x, y, 0xF3C4FF );
+			my_mlx_pixel_put(&data->img, x, y, 0xF3C4FF );
 			y++;
 		}
 		x += 100;

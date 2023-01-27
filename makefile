@@ -19,7 +19,8 @@ SRCS	=	./srcs/main.c \
 			./srcs/engine/draw.c \
 			./srcs/engine/vectors.c \
 			./srcs/engine/raycast.c \
-			./srcs/keyhooks.c
+			./srcs/keyhooks.c \
+			./srcs/engine/minimap.c
 
 OS		=	$(shell uname -s)
 

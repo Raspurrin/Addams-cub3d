@@ -58,5 +58,8 @@ double		just_abs(double i);
 double		calc_the_theorem(t_vector vect);
 void		single_ray(t_data *data, t_vector direction);
 
+/* minimap */
+// void	draw_minimap(t_data *data);
+
 
 #endif

@@ -44,9 +44,9 @@ void	draw_vertical_line(t_data *data, t_texture *texture, \
 	while (y < SCREEN_HEIGHT)
 	{
 		if (y < wall->offset)
-			my_mlx_pixel_put(&data->img, w_x, y, 0x4080FF);
+			my_mlx_pixel_put(&data->img, w_x, y, 0x7300bf);
 		else if (y > wall->height + wall->offset)
-			my_mlx_pixel_put(&data->img, w_x, y, 0x968335);
+			my_mlx_pixel_put(&data->img, w_x, y, 0x36004f);
 		else
 			my_mlx_pixel_put(&data->img, w_x, y, \
 			my_mlx_pixel_get(texture->img, t_x, y % texture->height ));

@@ -195,5 +195,6 @@ void	print_bits(int32_t nbr);
 void	init_image(t_data *data, t_img *img);
 
 unsigned int	my_mlx_pixel_get(t_img *data, int x, int y);
-void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, int32_t w_x);
+void			draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, int32_t w_x);
+
 #endif
