@@ -4,11 +4,11 @@ void	draw_minimap(t_data *data)
 {
 	int	x;
 	int	y;
-	x = data->player.pos.x/100;
+	x = data->player.pos.x/M_TILE;
 	while (x < 10)
 	{
 		y = 0;
-		while (y < 20)
+		while (y < 10)
 		{
 			if (data->map[x][y] == '1')
 				draw_the_walls(data, y*M_TILE, x*M_TILE, 1);

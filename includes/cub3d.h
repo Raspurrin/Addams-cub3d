@@ -147,6 +147,12 @@ typedef struct s_wall
 	int32_t		offset;
 }	t_wall;
 
+typedef	struct s_touple
+{
+	double		dist;
+	t_vector	coll;
+}	t_touple;
+
 typedef struct s_data
 {
 	void		*mlx;
@@ -162,6 +168,9 @@ typedef struct s_data
 	t_colour	colour;
 	t_vector	vector;
 	t_wall		wall;
+	t_vector	vert_coll;
+	t_vector	horz_coll;
+	t_vector	akschuell_coll;
 }	t_data;
 
 /* general functions */
