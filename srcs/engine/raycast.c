@@ -123,7 +123,6 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 			first_inter = vector_add(first_inter, next_inter);
 			cond = end_condition(data, first_inter);
 		}
-		
 	}
 	double	dist;
 	if (cond == 2)

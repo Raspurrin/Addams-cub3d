@@ -21,8 +21,8 @@ bool	is_player(t_data *data, t_player *player, int32_t x, int32_t y)
 	if (data->map[y][x] != 'N' && data->map[y][x] != 'E' \
 	&& data->map[y][x] != 'O' && data->map[y][x] != 'W')
 		return (false);
-	player->pos.x = x * TILE;
-	player->pos.y = y * TILE;
+	player->pos.x = x * TILE + (TILE / 2);
+	player->pos.y = y * TILE + (TILE / 2);
 	if (data->map[y][x] == 'N')
 		player->dir.y = -1 * DIR_VECTOR;
 	if (data->map[y][x] == 'S')

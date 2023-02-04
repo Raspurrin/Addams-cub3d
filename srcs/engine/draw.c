@@ -3,14 +3,17 @@
 void	move(t_data *data, bool up, bool dwn, bool rht, bool lft)
 {
 	// tem vec
-	if (up &&  !is_wall(data, vector_add(data->player.pos, data->player.dir)))
-		data->player.pos = vector_add(data->player.pos, data->player.dir);
-	if (dwn && !is_wall(data, vector_substr(data->player.pos, data->player.dir)))
-		data->player.pos = vector_substr(data->player.pos, data->player.dir);
-	if (rht && !is_wall(data, vector_add(data->player.pos, rotatevectorlol(data->player.dir, 90))))
-		data->player.pos = vector_add(data->player.pos, rotatevectorlol(data->player.dir, 90));
-	if (lft && !is_wall(data, vector_substr(data->player.pos, rotatevectorlol(data->player.dir, 90))))
-		data->player.pos = vector_substr(data->player.pos, rotatevectorlol(data->player.dir, 90));
+	t_vector temp;
+	temp.x = data->player.dir.x * 10;
+	temp.y = data->player.dir.y * 10;
+	if (up &&  !is_wall(data, vector_add(data->player.pos, temp)))
+		data->player.pos = vector_add(data->player.pos, temp);
+	if (dwn && !is_wall(data, vector_substr(data->player.pos, temp)))
+		data->player.pos = vector_substr(data->player.pos, temp);
+	if (rht && !is_wall(data, vector_add(data->player.pos, rotatevectorlol(temp, 90))))
+		data->player.pos = vector_add(data->player.pos, rotatevectorlol(temp, 90));
+	if (lft && !is_wall(data, vector_substr(data->player.pos, rotatevectorlol(temp, 90))))
+		data->player.pos = vector_substr(data->player.pos, rotatevectorlol(temp, 90));
 	// check if tmp in wall
 	// only if !wall update pos player
 }
@@ -155,21 +158,22 @@ void	single_ray(t_data *data, t_vector direction)
 
 void	ray_the_caster(t_data *data)
 {
-	int	count;
-	double angle_view;
+	t_intvector	draw;
+	double		angle_view;
 	data->wall.pos.y = 2;
 	data->wall.pos.x = 2;
 	data->wall.height = 0;
 	data->wall.offset = 0;
 
 	angle_view = ((double) FOV) / ((double)RAY_COUNT);
-	count = 0;
-	while (count < RAY_COUNT)
+	draw.x = 0;
+	draw.y = 0;
+	while (draw.x < RAY_COUNT)
 	{
 		// printf("fov %i ray count %i angle view %f count %i\n", FOV, RAY_COUNT, angle_view, count);
-		single_ray(data, rotatevectorlol(data->player.dir, (-1 * FOV/2) + (angle_view * count)));
-		draw_vertical_line(data, &data->texture[data->wall.direction], &data->wall, count);
-		count ++;
+		single_ray(data, rotatevectorlol(data->player.dir, (-1 * FOV/2) + (angle_view * draw.x)));
+		draw_vertical_line(data, &data->texture[data->wall.direction], &data->wall, draw);
+		draw.x++;
 	}
 	// draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
 }
@@ -181,7 +185,7 @@ bool	is_wall(t_data *data, t_vector pos)
 
 	x = pos.y / 100;
 	y = pos.x / 100;
-	if(x < 0 || y < 0 || y > data->map_width - 1|| x > data->map_height - 1)
+	if (x < 0 || y < 0 || y > data->map_width - 1|| x > data->map_height - 1)
 	{
 		printf("SZTOPPPPPPPP!!!!!!!!, because x is %d,,,, and y is %i\n",y ,x);
 		exit(1);

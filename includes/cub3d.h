@@ -149,8 +149,8 @@ typedef struct s_wall
 	t_intvector	pos;
 	double		distance;
 	int32_t		direction;
-	int32_t		height;
-	int32_t		offset;
+	uint32_t	height;
+	uint32_t	offset;
 }	t_wall;
 
 typedef struct s_data
@@ -202,5 +202,5 @@ void	init_image(t_data *data, t_img *img);
 int32_t	rev_colour(t_colour *colour);
 
 unsigned int	my_mlx_pixel_get(t_img *data, int x, int y);
-void	draw_vertical_line(t_data *data, t_wall *wall, int32_t w_x);
+void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, t_intvector draw);
 #endif
