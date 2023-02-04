@@ -96,7 +96,6 @@ typedef enum temp_textures
 	WEST,
 	SOUTH,
 	EAST,
-	SKYBOX,
 	TEXTCOUNT
 }	t_temp_textures;
 

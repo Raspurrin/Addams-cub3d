@@ -4,8 +4,8 @@ void	move(t_data *data, bool up, bool dwn, bool rht, bool lft)
 {
 	// tem vec
 	t_vector temp;
-	temp.x = data->player.dir.x * 10;
-	temp.y = data->player.dir.y * 10;
+	temp.x = data->player.dir.x;
+	temp.y = data->player.dir.y;
 	if (up &&  !is_wall(data, vector_add(data->player.pos, temp)))
 		data->player.pos = vector_add(data->player.pos, data->player.dir);
 	if (dwn && !is_wall(data, vector_substr(data->player.pos, temp)))

@@ -1,6 +1,10 @@
 #include "../../includes/cub3d.h"
 
-// ugly fucking protection because I am about to get blackholed idec
+// ugly fucking protection because I am about to get blackholed idec 
+// also I am beautiful and smart and I have a lot of people who really care about me
+// also I'm gonna die
+// how bout no
+// see people no care
 void	my_mlx_pixel_put(t_texture *data, int x, int y, int color)
 {
 	char	*dst;
@@ -19,6 +23,8 @@ void	my_mlx_pixel_put(t_texture *data, int x, int y, int color)
 	// 	// else
 	// 		x = data->width - 1;
 	// }
+	if (x < 0 || y < 0 || x >= SCREEN_WIDTH || y >= SCREEN_HEIGHT)
+		return ;
 	dst = data->img->data + (y * data->img->size_l + x * (data->img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
