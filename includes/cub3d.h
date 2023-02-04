@@ -202,5 +202,5 @@ void	init_image(t_data *data, t_img *img);
 int32_t	rev_colour(t_colour *colour);
 
 unsigned int	my_mlx_pixel_get(t_img *data, int x, int y);
-void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, int32_t w_x);
+void	draw_vertical_line(t_data *data, t_wall *wall, int32_t w_x);
 #endif
