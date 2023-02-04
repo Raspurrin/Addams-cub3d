@@ -39,10 +39,14 @@ double	just_abs(double i)
 	else
 		return (-1 * i);
 }
-unsigned int	my_mlx_pixel_get(t_img *data, int x, int y)
+unsigned int	my_mlx_pixel_get(t_texture *texture, int x, int y)
 {
 	char	*dst;
 
-	dst = data->data + (y * data->size_l + x * (data->bpp / 8));
+	if (y > texture->height)
+		y = texture->height;
+	if (x > texture->width)
+		x = texture->width;
+	dst = texture->img->data + (y * texture->img->size_l + x * (texture->img->bpp / 8));
 	return (*(unsigned int *)dst);
 }

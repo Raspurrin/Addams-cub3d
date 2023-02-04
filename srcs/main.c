@@ -13,24 +13,24 @@ int	game_loop(void *data)
 	return (0);
 }
 
-void	texturetest(t_data *data)
-{
-	int32_t	i;
-	int32_t	x;
-	int32_t	y;
+// void	texturetest(t_data *data)
+// {
+// 	int32_t	i;
+// 	int32_t	x;
+// 	int32_t	y;
 
-	i = 0;
-	printf("texture width: %d", data->texture[NORTH].width);
-	while (i < data->texture[NORTH].width * data->texture[NORTH].height)
-	{
-		x = i % data->texture[NORTH].width;
-		y = i / data->texture[NORTH].width;
-		printf("x: %d, y: %d\n", x, y);
-		my_mlx_pixel_put(&data->img, x, y, \
-			my_mlx_pixel_get(data->texture[NORTH].img, x, y));
-		i++;
-	}
-}
+// 	i = 0;
+// 	printf("texture width: %d", data->texture[NORTH].width);
+// 	while (i < data->texture[NORTH].width * data->texture[NORTH].height)
+// 	{
+// 		x = i % data->texture[NORTH].width;
+// 		y = i / data->texture[NORTH].width;
+// 		printf("x: %d, y: %d\n", x, y);
+// 		my_mlx_pixel_put(&data->img, x, y, \
+// 			my_mlx_pixel_get(data->texture[NORTH].img, x, y));
+// 		i++;
+// 	}
+// }
 
 int32_t	main(int argc, char *argv[])
 {

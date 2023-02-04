@@ -6,27 +6,9 @@
  * int offset = 250 / 100 = 2.5  -  2  - repeat every line this many times
  * 250 % 100 = 50. 100 / 50 = 2. Repeat or skip with this offset (depends if previous value is 0 or not)
  */
-static int32_t	calc_percentage(int32_t new_value, int32_t whole)
+static float	calc_multiplier(float whole, float new_value)
 {
-	return ((new_value / whole) * 100);
-}
-
-static int32_t	calc_interval(t_wall *wall, t_texture *texture, t_ratio *ratio)
-{
-	int32_t	percentage;
-	int32_t	remainder;
-
-	percentage = calc_percentage(wall->height, texture->height);
-	remainder = percentage % 100; 
-	if (remainder == 0)
-		ratio->interval = 0;
-	else
-		ratio->interval = 100 / remainder;
-	if (percentage == 0)
-		ratio->repeat = 1;
-	else
-		ratio->repeat = (percentage / 100);
-	return ((((remainder / 100)) * texture->height) % texture->height);
+	return (1 / (whole / new_value));
 }
 
 int32_t	get_column(t_wall *wall, t_texture *texture)
@@ -41,30 +23,20 @@ int32_t	get_column(t_wall *wall, t_texture *texture)
 // most stupid fucking function ever fucking written, kill this idiot pls
 static void	draw_wall(t_data *data, t_texture *texture, t_intvector *draw)
 {
-	int32_t		i;
-	uint32_t	old_y;
+	uint32_t		i;
 	t_intvector	img;
-	t_ratio 	ratio;
+	float		multiplier;
 
 	i = 0;
-	old_y = draw->y;
+	multiplier = calc_multiplier(texture->height, data->wall.height);
 	img.x = draw->x % data->texture->width;
-	img.y = calc_interval(&data->wall, texture, &ratio);
-	while ((draw->y - old_y) < data->wall.height)
+	while (i < data->wall.height)
 	{
-		while (i < ratio.repeat && (draw->y - old_y) < data->wall.height)
-		{
-			my_mlx_pixel_put(&data->img, draw->x, draw->y++, \
-			my_mlx_pixel_get(data->texture->img, img.x, img.y));
-			i++;
-		}
-		if (ratio.interval != 0 && i % ratio.interval == 0 && (draw->y - old_y) < data->wall.height)
-			my_mlx_pixel_put(&data->img, draw->x, draw->y++, \
-			my_mlx_pixel_get(data->texture->img, img.x, img.y));
-		i = 0;
-		img.y++;
+		my_mlx_pixel_put(&data->img, draw->x, draw->y++, \
+		my_mlx_pixel_get(data->texture, img.x, i * multiplier));
+		i++;
 	}
-
+}
 // use vectors ffs =_=  . . . Hold on. 
 
 // which distance do you want to make the texture at 100 % its image height? 
@@ -74,7 +46,7 @@ static void	draw_wall(t_data *data, t_texture *texture, t_intvector *draw)
 // texture over the screen. That 
 void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, t_intvector draw)
 {
-	wall->height = SCREEN_HEIGHT * 10 / wall->distance;
+	wall->height = SCREEN_HEIGHT * 20 / wall->distance;
 	if (wall->height > SCREEN_HEIGHT)
 		wall->offset = 0;
 	else
