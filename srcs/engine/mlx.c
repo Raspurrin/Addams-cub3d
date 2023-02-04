@@ -43,10 +43,10 @@ unsigned int	my_mlx_pixel_get(t_texture *texture, int x, int y)
 {
 	char	*dst;
 
-	if (y > texture->height)
-		y = texture->height;
-	if (x > texture->width)
-		x = texture->width;
+	if (y >= texture->height)
+		y = texture->height - 1;
+	if (x >= texture->width)
+		x = texture->width - 1;
 	dst = texture->img->data + (y * texture->img->size_l + x * (texture->img->bpp / 8));
 	return (*(unsigned int *)dst);
 }
