@@ -1,14 +1,29 @@
 #include "../../includes/cub3d.h"
 
-void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
+// ugly fucking protection because I am about to get blackholed idec
+void	my_mlx_pixel_put(t_texture *data, int x, int y, int color)
 {
 	char	*dst;
 
-	dst = data->data + (y * data->size_l + x * (data->bpp / 8));
+	// if (y >= data->height)
+	// {
+	// 	// if (data->height == 0)
+	// 	// 	y = 0;
+	// 	// else 
+	// 		y = data->height - 1;
+	// }
+	// if (x >= data->width)
+	// {
+	// 	// if (data->width == 0)
+	// 	// 	x = 0;
+	// 	// else
+	// 		x = data->width - 1;
+	// }
+	dst = data->img->data + (y * data->img->size_l + x * (data->img->bpp / 8));
 	*(unsigned int *)dst = color;
 }
 
-void draw_line_img(t_img *img, t_vector eins, t_vector zwei, int color)
+void draw_line_img(t_texture *img, t_vector eins, t_vector zwei, int color)
 {
 	double	deltaX;
 	double	deltaY;
@@ -43,9 +58,9 @@ unsigned int	my_mlx_pixel_get(t_texture *texture, int x, int y)
 {
 	char	*dst;
 
-	if (y >= texture->height)
+	if (y >= texture->height && texture->height != 0)
 		y = texture->height - 1;
-	if (x >= texture->width)
+	if (x >= texture->width && texture->width != 0)
 		x = texture->width - 1;
 	dst = texture->img->data + (y * texture->img->size_l + x * (texture->img->bpp / 8));
 	return (*(unsigned int *)dst);

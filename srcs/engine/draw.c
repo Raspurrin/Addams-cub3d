@@ -39,7 +39,7 @@ void	draw_addams_cube(t_data *data)
 	// draw_the_grid(data);
 	// draw_player(data); // i dont agree with this (angry exclamation mark)
 	ray_the_caster(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img.ptr, 0,0);
+	mlx_put_image_to_window(data->mlx, data->win, data->canvas.img->ptr, 0,0);
 }
 
 void	draw_the_walls(t_data *data, int x, int y, bool wall)
@@ -54,9 +54,9 @@ void	draw_the_walls(t_data *data, int x, int y, bool wall)
 		while (j < 100)
 		{
 			if (wall)
-				my_mlx_pixel_put(&data->img, i + x, j + y, 0xBA7CE7);
+				my_mlx_pixel_put(&data->canvas, i + x, j + y, 0xBA7CE7);
 			else
-				my_mlx_pixel_put(&data->img, i + x, j + y, 0x000000);
+				my_mlx_pixel_put(&data->canvas, i + x, j + y, 0x000000);
 			j++;
 		}
 		i++;
@@ -74,7 +74,7 @@ void	draw_player(t_data *data)
 		y = 0;
 		while (y < 25)
 		{
-			my_mlx_pixel_put(&data->img, data->player.pos.x + x, data->player.pos.y + y, 0xFFF791);
+			my_mlx_pixel_put(&data->canvas, data->player.pos.x + x, data->player.pos.y + y, 0xFFF791);
 			y++;		
 		}
 		x++;
@@ -92,7 +92,7 @@ void	draw_background(t_data *data)
 		y = 0;
 		while (y < SCREEN_HEIGHT)
 		{
-            my_mlx_pixel_put(&data->img, x, y, 0x0000000);
+            my_mlx_pixel_put(&data->canvas, x, y, 0x0000000);
 			y ++;
 		}
 		x++;
@@ -110,7 +110,7 @@ void	draw_the_grid(t_data *data)
 		y = 0;
 		while (y < SCREEN_HEIGHT)
 		{
-            my_mlx_pixel_put(&data->img, x, y, 0xF3C4FF );
+            my_mlx_pixel_put(&data->canvas, x, y, 0xF3C4FF );
 			y += 100;
 		}
 		x++;
@@ -121,7 +121,7 @@ void	draw_the_grid(t_data *data)
 		y = 0;
 		while (y < SCREEN_HEIGHT)
 		{
-            my_mlx_pixel_put(&data->img, x, y, 0xF3C4FF );
+            my_mlx_pixel_put(&data->canvas, x, y, 0xF3C4FF );
 			y++;
 		}
 		x += 100;
@@ -175,7 +175,7 @@ void	ray_the_caster(t_data *data)
 		draw_vertical_line(data, &data->texture[data->wall.direction], &data->wall, draw);
 		draw.x++;
 	}
-	// draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
+	// draw_line_img(&data->canvas, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
 }
 
 bool	is_wall(t_data *data, t_vector pos)

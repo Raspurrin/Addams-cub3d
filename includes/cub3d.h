@@ -161,7 +161,7 @@ typedef struct s_data
 	t_player	player;
 	int32_t		map_width;
 	int32_t		map_height;
-	t_img		img;
+	t_texture	canvas;
 	t_texture	texture[TEXTCOUNT];
 	t_colour	*floor;
 	t_colour	*ceiling;
