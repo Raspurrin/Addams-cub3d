@@ -42,8 +42,8 @@ int32_t	main(int argc, char *argv[])
 	data.texture->height = 0;
 	data.texture->width = 0;
 	error_check(&data, argc, argv);
-	data.texture->height = data.map_height;
-	data.texture->width = data.map_width;
+	data.canvas.height = data.map_height;
+	data.canvas.width = data.map_width;
 	// draw_textures(&data);
 	// texturetest(&data);
 	//hey
