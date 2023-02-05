@@ -170,7 +170,7 @@ void	ray_the_caster(t_data *data)
 		single_ray(data, rotatevectorlol(data->player.dir, (-1 * FOV/2) + (angle_view * draw.x)));
 		// data->wall.pos.y = fabs(data->wall.pos.y);
 		// data->wall.pos.x = fabs(data->wall.pos.x);
-		printf("direction: %d %p\n", data->wall.direction, &data->texture[data->wall.direction]);
+
 		draw_vertical_line(data, &(data->texture)[data->wall.direction], &data->wall, draw);
 		draw.x++;
 	}

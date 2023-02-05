@@ -31,7 +31,6 @@ static void	draw_wall(t_data *data, t_texture *texture, t_intvector *draw)
 	i = 0;
 	multiplier = calc_multiplier(texture->height, data->wall.height);
 	img.x = get_column(&data->wall, texture);
-	printf("%d\n", img.x);
 	while (i < data->wall.height - 1)
 	{
 		if (draw->y < SCREEN_HEIGHT - 1 && draw->x < SCREEN_WIDTH - 1)
@@ -44,7 +43,7 @@ static void	draw_wall(t_data *data, t_texture *texture, t_intvector *draw)
 
 void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, t_intvector draw)
 {
-	wall->height = SCREEN_HEIGHT * 20 / wall->distance;
+	wall->height = TILE * SCREEN_HEIGHT / wall->distance;
 	if (wall->height > SCREEN_HEIGHT)
 		wall->offset = 0;
 	else
