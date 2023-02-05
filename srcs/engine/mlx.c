@@ -68,6 +68,8 @@ unsigned int	my_mlx_pixel_get(t_texture *texture, int x, int y)
 		y = texture->height - 1;
 	if (x >= texture->width && texture->width != 0)
 		x = texture->width - 1;
+	if (x < 0 || y < 0 || x >= SCREEN_WIDTH || y >= SCREEN_HEIGHT)
+		return (0);
 	dst = texture->img->data + (y * texture->img->size_l + x * (texture->img->bpp / 8));
 	return (*(unsigned int *)dst);
 }

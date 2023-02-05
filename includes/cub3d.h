@@ -145,7 +145,7 @@ typedef struct	s_ratio
 
 typedef struct s_wall
 {
-	t_intvector	pos;
+	t_vector	pos;
 	double		distance;
 	int32_t		direction;
 	uint32_t	height;

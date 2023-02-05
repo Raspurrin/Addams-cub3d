@@ -6,24 +6,32 @@ static float	calc_multiplier(float whole, float new_value)
 	return (1 * (whole / new_value));
 }
 
-int32_t	get_column(t_wall *wall, t_texture *texture)
+static int32_t	get_column(t_wall *wall, t_texture *texture)
 {
-	if (wall->direction == EAST || wall->direction == WEST)
-		return (wall->pos.y % texture->width);
-	else if (wall->direction == NORTH || wall->direction == SOUTH)
-		return (wall->pos.x % texture->width);
+	float	multiplier;
+
+	multiplier = calc_multiplier(texture->width, TILE);
+	if (wall->direction == EAST)
+		return (((int32_t)wall->pos.y % TILE) * multiplier);
+	else if (wall->direction == WEST)
+		return ((TILE - ((int32_t)wall->pos.y % TILE)) * multiplier);
+	else if (wall->direction == NORTH)
+		return (((int32_t)wall->pos.x % TILE) * multiplier);
+	else if (wall->direction == SOUTH)
+		return ((TILE - (int32_t)wall->pos.x % TILE) * multiplier);
 	return (0);
 }
 
 static void	draw_wall(t_data *data, t_texture *texture, t_intvector *draw)
 {
-	uint32_t		i;
+	uint32_t	i;
 	t_intvector	img;
 	float		multiplier;
 
 	i = 0;
 	multiplier = calc_multiplier(texture->height, data->wall.height);
-	img.x = draw->x % data->texture->width;
+	img.x = get_column(&data->wall, texture);
+	printf("%d\n", img.x);
 	while (i < data->wall.height - 1)
 	{
 		if (draw->y < SCREEN_HEIGHT - 1 && draw->x < SCREEN_WIDTH - 1)
