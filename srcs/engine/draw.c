@@ -171,7 +171,7 @@ void	ray_the_caster(t_data *data)
 		// data->wall.pos.y = fabs(data->wall.pos.y);
 		// data->wall.pos.x = fabs(data->wall.pos.x);
 		printf("direction: %d %p\n", data->wall.direction, &data->texture[data->wall.direction]);
-		draw_vertical_line(data, &data->texture[data->wall.direction], &data->wall, draw);
+		draw_vertical_line(data, &(data->texture)[data->wall.direction], &data->wall, draw);
 		draw.x++;
 	}
 	// draw_line_img(&data->canvas, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);

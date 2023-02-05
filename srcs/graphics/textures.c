@@ -36,7 +36,7 @@ static void	draw_wall(t_data *data, t_texture *texture, t_intvector *draw)
 	{
 		if (draw->y < SCREEN_HEIGHT - 1 && draw->x < SCREEN_WIDTH - 1)
 			my_mlx_pixel_put(&data->canvas, draw->x, draw->y, \
-			my_mlx_pixel_get(data->texture, img.x, i * multiplier));
+			my_mlx_pixel_get(texture, img.x, i * multiplier));
 		i++;
 		draw->y++;
 	}
