@@ -15,7 +15,6 @@ static double	get_column(t_wall *wall, t_texture *texture)
 		column = fmod(wall->pos.x, TILE) * multiplier;
 	else if (wall->direction == SOUTH)
 		column = fmod(wall->pos.x, TILE) * multiplier;
-	printf("x: %f, y: %f wall direction: %d column: %f\n", wall->pos.x, wall->pos.y, wall->direction, column);
 	return (column);
 }
 
@@ -59,34 +58,3 @@ void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, t_intvec
 	while ((uint32_t)draw.y < wall->offset)
 		my_mlx_pixel_put(&data->canvas, draw.x, draw.y++, data->floor->bgra_i);
 }
-
-// static void    draw_wall_3d(t_data *data, int x, double dist)
-// {
-//     double    wall_height = WIN_HEIGTH * TILE / dist;
-//     double    wall_offset = (WIN_HEIGTH - wall_height) / 2;
-//     double    texture_x_d;
-//     int        texture_x;
-
-//     if(data->found_wall == NORTH_WALL || data->found_wall == SOUTH_WALL)
-//         texture_x_d = fmod(data->intersection.x, TILE);
-//     else
-//         texture_x_d = fmod(data->intersection.y, TILE);
-//     texture_x =  (int)texture_x_d;
-//     int        texture_y;
-//     double    y_perc;
-//     texture_x = (int)(data->walls[data->found_wall].width * texture_x_d / 100);
-//     for (int y = 0; y < WIN_HEIGTH; y++)
-//     {
-//         if (y < wall_offset)
-//             my_mlx_pixel_put(&data->img, x, y, data->ceiling_col);
-//         else if (y > wall_height + wall_offset)
-//             my_mlx_pixel_put(&data->img, x, y, data->floor_col);
-//         else
-//         {
-//             texture_y = y - wall_offset;
-//             y_perc = (double)texture_y / wall_height;
-//             texture_y = data->walls[data->found_wall].height * y_perc;
-//             my_mlx_pixel_put(&data->img, x, y, my_mlx_pixel_get(data->walls[data->found_wall].img, texture_x, texture_y));
-//         }
-//     }
-// }
