@@ -1,19 +1,22 @@
 #include "../../includes/cub3d.h"
 
-static int32_t	get_column(t_wall *wall, t_texture *texture)
+static double	get_column(t_wall *wall, t_texture *texture)
 {
-	float	multiplier;
+	double	multiplier;
+	double	column;
 
-	multiplier = texture->width / (float)TILE;
+	column = 0.0;
+	multiplier = texture->width / (double)TILE;
 	if (wall->direction == EAST)
-		return (((int32_t)fmod(wall->pos.y, TILE)) * multiplier);
+		column = fmod(wall->pos.y, TILE) * multiplier;
 	else if (wall->direction == WEST)
-		return (((int32_t)fmod(wall->pos.y, TILE)) * multiplier);
+		column = fmod(wall->pos.y, TILE) * multiplier;
 	else if (wall->direction == NORTH)
-		return (((int32_t)fmod(wall->pos.x, TILE)) * multiplier);
+		column = fmod(wall->pos.x, TILE) * multiplier;
 	else if (wall->direction == SOUTH)
-		return ((((int32_t)fmod(wall->pos.x, TILE))) * multiplier);
-	return (0);
+		column = fmod(wall->pos.x, TILE) * multiplier;
+	printf("x: %f, y: %f wall direction: %d column: %f\n", wall->pos.x, wall->pos.y, wall->direction, column);
+	return (column);
 }
 
 static int32_t	get_start_row(t_wall wall)

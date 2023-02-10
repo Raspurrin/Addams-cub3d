@@ -58,7 +58,7 @@ double	horizontal_raycast(t_data *data, t_vector direction)
 			first_inter = vector_add(first_inter, next_inter);
 			cond = end_condition(data, first_inter);
 		}
-		
+		data->wall.pos.x = first_inter.x;
 	}
 	double	dist;
 	if (cond == 2)
@@ -124,7 +124,6 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 			cond = end_condition(data, first_inter);
 		}
 	}
-	data->wall.pos.x = first_inter.x;
 	data->wall.pos.y = first_inter.y;
 	double	dist;
 	if (cond == 2)
