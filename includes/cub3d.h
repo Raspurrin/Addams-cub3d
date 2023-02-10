@@ -96,20 +96,19 @@ typedef enum temp_textures
 	WEST,
 	SOUTH,
 	EAST,
-	SKYBOX,
 	TEXTCOUNT
 }	t_temp_textures;
 
 typedef union s_colour
 {
-	uint32_t	abgr_i;
-	uint8_t		abgr[4];
+	uint32_t	bgra_i;
+	uint8_t		bgra[4];
 	struct
 	{
-		uint8_t	a;
 		uint8_t	b;
 		uint8_t	g;
 		uint8_t	r;
+		uint8_t	a;
 	};
 }	t_colour;
 
@@ -138,13 +137,19 @@ typedef struct s_texture
 	int32_t	height;
 }	t_texture;
 
+typedef struct	s_ratio
+{
+	int32_t	interval;
+	int32_t	repeat;
+}	t_ratio;
+
 typedef struct s_wall
 {
-	t_intvector	pos;
+	t_vector	pos;
 	double		distance;
 	int32_t		direction;
-	int32_t		height;
-	int32_t		offset;
+	uint32_t	height;
+	uint32_t	offset;
 }	t_wall;
 
 typedef struct s_data
@@ -155,7 +160,7 @@ typedef struct s_data
 	t_player	player;
 	int32_t		map_width;
 	int32_t		map_height;
-	t_img		img;
+	t_texture	canvas;
 	t_texture	texture[TEXTCOUNT];
 	t_colour	*floor;
 	t_colour	*ceiling;
@@ -193,7 +198,8 @@ int32_t	rgb_to_int(int32_t r, int32_t g, int32_t b, int32_t a);
 int32_t	add_channel(int32_t colour, int32_t channel, int8_t bitshift);
 void	print_bits(int32_t nbr);
 void	init_image(t_data *data, t_img *img);
+int32_t	rev_colour(t_colour *colour);
 
-unsigned int	my_mlx_pixel_get(t_img *data, int x, int y);
-void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, int32_t w_x);
+unsigned int	my_mlx_pixel_get(t_texture *texture, int x, int y);
+void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, t_intvector draw);
 #endif

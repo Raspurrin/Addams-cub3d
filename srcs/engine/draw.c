@@ -3,13 +3,16 @@
 void	move(t_data *data, bool up, bool dwn, bool rht, bool lft)
 {
 	// tem vec
-	if (up &&  !is_wall(data, vector_add(data->player.pos, data->player.dir)))
+	t_vector temp;
+	temp.x = data->player.dir.x;
+	temp.y = data->player.dir.y;
+	if (up &&  !is_wall(data, vector_add(data->player.pos, temp)))
 		data->player.pos = vector_add(data->player.pos, data->player.dir);
-	if (dwn && !is_wall(data, vector_substr(data->player.pos, data->player.dir)))
+	if (dwn && !is_wall(data, vector_substr(data->player.pos, temp)))
 		data->player.pos = vector_substr(data->player.pos, data->player.dir);
-	if (rht && !is_wall(data, vector_add(data->player.pos, rotatevectorlol(data->player.dir, 90))))
+	if (rht && !is_wall(data, vector_add(data->player.pos, rotatevectorlol(temp, 90))))
 		data->player.pos = vector_add(data->player.pos, rotatevectorlol(data->player.dir, 90));
-	if (lft && !is_wall(data, vector_substr(data->player.pos, rotatevectorlol(data->player.dir, 90))))
+	if (lft && !is_wall(data, vector_substr(data->player.pos, rotatevectorlol(temp, 90))))
 		data->player.pos = vector_substr(data->player.pos, rotatevectorlol(data->player.dir, 90));
 	// check if tmp in wall
 	// only if !wall update pos player
@@ -36,7 +39,7 @@ void	draw_addams_cube(t_data *data)
 	// draw_the_grid(data);
 	// draw_player(data); // i dont agree with this (angry exclamation mark)
 	ray_the_caster(data);
-	mlx_put_image_to_window(data->mlx, data->win, data->img.ptr, 0,0);
+	mlx_put_image_to_window(data->mlx, data->win, data->canvas.img->ptr, 0,0);
 }
 
 void	draw_the_walls(t_data *data, int x, int y, bool wall)
@@ -51,9 +54,9 @@ void	draw_the_walls(t_data *data, int x, int y, bool wall)
 		while (j < 100)
 		{
 			if (wall)
-				my_mlx_pixel_put(&data->img, i + x, j + y, 0xBA7CE7);
+				my_mlx_pixel_put(&data->canvas, i + x, j + y, 0xBA7CE7);
 			else
-				my_mlx_pixel_put(&data->img, i + x, j + y, 0x000000);
+				my_mlx_pixel_put(&data->canvas, i + x, j + y, 0x000000);
 			j++;
 		}
 		i++;
@@ -71,7 +74,7 @@ void	draw_player(t_data *data)
 		y = 0;
 		while (y < 25)
 		{
-			my_mlx_pixel_put(&data->img, data->player.pos.x + x, data->player.pos.y + y, 0xFFF791);
+			my_mlx_pixel_put(&data->canvas, data->player.pos.x + x, data->player.pos.y + y, 0xFFF791);
 			y++;		
 		}
 		x++;
@@ -89,7 +92,7 @@ void	draw_background(t_data *data)
 		y = 0;
 		while (y < SCREEN_HEIGHT)
 		{
-            my_mlx_pixel_put(&data->img, x, y, 0x0000000);
+            my_mlx_pixel_put(&data->canvas, x, y, 0x0000000);
 			y ++;
 		}
 		x++;
@@ -107,7 +110,7 @@ void	draw_the_grid(t_data *data)
 		y = 0;
 		while (y < SCREEN_HEIGHT)
 		{
-            my_mlx_pixel_put(&data->img, x, y, 0xF3C4FF );
+            my_mlx_pixel_put(&data->canvas, x, y, 0xF3C4FF );
 			y += 100;
 		}
 		x++;
@@ -118,7 +121,7 @@ void	draw_the_grid(t_data *data)
 		y = 0;
 		while (y < SCREEN_HEIGHT)
 		{
-            my_mlx_pixel_put(&data->img, x, y, 0xF3C4FF );
+            my_mlx_pixel_put(&data->canvas, x, y, 0xF3C4FF );
 			y++;
 		}
 		x += 100;
@@ -150,28 +153,28 @@ void	single_ray(t_data *data, t_vector direction)
 		akschuel_dist = horizontal_dist;
 	}
 	// printf("Ze akschuel %f\n", akschuel_dist);
-	data->wall.distance = akschuel_dist;
+	data->wall.distance = akschuel_dist / TILE;
 }
 
 void	ray_the_caster(t_data *data)
 {
-	int	count;
-	double angle_view;
-	data->wall.pos.y = 2;
-	data->wall.pos.x = 2;
-	data->wall.height = 0;
-	data->wall.offset = 0;
+	t_intvector	draw;
+	double		angle_view;
 
 	angle_view = ((double) FOV) / ((double)RAY_COUNT);
-	count = 0;
-	while (count < RAY_COUNT)
+	draw.x = 0;
+	draw.y = 0;
+	while (draw.x < RAY_COUNT)
 	{
 		// printf("fov %i ray count %i angle view %f count %i\n", FOV, RAY_COUNT, angle_view, count);
-		single_ray(data, rotatevectorlol(data->player.dir, (-1 * FOV/2) + (angle_view * count)));
-		draw_vertical_line(data, &data->texture[data->wall.direction], &data->wall, count);
-		count ++;
+		single_ray(data, rotatevectorlol(data->player.dir, (-1 * FOV/2) + (angle_view * draw.x)));
+		// data->wall.pos.y = fabs(data->wall.pos.y);
+		// data->wall.pos.x = fabs(data->wall.pos.x);
+
+		draw_vertical_line(data, &(data->texture)[data->wall.direction], &data->wall, draw);
+		draw.x++;
 	}
-	// draw_line_img(&data->img, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
+	// draw_line_img(&data->canvas, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
 }
 
 bool	is_wall(t_data *data, t_vector pos)
@@ -179,9 +182,9 @@ bool	is_wall(t_data *data, t_vector pos)
 	int	x;
 	int	y;
 
-	x = pos.y / 100;
+	x = pos.y / 100; // was dis?
 	y = pos.x / 100;
-	if(x < 0 || y < 0 || y > data->map_width - 1|| x > data->map_height - 1)
+	if (x < 0 || y < 0 || y > data->map_width - 1|| x > data->map_height - 1)
 	{
 		printf("SZTOPPPPPPPP!!!!!!!!, because x is %d,,,, and y is %i\n",y ,x);
 		exit(1);

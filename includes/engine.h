@@ -15,8 +15,9 @@
 
 # define A_VERY_VERY_BIG_NUMMER 1000000000000000000
 
-typedef struct s_vector t_vector;
-typedef struct s_data	t_data;
+typedef struct s_vector		t_vector;
+typedef struct s_data		t_data;
+typedef struct s_texture	t_texture;
 
 typedef struct s_img
 {
@@ -28,7 +29,7 @@ typedef struct s_img
 }	t_img;
 
 /* mlx */
-void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
+void		my_mlx_pixel_put(t_texture *data, int x, int y, int color);
 // int		get_colour(t_colour colour);
 /* hooks */
 int			x_close(t_data *data);
@@ -42,7 +43,7 @@ void		ray_the_caster(t_data *data);
 void		draw_background(t_data *data);
 void		draw_addams_cube(t_data *data);
 void		draw_the_walls(t_data *data, int x, int y, bool wall);
-void		draw_line_img(t_img *img, t_vector eins, t_vector zwei, int color);
+void		draw_line_img(t_texture *img, t_vector eins, t_vector zwei, int color);
 /* vector */
 t_vector	vector_add(t_vector first, t_vector second);
 t_vector	vector_multpl(t_vector first, t_vector second);

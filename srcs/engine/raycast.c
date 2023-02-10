@@ -58,17 +58,17 @@ double	horizontal_raycast(t_data *data, t_vector direction)
 			first_inter = vector_add(first_inter, next_inter);
 			cond = end_condition(data, first_inter);
 		}
-		
 	}
 	double	dist;
 	if (cond == 2)
 		dist = A_VERY_VERY_BIG_NUMMER;
 	else
 	{
-		// draw_line_img(&data->img, data->player.pos, first_inter, 0xFB00FF); //pink
+		// draw_line_img(&data->canvas, data->player.pos, first_inter, 0xFB00FF); //pink
 		first_inter = vector_substr(data->player.pos, first_inter); //the abs of those
 		dist = calc_the_theorem(first_inter);
 	}
+	data->wall.pos.x = fabs(first_inter.x);
 	return (dist);
 }
 
@@ -123,14 +123,14 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 			first_inter = vector_add(first_inter, next_inter);
 			cond = end_condition(data, first_inter);
 		}
-		
 	}
+	data->wall.pos.y = first_inter.y;
 	double	dist;
 	if (cond == 2)
 		dist = A_VERY_VERY_BIG_NUMMER;
 	else
 	{
-		// draw_line_img(&data->img, data->player.pos, first_inter, 0xFFE036);
+		// draw_line_img(&data->canvas, data->player.pos, first_inter, 0xFFE036);
 		first_inter = vector_substr(data->player.pos, first_inter); //the abs of those
 		dist = calc_the_theorem(first_inter);
 	}

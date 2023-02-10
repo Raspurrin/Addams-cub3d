@@ -9,6 +9,7 @@ void	init(t_data *data)
 	data->texture[SOUTH].img = ft_calloc(1, sizeof(t_img));
 	data->texture[EAST].img = ft_calloc(1, sizeof(t_img));
 	data->texture[WEST].img = ft_calloc(1, sizeof(t_img));
+	data->canvas.img = ft_calloc(1, sizeof(t_img));
 }
 
 void	init_image(t_data *data, t_img *img)
