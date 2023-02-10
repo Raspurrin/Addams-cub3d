@@ -153,7 +153,7 @@ void	single_ray(t_data *data, t_vector direction)
 		akschuel_dist = horizontal_dist;
 	}
 	// printf("Ze akschuel %f\n", akschuel_dist);
-	data->wall.distance = akschuel_dist;
+	data->wall.distance = akschuel_dist / TILE;
 }
 
 void	ray_the_caster(t_data *data)

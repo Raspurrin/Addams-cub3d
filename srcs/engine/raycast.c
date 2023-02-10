@@ -101,8 +101,6 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 	// printf("next a strich %f a %f b %f\n", a_strich, a,b );
 	first_inter.x = data->player.pos.x + a_strich;
 	first_inter.y = data->player.pos.y + b_strich;
-	data->wall.pos.x = first_inter.x;
-	data->wall.pos.y = first_inter.y;
 	cond = end_condition(data, first_inter);
 	if(direction.x < 0)
 		a_strich += 0.001;
@@ -126,6 +124,8 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 			cond = end_condition(data, first_inter);
 		}
 	}
+	data->wall.pos.x = first_inter.x;
+	data->wall.pos.y = first_inter.y;
 	double	dist;
 	if (cond == 2)
 		dist = A_VERY_VERY_BIG_NUMMER;
