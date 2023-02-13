@@ -166,15 +166,12 @@ void	ray_the_caster(t_data *data)
 	draw.y = 0;
 	while (draw.x < RAY_COUNT)
 	{
-		// printf("fov %i ray count %i angle view %f count %i\n", FOV, RAY_COUNT, angle_view, count);
 		single_ray(data, rotatevectorlol(data->player.dir, (-1 * FOV/2) + (angle_view * draw.x)));
-		// data->wall.pos.y = fabs(data->wall.pos.y);
-		// data->wall.pos.x = fabs(data->wall.pos.x);
-
+		printf("x pos: %f y pos: %f\n", data->wall.pos.x, data->wall.pos.y);
 		draw_vertical_line(data, &(data->texture)[data->wall.direction], &data->wall, draw);
 		draw.x++;
 	}
-	// draw_line_img(&data->canvas, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
+	printf("-------------\n");
 }
 
 bool	is_wall(t_data *data, t_vector pos)

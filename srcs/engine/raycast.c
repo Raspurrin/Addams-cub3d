@@ -59,6 +59,7 @@ double	horizontal_raycast(t_data *data, t_vector direction)
 			cond = end_condition(data, first_inter);
 		}
 	}
+	data->wall.pos.x = fabs(first_inter.x);
 	double	dist;
 	if (cond == 2)
 		dist = A_VERY_VERY_BIG_NUMMER;
@@ -68,7 +69,6 @@ double	horizontal_raycast(t_data *data, t_vector direction)
 		first_inter = vector_substr(data->player.pos, first_inter); //the abs of those
 		dist = calc_the_theorem(first_inter);
 	}
-	data->wall.pos.x = fabs(first_inter.x);
 	return (dist);
 }
 
