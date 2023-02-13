@@ -34,8 +34,6 @@ void		my_mlx_pixel_put(t_texture *data, int x, int y, int color);
 /* hooks */
 int			x_close(t_data *data);
 int			key_handler(int keycode, t_data *data);
-/* move */
-void		move(t_data *data, bool up, bool dwn, bool rht, bool lft);
 /* render stuff */
 void		draw_player(t_data *data);
 void		draw_the_grid(t_data *data);

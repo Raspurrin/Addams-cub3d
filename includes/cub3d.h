@@ -28,6 +28,7 @@
 # define BUFFERSIZE 20
 
 # define KEY_PRESS 2
+# define KEY_RELEASE 3
 # define RED_CROSS 17
 # define MOUSE_MOVE 6
 # define MOUSE_DOWN 4
@@ -73,6 +74,12 @@
 #  define A_KEY 0
 #  define S_KEY 1
 #  define D_KEY 2
+
+// movement bool:
+# define UP 1
+# define DOWN 2
+# define LEFT 4
+# define RIGHT 8
 
 # endif
 
@@ -126,6 +133,7 @@ typedef struct s_intvector
 
 typedef struct s_player
 {
+	uint32_t	movement;
 	t_vector	dir;
 	t_vector	pos;
 }	t_player;
@@ -160,6 +168,7 @@ typedef struct s_data
 	t_player	player;
 	int32_t		map_width;
 	int32_t		map_height;
+	t_vector	mid_canvas;
 	t_texture	canvas;
 	t_texture	texture[TEXTCOUNT];
 	t_colour	*floor;
@@ -175,9 +184,12 @@ void	free_data(t_data *data);
 void	errno(int8_t nbr, char *msg, t_data *data);
 
 /* mlx */
+void	move(t_data *data, int32_t movement);
 void	key_hooks(t_data *data);
-int		key_handler(int keycode, t_data *data);
 int		x_close(t_data *data);
+int		move_on_press(int keycode, t_data *data);
+int		move_on_release(int keycode, t_data *data);
+void	check_mouse_movement(t_data *data);
 
 /* parsing */
 char	*read_file(int32_t fd);
