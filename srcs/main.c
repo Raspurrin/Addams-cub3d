@@ -9,7 +9,9 @@ int	game_loop(void *data2)
 	data = (t_data *)data2;
 	mlx_do_key_autorepeaton(data->mlx);
 	move(data, data->player.movement);
+	check_mouse_movement(data);
 	draw_addams_cube(data);
+	mlx_mouse_hide();
 	return (0);
 }
 
@@ -44,13 +46,8 @@ int32_t	main(int argc, char *argv[])
 	error_check(&data, argc, argv);
 	data.canvas.height = data.map_height * TILE;
 	data.canvas.width = data.map_width * TILE;
-	// draw_textures(&data);
-	// texturetest(&data);
-	//hey
-	// mlx_put_image_to_window(data.mlx, data.win, data.img.ptr, 0, 0);
-	// printf("halp\n");
-	// print_2d_fd(data.map,1);
-	// 
+	data.mid_canvas.x = SCREEN_WIDTH / 2;
+	data.mid_canvas.y = SCREEN_HEIGHT / 2;
 	mlx_hook(data.win, KEY_PRESS, 0, move_on_press, &data);
 	mlx_hook(data.win, KEY_RELEASE, 0, move_on_release, &data);
 	mlx_hook(data.win, RED_CROSS, 0, x_close, &data);

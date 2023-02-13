@@ -168,6 +168,7 @@ typedef struct s_data
 	t_player	player;
 	int32_t		map_width;
 	int32_t		map_height;
+	t_vector	mid_canvas;
 	t_texture	canvas;
 	t_texture	texture[TEXTCOUNT];
 	t_colour	*floor;
@@ -186,8 +187,9 @@ void	errno(int8_t nbr, char *msg, t_data *data);
 void	move(t_data *data, int32_t movement);
 void	key_hooks(t_data *data);
 int		x_close(t_data *data);
-void	move_on_press(int keycode, t_data *data);
-void	move_on_release(int keycode, t_data *data);
+int		move_on_press(int keycode, t_data *data);
+int		move_on_release(int keycode, t_data *data);
+void	check_mouse_movement(t_data *data);
 
 /* parsing */
 char	*read_file(int32_t fd);

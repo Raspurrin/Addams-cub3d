@@ -18,7 +18,19 @@ void	move(t_data *data, int32_t movement)
 	// only if !wall update pos player
 }
 
-void	move_on_press(int keycode, t_data *data)
+void	check_mouse_movement(t_data *data)
+{
+	t_intvector	mouse;
+
+	mlx_mouse_get_pos(data->win, &mouse.x, &mouse.y);
+	if (mouse.x < data->mid_canvas.x)
+		data->player.dir = rotatevectorlol(data->player.dir, -3); 
+	else if (mouse.x > data->mid_canvas.x)
+		data->player.dir = rotatevectorlol(data->player.dir, 3);
+	mlx_mouse_move(data->win, data->mid_canvas.x, data->mid_canvas.y);
+}
+
+int	move_on_press(int keycode, t_data *data)
 {
 	if (keycode == ESC)
 		x_close(data);
@@ -29,14 +41,11 @@ void	move_on_press(int keycode, t_data *data)
 	else if (keycode == D_KEY)
 		data->player.movement = data->player.movement | RIGHT; 
 	else if (keycode == A_KEY)
-		data->player.movement = data->player.movement | LEFT; 
-	else if (keycode == ARROW_RIGHT)
-		data->player.dir = rotatevectorlol(data->player.dir, 10);
-	else if (keycode == ARROW_LEFT)
-		data->player.dir = rotatevectorlol(data->player.dir, -10);
+		data->player.movement = data->player.movement | LEFT;
+	return (0);
 }
 
-void	move_on_release(int keycode, t_data *data)
+int	move_on_release(int keycode, t_data *data)
 {
 	if (keycode == W_KEY)
 		data->player.movement = data->player.movement & ~UP; 
@@ -45,7 +54,8 @@ void	move_on_release(int keycode, t_data *data)
 	else if (keycode == D_KEY)
 		data->player.movement = data->player.movement & ~RIGHT; 
 	else if (keycode == A_KEY)
-		data->player.movement = data->player.movement & ~LEFT; 
+		data->player.movement = data->player.movement & ~LEFT;
+	return (0); 
 }
 
 int	x_close(t_data *data)
