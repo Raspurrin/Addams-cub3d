@@ -131,6 +131,13 @@ typedef struct s_intvector
 	int32_t	y;
 }	t_intvector;
 
+typedef struct s_sprite
+{
+	t_texture	*texture;
+	double		distance;
+	t_sprite	*next;
+}	t_sprite;
+
 typedef struct s_player
 {
 	uint32_t	movement;
@@ -166,6 +173,7 @@ typedef struct s_data
 	void		*win;
 	char		**map;
 	t_player	player;
+	t_sprite	*sprites;
 	int32_t		map_width;
 	int32_t		map_height;
 	t_vector	mid_canvas;

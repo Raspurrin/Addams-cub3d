@@ -1,5 +1,10 @@
 #include "../includes/cub3d.h"
 
+void	init_sprites(t_data *data)
+{
+	data->sprites->texture = 
+}
+
 void	init(t_data *data)
 {
 	ft_bzero(data, sizeof(t_data));
