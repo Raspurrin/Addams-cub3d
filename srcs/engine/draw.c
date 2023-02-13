@@ -156,6 +156,25 @@ void	single_ray(t_data *data, t_vector direction)
 	data->wall.distance = akschuel_dist / TILE;
 }
 
+static t_vector    normalize_vec(t_vector vec)
+{
+    t_vector    out;
+    double length = sqrt(vec.x*vec.x + vec.y*vec.y);
+    out.x = vec.x/length;
+    out.y = vec.y/length;
+    return (out);
+}
+
+
+
+static double    vec_dot(t_vector one, t_vector two)
+{
+    t_vector    tmp1 = normalize_vec(one);
+    t_vector    tmp2 = normalize_vec(two);
+
+    return ((tmp1.x * tmp2.x) + (tmp1.y * tmp2.y));
+}
+
 void	ray_the_caster(t_data *data)
 {
 	t_intvector	draw;
@@ -166,12 +185,21 @@ void	ray_the_caster(t_data *data)
 	draw.y = 0;
 	while (draw.x < RAY_COUNT)
 	{
+		t_vector tmp = rotatevectorlol(data->player.dir, (-1 * FOV/2) + (angle_view * draw.x));
 		// printf("fov %i ray count %i angle view %f count %i\n", FOV, RAY_COUNT, angle_view, count);
-		single_ray(data, rotatevectorlol(data->player.dir, (-1 * FOV/2) + (angle_view * draw.x)));
+		single_ray(data, tmp);
 		// data->wall.pos.y = fabs(data->wall.pos.y);
 		// data->wall.pos.x = fabs(data->wall.pos.x);
+		if(draw.x != RAY_COUNT /2)
+		{
+			
+			double i_dont_know = vec_dot(data->player.dir, tmp);
+			double radiant_diff = acos(i_dont_know);
+			data->wall.distance *= cos(radiant_diff);
+		}
 
 		draw_vertical_line(data, &(data->texture)[data->wall.direction], &data->wall, draw);
+		// printf("test2\n");
 		draw.x++;
 	}
 	// draw_line_img(&data->canvas, data->player.pos, vector_add(data->player.dir, data->player.pos), 0x59D4F8);
