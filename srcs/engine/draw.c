@@ -1,23 +1,5 @@
 #include "../../includes/cub3d.h"
 
-void	move(t_data *data, bool up, bool dwn, bool rht, bool lft)
-{
-	// tem vec
-	t_vector temp;
-	temp.x = data->player.dir.x;
-	temp.y = data->player.dir.y;
-	if (up &&  !is_wall(data, vector_add(data->player.pos, temp)))
-		data->player.pos = vector_add(data->player.pos, data->player.dir);
-	if (dwn && !is_wall(data, vector_substr(data->player.pos, temp)))
-		data->player.pos = vector_substr(data->player.pos, data->player.dir);
-	if (rht && !is_wall(data, vector_add(data->player.pos, rotatevectorlol(temp, 90))))
-		data->player.pos = vector_add(data->player.pos, rotatevectorlol(data->player.dir, 90));
-	if (lft && !is_wall(data, vector_substr(data->player.pos, rotatevectorlol(temp, 90))))
-		data->player.pos = vector_substr(data->player.pos, rotatevectorlol(data->player.dir, 90));
-	// check if tmp in wall
-	// only if !wall update pos player
-}
-
 void	draw_addams_cube(t_data *data)
 {
 	// int	x;
