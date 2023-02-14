@@ -19,6 +19,10 @@ SRCS	=	./srcs/main.c \
 			./srcs/engine/draw.c \
 			./srcs/engine/vectors.c \
 			./srcs/engine/raycast.c \
+			./srcs/engine/minimap.c \
+			./srcs/engine/useless_file_because_norminette.c \
+			./srcs/engine/yet_anotha_file_because_norminette.c \
+			./srcs/engine/anotha.c \
 			./srcs/keyhooks.c
 
 OS		=	$(shell uname -s)
@@ -102,5 +106,8 @@ fclean: clean
 	@echo "${B_RED}🧹 Cleaning: ${RED} $(NAME)$(NC)"
 
 re: fclean all
+
+run:
+	@./$(NAME) maps/rave.cub
 
 .PHONY: all clean fclean re banner $(NAME) libft mlx submodule

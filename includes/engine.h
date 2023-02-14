@@ -57,5 +57,11 @@ double		just_abs(double i);
 double		calc_the_theorem(t_vector vect);
 void		single_ray(t_data *data, t_vector direction);
 
+double		direction_check(t_data	*data, t_vector direction, double y);
+t_vector	cond_zero(t_data *data, t_vector yup, t_vector dir, t_vector first, int cond, double ratio);
+int			end_condition(t_data *data, t_vector vector);
+t_vector	dir_smoler_zero(t_vector direction, t_vector strich);
+double		ratio_is_actually_distance(t_data *data, double dist, t_vector first, int cond);
+
 
 #endif

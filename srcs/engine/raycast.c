@@ -10,66 +10,30 @@ int		end_condition(t_data *data, t_vector vector)
 
 double	horizontal_raycast(t_data *data, t_vector direction)
 {
-	double		x_strich;
-	double		y_strich;
-	double		x;
-	double		y;
-	double		ratio;
-	t_vector	first_inter;
 	int			cond;
+	double		ratio;
+	t_vector	yup;
+	t_vector	strich;
+	t_vector	first_inter;
 
 	if (direction.y == 0)
 		return (A_VERY_VERY_BIG_NUMMER);
-	if (direction.y > 0)
-		y_strich = TILE - fmod(data->player.pos.y, TILE);
-	else
-		y_strich = fmod(data->player.pos.y, TILE);
-	y = just_abs(direction.y);
-	x = direction.x;
-	ratio = y / y_strich;
-	x_strich = x / ratio;
-	if(direction.y < 0)
-	{
-		y_strich *= (-1);
-		y_strich -= 0.001;
-	}
-	first_inter.x = data->player.pos.x + x_strich;
-	first_inter.y = data->player.pos.y + y_strich;
-	// print_pos(data);
+	strich.y = direction_check(data, direction, strich.y);
+	yup.y = just_abs(direction.y);
+	yup.x = direction.x;
+	ratio = yup.y / strich.y;
+	strich.x = yup.x / ratio;
+	strich = dir_smoler_zero(direction, strich);
+	first_inter.x = data->player.pos.x + strich.x;
+	first_inter.y = data->player.pos.y + strich.y;
 	cond = end_condition(data, first_inter);
 	if(direction.y < 0)
-		y_strich += 0.001;
+		strich.y += 0.001;
 	if (cond == 0)
-	{
-		// printf("hello\n");
-		double		next_x_strich;
-		t_vector	next_inter;
-
-		ratio = y / TILE;
-		next_x_strich = x /ratio;
-
-		if(direction.y < 0)
-			next_inter.y = - TILE - 0.01;
-		else
-			next_inter.y = TILE;
-		next_inter.x = next_x_strich ;
-		while (cond == 0)
-		{
-			first_inter = vector_add(first_inter, next_inter);
-			cond = end_condition(data, first_inter);
-		}
-	}
+		first_inter = cond_zero(data, yup, direction, first_inter, cond, ratio);
 	data->wall.pos.x = fabs(first_inter.x);
-	double	dist;
-	if (cond == 2)
-		dist = A_VERY_VERY_BIG_NUMMER;
-	else
-	{
-		// draw_line_img(&data->canvas, data->player.pos, first_inter, 0xFB00FF); //pink
-		first_inter = vector_substr(data->player.pos, first_inter); //the abs of those
-		dist = calc_the_theorem(first_inter);
-	}
-	return (dist);
+	ratio = ratio_is_actually_distance(data, ratio, first_inter, cond);
+	return (ratio);
 }
 
 double	vertikal_raycast(t_data *data, t_vector direction)
@@ -92,7 +56,6 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 	b = direction.y;
 	ratio = a / a_strich;
 	b_strich = b / ratio;
-	// printf("a strich %f a %f b %f\n", a_strich, a,b );
 	if(direction.x < 0)
 	{
 		a_strich *= (-1);
