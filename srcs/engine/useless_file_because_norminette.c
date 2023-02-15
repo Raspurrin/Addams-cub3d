@@ -1,46 +1,95 @@
 #include "../../includes/cub3d.h"
 
-t_vector	cond_zero(t_data *data, t_vector yup, t_vector dir, t_vector first, int cond, double ratio)
+t_vector	cond_horiz_zero(t_data *data, t_vecstack vec,
+			t_vector dir, double ratio)
 {
+	int			cond;
 	double		next_x_strich;
 	t_vector	next_inter;
 
-	ratio = yup.y / TILE;
-	next_x_strich = yup.x / ratio;
-
-	if(dir.y < 0)
-		next_inter.y = - TILE - 0.01;
+	cond = 0;
+	ratio = vec.yup.y / TILE;
+	next_x_strich = vec.yup.x / ratio;
+	if (dir.y < 0)
+		next_inter.y = -TILE - 0.01;
 	else
 		next_inter.y = TILE;
-	next_inter.x = next_x_strich ;
+	next_inter.x = next_x_strich;
 	while (cond == 0)
 	{
-		first = vector_add(first, next_inter);
-		cond = end_condition(data, first);
+		vec.first_inter = vector_add(vec.first_inter, next_inter);
+		cond = end_condition(data, vec.first_inter);
 	}
-	return (first);
+	return (vec.first_inter);
 }
 
-double	direction_check(t_data	*data, t_vector direction, double y)
+t_vector	cond_vert_zero(t_data *data, t_vecstack vec,
+			t_vector dir, double ratio)
 {
-	if (direction.y > 0)
-		y = TILE - fmod(data->player.pos.y, TILE);
+	int			cond;
+	double		next_y_strich;
+	t_vector	next_inter;
+
+	cond = 0;
+	ratio = vec.yup.x / TILE;
+	next_y_strich = vec.yup.y / ratio;
+	if (dir.x < 0)
+		next_inter.x = -TILE - 0.01;
 	else
-		y = fmod(data->player.pos.y, TILE);
-	return (y);
-}
-
-t_vector	dir_smoler_zero(t_vector direction, t_vector strich)
-{
-	if(direction.y < 0)
+		next_inter.x = TILE;
+	next_inter.y = next_y_strich;
+	while (cond == 0)
 	{
-		strich.y *= (-1);
-		strich.y -= 0.001;
+		vec.first_inter = vector_add(vec.first_inter, next_inter);
+		cond = end_condition(data, vec.first_inter);
 	}
-	return(strich);
+	return (vec.first_inter);
 }
 
-double	ratio_is_actually_distance(t_data *data, double dist, t_vector first, int cond)
+double	direction_check(t_data	*data, t_vector direction, double y, bool horiz)
+{
+	if (horiz)
+	{
+		if (direction.y > 0)
+			y = TILE - fmod(data->player.pos.y, TILE);
+		else
+			y = fmod(data->player.pos.y, TILE);
+		return (y);
+	}
+	else
+	{
+		if (direction.x > 0)
+			y = TILE - fmod(data->player.pos.x, TILE);
+		else
+			y = fmod(data->player.pos.x, TILE);
+		return (y);
+	}
+}
+
+t_vector	dir_smoler_zero(t_vector direction, t_vector strich, bool horiz)
+{
+	if (horiz)
+	{
+		if (direction.y < 0)
+		{
+			strich.y *= (-1);
+			strich.y -= 0.001;
+		}
+		return (strich);
+	}
+	else
+	{
+		if (direction.x < 0)
+		{
+			strich.x *= (-1);
+			strich.x -= 0.001;
+		}
+		return (strich);
+	}
+}
+
+double	ratio_is_actually_distance(t_data *data, double dist,
+		t_vector first, int cond)
 {
 	if (cond == 2)
 		dist = A_VERY_VERY_BIG_NUMMER;

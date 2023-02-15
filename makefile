@@ -22,7 +22,6 @@ SRCS	=	./srcs/main.c \
 			./srcs/engine/minimap.c \
 			./srcs/engine/useless_file_because_norminette.c \
 			./srcs/engine/yet_anotha_file_because_norminette.c \
-			./srcs/engine/anotha.c \
 			./srcs/keyhooks.c
 
 OS		=	$(shell uname -s)

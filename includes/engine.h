@@ -14,10 +14,18 @@
 # define ON_PINK	"\033[45m"
 
 # define A_VERY_VERY_BIG_NUMMER 1000000000000000000
+// # define VECTORS t_vector yup, t_vector dir, t_vector first
 
+typedef struct s_vecstack	t_vecstack;
 typedef struct s_vector		t_vector;
 typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
+
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}	t_vector;
 
 typedef struct s_img
 {
@@ -27,6 +35,13 @@ typedef struct s_img
 	int		bpp;
 	int		endian;
 }	t_img;
+
+typedef struct s_vecstack
+{
+	t_vector	yup;
+	t_vector	strich;
+	t_vector	first_inter;
+}	t_vecstack;
 
 /* mlx */
 void		my_mlx_pixel_put(t_texture *data, int x, int y, int color);
@@ -47,21 +62,20 @@ t_vector	vector_add(t_vector first, t_vector second);
 t_vector	vector_multpl(t_vector first, t_vector second);
 t_vector	vector_substr(t_vector first, t_vector second);
 t_vector	rotatevectorlol(t_vector vct, double angle); //do not rename!!!!!!!
-/*  */
+/* functions that fix stuff */
 bool		is_wall(t_data *data, t_vector pos);
 double		horizontal_raycast(t_data *data, t_vector direction);
 double		vertikal_raycast(t_data *data, t_vector direction);
-
 double		just_abs(double i);
-
 double		calc_the_theorem(t_vector vect);
 void		single_ray(t_data *data, t_vector direction);
-
-double		direction_check(t_data	*data, t_vector direction, double y);
-t_vector	cond_zero(t_data *data, t_vector yup, t_vector dir, t_vector first, int cond, double ratio);
+/* useless_file_because_norminette */
 int			end_condition(t_data *data, t_vector vector);
-t_vector	dir_smoler_zero(t_vector direction, t_vector strich);
+double		direction_check(t_data	*data, t_vector direction, double y, bool horiz);
 double		ratio_is_actually_distance(t_data *data, double dist, t_vector first, int cond);
+t_vector	cond_horiz_zero(t_data *data, t_vecstack vec, t_vector dir, double ratio);
+t_vector	cond_vert_zero(t_data *data, t_vecstack vec, t_vector dir, double ratio);
+t_vector	dir_smoler_zero(t_vector direction, t_vector strich, bool horiz);
 
 
 #endif

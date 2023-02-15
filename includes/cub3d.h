@@ -83,6 +83,8 @@
 
 # endif
 
+
+
 typedef enum errno
 {
 	ARGS,
@@ -119,11 +121,6 @@ typedef union s_colour
 	};
 }	t_colour;
 
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-}	t_vector;
 
 typedef struct s_intvector
 {
