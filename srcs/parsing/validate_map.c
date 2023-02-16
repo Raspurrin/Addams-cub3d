@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:07 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 02:15:41 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:31:52 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	extract_map(t_data *data, char *file)
 	file += count_newlines_start(file);
 	largest_row(data, file);
 	data->map_height -= count_newlines_end(file);
-	data->map = ft_calloc(data->map_height, sizeof(char *));
+	data->map = ft_calloc(data->map_height, sizeof(char *) + 1);
 	while (i < (size_t)data->map_height)
 	{
 		data->map[i] = ft_calloc(data->map_width + 1, sizeof(char));

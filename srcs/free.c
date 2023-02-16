@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:29 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 13:16:35 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:28:03 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	free_data(t_data *data)
 	if (data->win)
 		free(data->win);
 	if (data->map)
-		free_2d_guard(&data->map);
+		free_2d(data->map);
 	free_texture(data->texture);
 	if (data->floor)
 		free(data->floor);
