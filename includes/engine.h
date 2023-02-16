@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 02:07:45 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 12:12:47 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:15:51 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@
 # define ON_PINK	"\033[45m"
 
 # define A_VERY_VERY_BIG_NUMMER 1000000000000000000
-// # define VECTORS t_vector yup, t_vector dir, t_vector first
+// # define VECTORS t_vector tmp, t_vector dir, t_vector first
 
 typedef struct s_vecstack	t_vecstack;
 typedef struct s_vector		t_vector;
@@ -55,7 +55,7 @@ typedef struct s_img
 
 typedef struct s_vecstack
 {
-	t_vector	yup;
+	t_vector	tmp;
 	t_vector	strich;
 	t_vector	first_inter;
 }	t_vecstack;

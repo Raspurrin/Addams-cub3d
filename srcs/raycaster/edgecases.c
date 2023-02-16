@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:16 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 11:20:26 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:15:51 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ t_vector	cond_horiz_zero(t_data *data, t_vecstack vec,
 	t_vector	next_inter;
 
 	cond = 0;
-	ratio = vec.yup.y / TILE;
-	next_x_strich = vec.yup.x / ratio;
+	ratio = vec.tmp.y / TILE;
+	next_x_strich = vec.tmp.x / ratio;
 	if (dir.y < 0)
 		next_inter.y = -TILE - 0.01;
 	else
@@ -43,8 +43,8 @@ t_vector	cond_vert_zero(t_data *data, t_vecstack vec,
 	t_vector	next_inter;
 
 	cond = 0;
-	ratio = vec.yup.x / TILE;
-	next_y_strich = vec.yup.y / ratio;
+	ratio = vec.tmp.x / TILE;
+	next_y_strich = vec.tmp.y / ratio;
 	if (dir.x < 0)
 		next_inter.x = -TILE - 0.01;
 	else

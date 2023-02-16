@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:21 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 01:47:08 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:15:51 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,10 @@ double	horizontal_raycast(t_data *data, t_vector direction)
 	if (direction.y == 0)
 		return (A_VERY_VERY_BIG_NUMMER);
 	vec.strich.y = direction_check(data, direction, vec.strich.y, 1);
-	vec.yup.y = ft_abs(direction.y);
-	vec.yup.x = direction.x;
-	ratio = vec.yup.y / vec.strich.y;
-	vec.strich.x = vec.yup.x / ratio;
+	vec.tmp.y = ft_abs(direction.y);
+	vec.tmp.x = direction.x;
+	ratio = vec.tmp.y / vec.strich.y;
+	vec.strich.x = vec.tmp.x / ratio;
 	vec.strich = dir_smoler_zero(direction, vec.strich, 1);
 	vec.first_inter.x = data->player.pos.x + vec.strich.x;
 	vec.first_inter.y = data->player.pos.y + vec.strich.y;
@@ -55,10 +55,10 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 	if (direction.x == 0)
 		return (A_VERY_VERY_BIG_NUMMER);
 	vec.strich.x = direction_check(data, direction, vec.strich.x, 0);
-	vec.yup.x = ft_abs(direction.x);
-	vec.yup.y = direction.y;
-	ratio = vec.yup.x / vec.strich.x;
-	vec.strich.y = vec.yup.y / ratio;
+	vec.tmp.x = ft_abs(direction.x);
+	vec.tmp.y = direction.y;
+	ratio = vec.tmp.x / vec.strich.x;
+	vec.strich.y = vec.tmp.y / ratio;
 	vec.strich = dir_smoler_zero(direction, vec.strich, 0);
 	vec.first_inter.x = data->player.pos.x + vec.strich.x;
 	vec.first_inter.y = data->player.pos.y + vec.strich.y;
