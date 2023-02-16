@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:25 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 11:15:01 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 11:55:52 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@
 void	errno(int8_t nbr, char *msg, t_data *data)
 {
 	static const char	*errors[] = {
+		"Creating window failed",
 		"Too many arguments",
 		"Failed reading the file",
 		"Wrong colour channel given in input file. Ex: C 220,100,0",
@@ -29,6 +30,7 @@ void	errno(int8_t nbr, char *msg, t_data *data)
 		"Wrong file extension",
 		"The map must be closed/surrounded by walls",
 		"Invalid texture: ",
+		"Creating image failed: ",
 		"Too many players",
 		"Map doesn't contain a player"
 	};

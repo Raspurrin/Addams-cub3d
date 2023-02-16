@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 02:06:05 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 03:05:13 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 11:55:06 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,6 +100,7 @@
 
 typedef enum errno
 {
+	WIN,
 	ARGS,
 	READ_FAIL,
 	COLOUR,
@@ -108,6 +109,7 @@ typedef enum errno
 	INV_EXT,
 	INV_MAP,
 	TEXTURE,
+	IMG_FAIL,
 	PLAYERS,
 	NOPLAYER
 }	t_errno;
