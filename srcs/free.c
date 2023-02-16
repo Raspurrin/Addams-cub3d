@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:29 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 11:15:42 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:16:35 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,4 @@ void	free_data(t_data *data)
 		free(data->floor);
 	if (data->ceiling)
 		free(data->ceiling);
-	free(data);
 }

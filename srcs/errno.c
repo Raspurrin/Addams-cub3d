@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:25 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 11:55:52 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:17:59 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	errno(int8_t nbr, char *msg, t_data *data)
 		"Map doesn't contain a player"
 	};
 
-	ft_printf_fd(STDERR_FILENO, "Error\n%s%s\n", errors[nbr], msg);
+	ft_printf_fd(STDERR_FILENO, "Error\n%s%s", errors[nbr], msg);
 	free_data(data);
 	exit(nbr);
 }
