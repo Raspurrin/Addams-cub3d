@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:38 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 01:15:39 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 11:16:14 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,5 +27,6 @@ int32_t	main(int argc, char *argv[])
 	data.mid_canvas.y = SCREEN_HEIGHT / 2;
 	mlx_loop_hook(data.mlx, game_loop, &data);
 	mlx_loop(data.mlx);
+	free_data(&data);
 	return (0);
 }

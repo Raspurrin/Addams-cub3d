@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:14:04 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 03:05:29 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 11:16:41 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	x_close(t_data *data)
 {
 	mlx_destroy_window(data->mlx, data->win);
+	free_data(data);
 	exit(0);
 }
 

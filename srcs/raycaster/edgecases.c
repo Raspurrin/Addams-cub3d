@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:16 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 01:43:48 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 11:20:26 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,21 +98,4 @@ t_vector	dir_smoler_zero(t_vector direction, t_vector strich, bool horiz)
 		}
 		return (strich);
 	}
-}
-
-bool	is_wall(t_data *data, t_vector pos)
-{
-	int	x;
-	int	y;
-
-	x = pos.y / 100;
-	y = pos.x / 100;
-	if (x < 0 || y < 0 || y > data->map_width - 1 || x > data->map_height - 1)
-	{
-		printf("SZTOPPPPPPPP!!!!!!!!, because x is %d,,,, and y is %i\n", y, x);
-		exit(1);
-	}
-	if (data->map[x][y] != '0')
-		return (true);
-	return (false);
 }

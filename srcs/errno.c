@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:25 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 01:15:26 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 11:15:01 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,3 @@ void	errno(int8_t nbr, char *msg, t_data *data)
 	free_data(data);
 	exit(nbr);
 }
-
-// testest

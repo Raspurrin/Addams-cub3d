@@ -1,5 +1,5 @@
 CC 		= gcc
-CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -g
 NAME	=	cub3d
 DEBUG	=	-fsanitize=address
 LIBFT	=	./libs/libft/
@@ -63,25 +63,12 @@ endif
 
 all: mlx libft cub3d
 
-submodule:
-	@git submodule init 
-	@git submodule update
-
 %.o : %.c
-# @echo "$(B_BLUE)Compiling: $(BLUE)$(notdir $<) 🔨$(NC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "\033[0;35m•\033[0m\c"
 
-banner:
-# @echo "\n${PURPLE}======== Cub3d ========$(NC)"
-
 libft:
-# @echo "\n${BLUE}======== Libft ========${NC}"
 	@$(MAKE) -C $(LIBFT)
-
-mlx:
-# @echo "\n${BLUE}======== MLX ========${NC}"
-# @$(MAKE) -C $(MLXDIR)
 
 $(NAME): banner $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)libft.a $(MLXDIR)$(MLXLIB) $(FSAN) $(LIBS) -o $(NAME)
@@ -106,7 +93,7 @@ fclean: clean
 
 re: fclean all
 
-run:
+run: all
 	@./$(NAME) maps/rave.cub
 
 .PHONY: all clean fclean re banner $(NAME) libft mlx submodule

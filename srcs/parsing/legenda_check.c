@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:14:49 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 02:17:33 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 11:35:57 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ static void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 		i--;
 		j++;
 	}
+	free_2d_guard(&channels);
 }
 
 static void	legenda_check(t_data *data, char *word, char *path)
@@ -97,6 +98,8 @@ void	element_check(t_data *data, char **file)
 		path = skip_spaces(file);
 		legenda_check(data, word, path);
 		*file += ft_strlen(path);
+		free(word);
+		free(path);
 		i++;
 	}
 }
