@@ -1,7 +1,6 @@
 CC 		= gcc
 CFLAGS	=	-Wall -Wextra -Werror -g
 NAME	=	cub3d
-DEBUG	=	-fsanitize=address
 LIBFT	=	./libs/libft/
 SRCS	=	./srcs/main.c \
 			./srcs/errno.c \
@@ -71,7 +70,7 @@ libft:
 	@$(MAKE) -C $(LIBFT)
 
 $(NAME): banner $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)libft.a $(MLXDIR)$(MLXLIB) $(FSAN) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)libft.a $(MLXDIR)$(MLXLIB) $(LIBS) -o $(NAME)
 
 git:
 	git add .
