@@ -1,2 +1,3 @@
 # Escape Addam's cub3d
-A 3D escape room made with the raycasting technique - Addam's family themed :D
+This is a raycasting engine. It is pretty bare bones, I don't have enough time to make it amazing atm
+BUT this will eventually become a Addam's family themed escape room! :D
