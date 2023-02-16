@@ -1,4 +1,4 @@
-#include "../includes/cub3d.h"
+#include "../../includes/cub3d.h"
 
 void	move(t_data *data, int32_t movement)
 {
@@ -14,8 +14,6 @@ void	move(t_data *data, int32_t movement)
 		data->player.pos = vector_add(data->player.pos, rotatevectorlol(temp, 90));
 	if (movement & LEFT && !is_wall(data, vector_substr(data->player.pos, rotatevectorlol(data->player.dir, 90))))
 		data->player.pos = vector_substr(data->player.pos, rotatevectorlol(temp, 90));
-	// check if tmp in wall
-	// only if !wall update pos player
 }
 
 void	check_mouse_movement(t_data *data)
@@ -56,10 +54,4 @@ int	move_on_release(int keycode, t_data *data)
 	else if (keycode == A_KEY)
 		data->player.movement = data->player.movement & ~LEFT;
 	return (0); 
-}
-
-int	x_close(t_data *data)
-{
-	mlx_destroy_window(data->mlx, data->win);
-	exit(0);
 }

@@ -50,13 +50,8 @@ void		my_mlx_pixel_put(t_texture *data, int x, int y, int color);
 int			x_close(t_data *data);
 int			key_handler(int keycode, t_data *data);
 /* render stuff */
-void		draw_player(t_data *data);
-void		draw_the_grid(t_data *data);
 void		ray_the_caster(t_data *data);
-void		draw_background(t_data *data);
-void		draw_addams_cube(t_data *data);
 void		draw_the_walls(t_data *data, int x, int y, bool wall);
-void		draw_line_img(t_texture *img, t_vector eins, t_vector zwei, int color);
 /* vector */
 t_vector	vector_add(t_vector first, t_vector second);
 t_vector	vector_multpl(t_vector first, t_vector second);
@@ -66,7 +61,6 @@ t_vector	rotatevectorlol(t_vector vct, double angle); //do not rename!!!!!!!
 bool		is_wall(t_data *data, t_vector pos);
 double		horizontal_raycast(t_data *data, t_vector direction);
 double		vertikal_raycast(t_data *data, t_vector direction);
-double		just_abs(double i);
 double		calc_the_theorem(t_vector vect);
 void		single_ray(t_data *data, t_vector direction);
 /* useless_file_because_norminette */

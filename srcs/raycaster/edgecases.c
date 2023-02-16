@@ -88,6 +88,23 @@ t_vector	dir_smoler_zero(t_vector direction, t_vector strich, bool horiz)
 	}
 }
 
+bool	is_wall(t_data *data, t_vector pos)
+{
+	int	x;
+	int	y;
+
+	x = pos.y / 100;
+	y = pos.x / 100;
+	if (x < 0 || y < 0 || y > data->map_width - 1 || x > data->map_height - 1)
+	{
+		printf("SZTOPPPPPPPP!!!!!!!!, because x is %d,,,, and y is %i\n", y, x);
+		exit(1);
+	}
+	if (data->map[x][y] != '0')
+		return (true);
+	return (!true);
+}
+
 double	ratio_is_actually_distance(t_data *data, double dist,
 		t_vector first, int cond)
 {
@@ -96,7 +113,7 @@ double	ratio_is_actually_distance(t_data *data, double dist,
 	else
 	{
 		first = vector_substr(data->player.pos, first);
-		dist = calc_the_theorem(first);
+		dist = sqrt(first.x * first.x + first.y * first.y);;
 	}
 	return (dist);
 }

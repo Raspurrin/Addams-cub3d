@@ -175,6 +175,11 @@ typedef struct s_data
 	t_wall		wall;
 }	t_data;
 
+/* vector */
+t_vector	normalize_vec(t_vector vec);
+
+void	ray_the_caster(t_data *data);
+
 /* general functions */
 void	init(t_data *data);
 void	free_data(t_data *data);
@@ -209,6 +214,10 @@ void	print_bits(int32_t nbr);
 void	init_image(t_data *data, t_img *img);
 int32_t	rev_colour(t_colour *colour);
 
+t_vector get_init_pos(t_player playa);
+int				game_loop(void *data2);
+double	vec_dot(t_vector one, t_vector two);
 unsigned int	my_mlx_pixel_get(t_texture *texture, int x, int y);
 void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, t_intvector draw);
+double get_next_angle(t_vector ini, t_player playa, int ray);
 #endif

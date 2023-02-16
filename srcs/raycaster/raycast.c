@@ -17,7 +17,7 @@ double	horizontal_raycast(t_data *data, t_vector direction)
 	if (direction.y == 0)
 		return (A_VERY_VERY_BIG_NUMMER);
 	vec.strich.y = direction_check(data, direction, vec.strich.y, 1);
-	vec.yup.y = just_abs(direction.y);
+	vec.yup.y = ft_abs(direction.y);
 	vec.yup.x = direction.x;
 	ratio = vec.yup.y / vec.strich.y;
 	vec.strich.x = vec.yup.x / ratio;
@@ -43,7 +43,7 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 	if (direction.x == 0)
 		return (A_VERY_VERY_BIG_NUMMER);
 	vec.strich.x = direction_check(data, direction, vec.strich.x, 0);
-	vec.yup.x = just_abs(direction.x);
+	vec.yup.x = ft_abs(direction.x);
 	vec.yup.y = direction.y;
 	ratio = vec.yup.x / vec.strich.x;
 	vec.strich.y = vec.yup.y / ratio;
@@ -60,7 +60,50 @@ double	vertikal_raycast(t_data *data, t_vector direction)
 	return (ratio);
 }
 
-double	calc_the_theorem(t_vector vect)
+void	single_ray(t_data *data, t_vector direction)
 {
-	return (sqrt((vect.x * vect.x) + (vect.y * vect.y)));
+	double	horizontal_dist;
+	double	vertikal_dist;
+	double	akschuel_dist;
+
+	horizontal_dist = horizontal_raycast(data, direction);
+	vertikal_dist = vertikal_raycast(data, direction);
+	if (horizontal_dist > vertikal_dist)
+	{
+		if (direction.x < 0)
+			data->wall.direction = WEST;
+		else
+			data->wall.direction = EAST;
+		akschuel_dist = vertikal_dist;
+	}
+	else
+	{
+		if (direction.y < 0)
+			data->wall.direction = NORTH;
+		else
+			data->wall.direction = SOUTH;
+		akschuel_dist = horizontal_dist;
+	}
+	data->wall.distance = akschuel_dist / TILE;
+}
+
+void	ray_the_caster(t_data *data)
+{
+	t_vector	init_pos;
+	t_vector	tmp;
+	t_intvector	draw;
+
+	init_pos = get_init_pos(data->player);
+	draw.x = 0;
+	draw.y = 0;
+	while (draw.x < RAY_COUNT)
+	{
+		tmp = rotatevectorlol(vector_substr(init_pos, data->player.pos), get_next_angle(init_pos, data->player, draw.x));
+		single_ray(data, tmp);
+		if (draw.x != RAY_COUNT / 2)
+			data->wall.distance *=  vec_dot(data->player.dir, tmp);
+		draw_vertical_line(data, &(data->texture)
+		[data->wall.direction], &data->wall, draw);
+		draw.x++;
+	}
 }

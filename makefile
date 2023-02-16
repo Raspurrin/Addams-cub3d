@@ -7,22 +7,21 @@ SRCS	=	./srcs/main.c \
 			./srcs/errno.c \
 			./srcs/free.c \
 			./srcs/init.c \
-			./srcs/graphics/colour.c \
 			./srcs/graphics/textures.c \
+			./srcs/graphics/pixel_put.c \
 			./srcs/parsing/legenda_check.c \
 			./srcs/parsing/error_check.c \
 			./srcs/parsing/read_map.c \
 			./srcs/parsing/validate_map.c \
 			./srcs/parsing/validate_map_utils.c \
 			./srcs/parsing/is_char_checks.c \
-			./srcs/engine/mlx.c \
-			./srcs/engine/draw.c \
-			./srcs/engine/vectors.c \
-			./srcs/engine/raycast.c \
-			./srcs/engine/minimap.c \
-			./srcs/engine/useless_file_because_norminette.c \
-			./srcs/engine/yet_anotha_file_because_norminette.c \
-			./srcs/keyhooks.c
+			./srcs/raycaster/raycast.c \
+			./srcs/raycaster/edgecases.c \
+			./srcs/raycaster/angle.c \
+			./srcs/math/vectors.c \
+			./srcs/math/normalize_vec.c \
+			./srcs/game_mechanics/game_loop.c \
+			./srcs/game_mechanics/movement.c
 
 OS		=	$(shell uname -s)
 

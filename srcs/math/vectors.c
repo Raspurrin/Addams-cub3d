@@ -39,3 +39,13 @@ t_vector	rotatevectorlol(t_vector vct, double angle)
 		+ (tmp.y * cos(angle * M_PI / 180));
 	return (vct);
 }
+
+double	vec_dot(t_vector one, t_vector two)
+{
+	t_vector	tmp1;
+	t_vector	tmp2;
+
+	tmp1 = normalize_vec(one);
+	tmp2 = normalize_vec(two);
+	return ((tmp1.x * tmp2.x) + (tmp1.y * tmp2.y));
+}
