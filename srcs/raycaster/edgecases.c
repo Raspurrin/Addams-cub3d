@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:16 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 13:15:51 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 14:55:35 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ t_vector	cond_vert_zero(t_data *data, t_vecstack vec,
 	return (vec.first_inter);
 }
 
-double	direction_check(t_data	*data, t_vector direction, double y, bool horiz)
+double	direction_check(t_data *data, t_vector direction, double y, bool horiz)
 {
 	if (horiz)
 	{

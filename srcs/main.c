@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:38 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 12:30:15 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:58:41 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int32_t	main(int argc, char *argv[])
 	data.canvas.width = data.map_width * TILE;
 	data.mid_canvas.x = SCREEN_WIDTH / 2;
 	data.mid_canvas.y = SCREEN_HEIGHT / 2;
+	mlx_mouse_move(data.win, data.mid_canvas.x, data.mid_canvas.y);
 	mlx_loop_hook(data.mlx, game_loop, &data);
 	mlx_loop(data.mlx);
 	free_data(&data);
