@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:14:09 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 11:20:34 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:02:20 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,11 @@ void	check_mouse_movement(t_data *data)
 
 	mlx_mouse_get_pos(data->win, &mouse.x, &mouse.y);
 	if (mouse.x < data->mid_canvas.x)
-		data->player.dir = rotatevectorlol(data->player.dir, -3);
+		data->player.dir = rotatevectorlol(data->player.dir, \
+							(data->mid_canvas.x - mouse.x) * -0.1);
 	else if (mouse.x > data->mid_canvas.x)
-		data->player.dir = rotatevectorlol(data->player.dir, 3);
+		data->player.dir = rotatevectorlol(data->player.dir, \
+							(mouse.x - data->mid_canvas.x) * 0.1);
 	mlx_mouse_move(data->win, data->mid_canvas.x, data->mid_canvas.y);
 }
 
