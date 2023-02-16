@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/17 15:15:10 by mialbert          #+#    #+#             */
-/*   Updated: 2022/11/21 19:15:39 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:21:17 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int			ft_strlen_ignore(const char *str, char ignore);
  * @param arr the 2d array to be counted.
  * @return size_t
  */
-size_t	ft_2darrlen(char **arr);
+size_t		ft_2darrlen(char **arr);
 
 /** 
  * Fills src up to n with c.
