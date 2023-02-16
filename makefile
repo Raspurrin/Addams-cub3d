@@ -26,7 +26,10 @@ SRCS	=	./srcs/main.c \
 OS		=	$(shell uname -s)
 
 OBJS	= $(SRCS:.c=.o)
-
+PINK	:= \033[0;35m
+PURPLE	:= \033[0;34m
+BLUE	= \033[94m
+RESET	:= \033[0m
 NC		:= \033[0m
 B_RED	:= \033[1;31m
 RED 	:= \033[0;31m
@@ -71,13 +74,15 @@ libft:
 
 $(NAME): banner $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)libft.a $(MLXDIR)$(MLXLIB) $(LIBS) -o $(NAME)
+	@echo "\n\n\t\t$(PINK)✨CUB3D successfully compiled!✨$(RESET)\n"
+	@bash textures/ghost.sh
 
 git:
 	git add .
 	@read -p "Enter the commit message: " halp; \
 	git commit -m "$$halp"
 	git push
-	@echo "$(BLUE)All added, commited and pushed✨$(RESET)"
+	@echo "$(BLUE)✨All added, commited and pushed✨$(RESET)"
 
 clean:
 	@rm -f $(OBJS)
