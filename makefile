@@ -1,28 +1,27 @@
 CC 		= gcc
-CFLAGS	=	-Wall -Wextra -Werror -g -fsanitize=address
+CFLAGS	=	-Wall -Wextra -Werror -g
 NAME	=	cub3d
-DEBUG	=	-fsanitize=address
 LIBFT	=	./libs/libft/
 SRCS	=	./srcs/main.c \
 			./srcs/errno.c \
 			./srcs/free.c \
 			./srcs/init.c \
-			./srcs/graphics/colour.c \
 			./srcs/graphics/textures.c \
+			./srcs/graphics/pixel_put.c \
 			./srcs/parsing/legenda_check.c \
 			./srcs/parsing/error_check.c \
 			./srcs/parsing/read_map.c \
 			./srcs/parsing/validate_map.c \
 			./srcs/parsing/validate_map_utils.c \
 			./srcs/parsing/is_char_checks.c \
-			./srcs/engine/mlx.c \
-			./srcs/engine/draw.c \
-			./srcs/engine/vectors.c \
-			./srcs/engine/raycast.c \
-			./srcs/engine/minimap.c \
-			./srcs/engine/useless_file_because_norminette.c \
-			./srcs/engine/yet_anotha_file_because_norminette.c \
-			./srcs/keyhooks.c
+			./srcs/raycaster/raycast.c \
+			./srcs/raycaster/edgecases.c \
+			./srcs/raycaster/angle.c \
+			./srcs/math/vectors.c \
+			./srcs/math/normalize_vec.c \
+			./srcs/math/ratio_to_distance.c \
+			./srcs/game_mechanics/game_loop.c \
+			./srcs/game_mechanics/movement.c
 
 OS		=	$(shell uname -s)
 
@@ -63,28 +62,15 @@ endif
 
 all: mlx libft cub3d
 
-submodule:
-	@git submodule init 
-	@git submodule update
-
 %.o : %.c
-# @echo "$(B_BLUE)Compiling: $(BLUE)$(notdir $<) 🔨$(NC)"
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "\033[0;35m•\033[0m\c"
 
-banner:
-# @echo "\n${PURPLE}======== Cub3d ========$(NC)"
-
 libft:
-# @echo "\n${BLUE}======== Libft ========${NC}"
 	@$(MAKE) -C $(LIBFT)
 
-mlx:
-# @echo "\n${BLUE}======== MLX ========${NC}"
-# @$(MAKE) -C $(MLXDIR)
-
 $(NAME): banner $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)libft.a $(MLXDIR)$(MLXLIB) $(FSAN) $(LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJS) $(LIBFT)libft.a $(MLXDIR)$(MLXLIB) $(LIBS) -o $(NAME)
 
 git:
 	git add .
@@ -106,7 +92,7 @@ fclean: clean
 
 re: fclean all
 
-run:
+run: all
 	@./$(NAME) maps/rave.cub
 
 .PHONY: all clean fclean re banner $(NAME) libft mlx submodule

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_check.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 01:14:38 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 11:26:31 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static void	extension_check(t_data *data, char *map_name, char *ext)
@@ -19,6 +31,7 @@ void	error_check(t_data *data, int32_t argc, char **argv)
 {
 	int32_t	fd;
 	char	*file;
+	char	*tempfile;
 
 	if (argc > 2)
 		errno(ARGS, "", data);
@@ -29,6 +42,8 @@ void	error_check(t_data *data, int32_t argc, char **argv)
 	if (fd == -1)
 		errno(READ_FAIL, "", data);
 	file = read_file(fd);
+	tempfile = file;
 	element_check(data, &file);
 	extract_map(data, file);
+	free(tempfile);
 }

@@ -1,5 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   engine.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 02:07:45 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 13:15:51 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ENGINE_H
 # define ENGINE_H
+
+# include <stdbool.h>
+# include <math.h>
+
 # define RESET		"\033[0m"
 # define BLACK		"\033[0;30m"
 # define RED		"\033[0;31m"
@@ -14,12 +30,13 @@
 # define ON_PINK	"\033[45m"
 
 # define A_VERY_VERY_BIG_NUMMER 1000000000000000000
-// # define VECTORS t_vector yup, t_vector dir, t_vector first
+// # define VECTORS t_vector tmp, t_vector dir, t_vector first
 
 typedef struct s_vecstack	t_vecstack;
 typedef struct s_vector		t_vector;
 typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
+typedef struct s_player		t_player;
 
 typedef struct s_vector
 {
@@ -38,44 +55,38 @@ typedef struct s_img
 
 typedef struct s_vecstack
 {
-	t_vector	yup;
+	t_vector	tmp;
 	t_vector	strich;
 	t_vector	first_inter;
 }	t_vecstack;
 
-/* mlx */
-void		my_mlx_pixel_put(t_texture *data, int x, int y, int color);
-// int		get_colour(t_colour colour);
-/* hooks */
-int			x_close(t_data *data);
-int			key_handler(int keycode, t_data *data);
-/* render stuff */
-void		draw_player(t_data *data);
-void		draw_the_grid(t_data *data);
-void		ray_the_caster(t_data *data);
-void		draw_background(t_data *data);
-void		draw_addams_cube(t_data *data);
-void		draw_the_walls(t_data *data, int x, int y, bool wall);
-void		draw_line_img(t_texture *img, t_vector eins, t_vector zwei, int color);
 /* vector */
+double		vec_dot(t_vector one, t_vector two);
+t_vector	normalize_vec(t_vector vec);
 t_vector	vector_add(t_vector first, t_vector second);
 t_vector	vector_multpl(t_vector first, t_vector second);
 t_vector	vector_substr(t_vector first, t_vector second);
 t_vector	rotatevectorlol(t_vector vct, double angle); //do not rename!!!!!!!
-/* functions that fix stuff */
+
+/* raycasting */
+void		ray_the_caster(t_data *data);
 bool		is_wall(t_data *data, t_vector pos);
 double		horizontal_raycast(t_data *data, t_vector direction);
 double		vertikal_raycast(t_data *data, t_vector direction);
-double		just_abs(double i);
-double		calc_the_theorem(t_vector vect);
 void		single_ray(t_data *data, t_vector direction);
-/* useless_file_because_norminette */
-int			end_condition(t_data *data, t_vector vector);
-double		direction_check(t_data	*data, t_vector direction, double y, bool horiz);
-double		ratio_is_actually_distance(t_data *data, double dist, t_vector first, int cond);
-t_vector	cond_horiz_zero(t_data *data, t_vecstack vec, t_vector dir, double ratio);
-t_vector	cond_vert_zero(t_data *data, t_vecstack vec, t_vector dir, double ratio);
-t_vector	dir_smoler_zero(t_vector direction, t_vector strich, bool horiz);
+t_vector	get_init_pos(t_player playa);
+double		get_next_angle(t_vector ini, t_player playa, int ray);
 
+/* raycasting edgecases */
+int			end_condition(t_data *data, t_vector vector);
+double		direction_check(t_data *data, t_vector direction, \
+										double y, bool horiz);
+double		ratio_is_actually_distance(t_data *data, double dist, \
+										t_vector first, int cond);
+t_vector	cond_horiz_zero(t_data *data, t_vecstack vec, \
+								t_vector dir, double ratio);
+t_vector	cond_vert_zero(t_data *data, t_vecstack vec, \
+								t_vector dir, double ratio);
+t_vector	dir_smoler_zero(t_vector direction, t_vector strich, bool horiz);
 
 #endif

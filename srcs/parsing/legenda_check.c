@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   legenda_check.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 01:14:49 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 18:02:18 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static char	*skip_spaces(char **file)
@@ -12,6 +24,24 @@ static char	*skip_spaces(char **file)
 	return (ft_substr(*file, 0, end));
 }
 
+static bool	is_valid_colour(char *colour_str, char **channels)
+{
+	size_t	i;
+	size_t	channel_count;
+
+	i = 0;
+	channel_count = ft_2darrlen(channels);
+	if (channel_count != 3 || getncount(colour_str, ',') > 2)
+		return (false);
+	while (colour_str[i])
+	{
+		if (!ft_isdigit(colour_str[i]) && colour_str[i] != ',')
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 /**
  * Extracting the string for the colour of the ceiling or the floor
  * and converting it to a usable integer.
@@ -21,17 +51,16 @@ static void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 {
 	int32_t	i;
 	int32_t	j;
-	size_t	channel_count;
-	uint8_t	colour_int;
+	int32_t	colour_int;
 	char	**channels;
 
 	i = 2;
 	j = 0;
+
 	channels = ft_split(colour_str, ',');
-	channel_count = ft_2darrlen(channels);
-	if (channel_count != 3)
+	if (!is_valid_colour(colour_str, channels))
 		errno(COLOUR, "", data);
-	colour->a = 0; 
+	colour->a = 0;
 	while (i >= 0)
 	{
 		colour_int = ft_atoi(channels[i]);
@@ -41,23 +70,8 @@ static void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 		i--;
 		j++;
 	}
+	free_2d_guard(&channels);
 }
-	// colour->a = 0;
-	// colour->b = ft_atoi(channels[0]);
-	// colour->g = ft_atoi(channels[1]);
-	// colour->r = ft_atoi(channels[2]);
-
-	// while (i > 0 && *colour_str)
-	// {
-	// 	colour_int = ft_atoi(*channels);
-	// 	if (colour_int < 0 || colour_int > 255)
-	// 		errno(COLOUR, "", data);
-	// 	colour->abgr[i] = (uint8_t)colour_int;
-	// 	colour_str += (ft_strclen(colour_str, ',') + 1);
-	// 	channels++;
-	// 	i--;
-	// }
-	// colour->a = 0;
 
 static void	legenda_check(t_data *data, char *word, char *path)
 {
@@ -101,7 +115,8 @@ void	element_check(t_data *data, char **file)
 		path = skip_spaces(file);
 		legenda_check(data, word, path);
 		*file += ft_strlen(path);
+		free(word);
+		free(path);
 		i++;
 	}
-	printf("texture check: %p\n", data->texture[NORTH].img->ptr);
 }

@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strclen.c                                       :+:      :+:    :+:   */
+/*   normalize_vec.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 13:20:27 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 13:22:14 by mialbert         ###   ########.fr       */
+/*   Created: 2023/02/16 01:14:26 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 01:14:27 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/libft.h"
+#include "../../includes/cub3d.h"
 
-size_t	ft_strclen(char *str, char c)
+t_vector	normalize_vec(t_vector vec)
 {
-	size_t	i;
+	t_vector	out;
+	double		length;
 
-	i = 0;
-	while (str[i] && str[i] != c)
-		i++;
-	return (i);
+	length = sqrt(vec.x * vec.x + vec.y * vec.y);
+	out.x = vec.x / length;
+	out.y = vec.y / length;
+	return (out);
 }

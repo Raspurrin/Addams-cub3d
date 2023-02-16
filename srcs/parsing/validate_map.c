@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   validate_map.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 01:15:07 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 13:31:52 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static void	largest_row(t_data *data, char *file)
@@ -37,11 +49,11 @@ static bool	around_space_valid(t_data *data, char **map, int32_t x, int32_t y)
  * @param data 
  * @param map 
  */
-static void	mapcheck(t_data *data, char **map)
+static int32_t	mapcheck(t_data *data, char **map)
 {
 	int32_t	x;
 	int32_t	y;
-	int8_t	player;
+	int32_t	player;
 
 	x = 0;
 	y = 0;
@@ -63,20 +75,20 @@ static void	mapcheck(t_data *data, char **map)
 		x = 0;
 		y++;
 	}
-	if (player < 1)
-		errno(NOPLAYER, "", data);
+	return (player);
 }
 
 void	extract_map(t_data *data, char *file)
 {
 	size_t	i;
 	size_t	row_length;
+	int32_t	player;
 
 	i = 0;
 	file += count_newlines_start(file);
 	largest_row(data, file);
 	data->map_height -= count_newlines_end(file);
-	data->map = ft_calloc(data->map_height, sizeof(char *));
+	data->map = ft_calloc(data->map_height, sizeof(char *) + 1);
 	while (i < (size_t)data->map_height)
 	{
 		data->map[i] = ft_calloc(data->map_width + 1, sizeof(char));
@@ -85,5 +97,7 @@ void	extract_map(t_data *data, char *file)
 		file += row_length + 1;
 		i++;
 	}
-	mapcheck(data, data->map);
+	player = mapcheck(data, data->map);
+	if (player < 1)
+		errno(NOPLAYER, "", data);
 }
