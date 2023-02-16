@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:33 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 02:17:14 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 02:55:01 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init(t_data *data)
 {
 	ft_bzero(data, sizeof(t_data));
+	data->pause = false;
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, SCREEN_WIDTH, SCREEN_HEIGHT, "yo");
 	data->texture[NORTH].img = ft_calloc(1, sizeof(t_img));

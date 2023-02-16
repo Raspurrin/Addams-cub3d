@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:14:09 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 02:05:25 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 03:04:58 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	check_mouse_movement(t_data *data)
 
 int	move_on_press(int keycode, t_data *data)
 {
+	if (keycode == SPACE)
+		pause_game(data);
 	if (keycode == ESC)
 		x_close(data);
 	else if (keycode == W_KEY)

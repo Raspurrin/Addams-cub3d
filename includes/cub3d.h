@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 02:06:05 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 02:42:38 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 03:05:13 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@
 # elif __APPLE__
 
 #  include "../libs/mlx/mlx.h"
+#  define SPACE 49
 #  define ESC 53
 #  define ZOOM_IN 34
 #  define ZOOM_OUT 31
@@ -173,6 +174,7 @@ typedef struct s_data
 	void		*mlx;
 	void		*win;
 	char		**map;
+	bool		pause;
 	t_player	player;
 	int32_t		map_width;
 	int32_t		map_height;
@@ -194,6 +196,7 @@ void		free_data(t_data *data);
 void		errno(int8_t nbr, char *msg, t_data *data);
 
 /* mlx */
+void		pause_game(t_data *data);
 void		move(t_data *data, int32_t movement);
 void		key_hooks(t_data *data);
 int			x_close(t_data *data);
