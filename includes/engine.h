@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 02:07:45 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 02:44:39 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:12:47 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_vecstack	t_vecstack;
 typedef struct s_vector		t_vector;
 typedef struct s_data		t_data;
 typedef struct s_texture	t_texture;
+typedef struct s_player		t_player;
 
 typedef struct s_vector
 {
@@ -59,32 +60,24 @@ typedef struct s_vecstack
 	t_vector	first_inter;
 }	t_vecstack;
 
-/* mlx */
-void		my_mlx_pixel_put(t_texture *data, int x, int y, int color);
-
-/* hooks */
-int			x_close(t_data *data);
-int			key_handler(int keycode, t_data *data);
-
-/* render stuff */
-void		ray_the_caster(t_data *data);
-void		draw_the_walls(t_data *data, int x, int y, bool wall);
-
 /* vector */
+double		vec_dot(t_vector one, t_vector two);
 t_vector	normalize_vec(t_vector vec);
 t_vector	vector_add(t_vector first, t_vector second);
 t_vector	vector_multpl(t_vector first, t_vector second);
 t_vector	vector_substr(t_vector first, t_vector second);
 t_vector	rotatevectorlol(t_vector vct, double angle); //do not rename!!!!!!!
 
-/* functions that fix stuff */
+/* raycasting */
+void		ray_the_caster(t_data *data);
 bool		is_wall(t_data *data, t_vector pos);
 double		horizontal_raycast(t_data *data, t_vector direction);
 double		vertikal_raycast(t_data *data, t_vector direction);
-double		calc_the_theorem(t_vector vect);
 void		single_ray(t_data *data, t_vector direction);
+t_vector	get_init_pos(t_player playa);
+double		get_next_angle(t_vector ini, t_player playa, int ray);
 
-/* useless_file_because_norminette */
+/* raycasting edgecases */
 int			end_condition(t_data *data, t_vector vector);
 double		direction_check(t_data *data, t_vector direction, \
 										double y, bool horiz);

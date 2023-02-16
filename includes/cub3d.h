@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 02:06:05 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 11:55:06 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:12:57 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,18 +190,17 @@ typedef struct s_data
 	t_wall		wall;
 }	t_data;
 
-void		ray_the_caster(t_data *data);
-
 /* general functions */
+void		init_texture(t_data *data, t_texture *texture, char *path);
 void		init(t_data *data);
 void		free_data(t_data *data);
 void		errno(int8_t nbr, char *msg, t_data *data);
 
 /* mlx */
+int32_t		game_loop(void *data2);
 void		pause_game(t_data *data);
-void		move(t_data *data, int32_t movement);
-void		key_hooks(t_data *data);
 int			x_close(t_data *data);
+void		move(t_data *data, int32_t movement);
 int			move_on_press(int keycode, t_data *data);
 int			move_on_release(int keycode, t_data *data);
 void		check_mouse_movement(t_data *data);
@@ -211,7 +210,6 @@ char		*read_file(int32_t fd);
 void		error_check(t_data *data, int32_t argc, char **argv);
 void		extract_map(t_data *data, char *file);
 void		element_check(t_data *data, char **file);
-void		init_texture(t_data *data, t_texture *texture, char *path);
 bool		is_space_or_1(char c);
 bool		is_valid_char(char c);
 bool		is_player(t_data *data, t_player *player, int32_t x, int32_t y);
@@ -220,18 +218,11 @@ int32_t		count_newlines_end(char *file);
 int32_t		count_newlines_start(char *file);
 
 /* graphics */
+void		draw_vertical_line(t_data *data, t_texture *texture, \
+								t_wall *wall, t_intvector draw);
 void		draw_textures(t_data *data);
-int32_t		rgb_to_int(int32_t r, int32_t g, int32_t b, int32_t a);
-int32_t		add_channel(int32_t colour, int32_t channel, int8_t bitshift);
-void		print_bits(int32_t nbr);
 void		init_image(t_data *data, t_img *img);
-int32_t		rev_colour(t_colour *colour);
-
-t_vector	get_init_pos(t_player playa);
-int32_t		game_loop(void *data2);
-double		vec_dot(t_vector one, t_vector two);
+void		my_mlx_pixel_put(t_texture *data, int x, int y, int color);
 uint32_t	my_mlx_pixel_get(t_texture *texture, int x, int y);
-void		draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, \
-															t_intvector draw);
-double		get_next_angle(t_vector ini, t_player playa, int ray);
+
 #endif
