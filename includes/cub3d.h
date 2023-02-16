@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 02:06:05 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 02:14:59 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 02:42:38 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,9 +185,6 @@ typedef struct s_data
 	t_vector	vector;
 	t_wall		wall;
 }	t_data;
-
-/* vector */
-t_vector	normalize_vec(t_vector vec);
 
 void		ray_the_caster(t_data *data);
 

@@ -6,11 +6,11 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:14:32 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 01:14:34 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 02:42:32 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/cub3d.h"
+#include "../../includes/engine.h"
 
 t_vector	vector_substr(t_vector first, t_vector second)
 {

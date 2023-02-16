@@ -6,12 +6,15 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 02:07:45 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 02:12:56 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 02:44:39 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ENGINE_H
 # define ENGINE_H
+
+# include <stdbool.h>
+# include <math.h>
 
 # define RESET		"\033[0m"
 # define BLACK		"\033[0;30m"
@@ -58,24 +61,29 @@ typedef struct s_vecstack
 
 /* mlx */
 void		my_mlx_pixel_put(t_texture *data, int x, int y, int color);
-// int		get_colour(t_colour colour);
+
 /* hooks */
 int			x_close(t_data *data);
 int			key_handler(int keycode, t_data *data);
+
 /* render stuff */
 void		ray_the_caster(t_data *data);
 void		draw_the_walls(t_data *data, int x, int y, bool wall);
+
 /* vector */
+t_vector	normalize_vec(t_vector vec);
 t_vector	vector_add(t_vector first, t_vector second);
 t_vector	vector_multpl(t_vector first, t_vector second);
 t_vector	vector_substr(t_vector first, t_vector second);
 t_vector	rotatevectorlol(t_vector vct, double angle); //do not rename!!!!!!!
+
 /* functions that fix stuff */
 bool		is_wall(t_data *data, t_vector pos);
 double		horizontal_raycast(t_data *data, t_vector direction);
 double		vertikal_raycast(t_data *data, t_vector direction);
 double		calc_the_theorem(t_vector vect);
 void		single_ray(t_data *data, t_vector direction);
+
 /* useless_file_because_norminette */
 int			end_condition(t_data *data, t_vector vector);
 double		direction_check(t_data *data, t_vector direction, \
