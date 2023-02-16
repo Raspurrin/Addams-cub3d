@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:14:04 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 11:16:41 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:16:36 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ int	game_loop(void *data2)
 		mlx_hook(data->win, RED_CROSS, 0, x_close, data);
 		mlx_mouse_hide();
 	}
-	printf("pause: %d\n", data->pause);
 	return (0);
 }
