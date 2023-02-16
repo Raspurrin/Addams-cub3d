@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 02:06:05 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 12:23:18 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:40:31 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,8 @@
 # define DOWN 2
 # define LEFT 4
 # define RIGHT 8
+# define TURN_LEFT 16
+# define TURN_RIGHT 32
 
 # if __linux__
 

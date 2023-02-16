@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:14:09 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 12:14:58 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 13:41:26 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,10 @@ void	move(t_data *data, int32_t movement)
 									rotatevectorlol(data->player.dir, 90))))
 		data->player.pos = vector_substr(data->player.pos, \
 									rotatevectorlol(temp, 90));
+	if (movement & TURN_LEFT)
+		data->player.dir = rotatevectorlol(data->player.dir, -5);
+	if (movement & TURN_RIGHT)
+		data->player.dir = rotatevectorlol(data->player.dir, 5);
 }
 
 void	check_mouse_movement(t_data *data)
@@ -79,6 +83,10 @@ int	move_on_press(int keycode, t_data *data)
 		data->player.movement = data->player.movement | RIGHT;
 	else if (keycode == A_KEY)
 		data->player.movement = data->player.movement | LEFT;
+	else if (keycode == ARROW_LEFT)
+		data->player.movement = data->player.movement | TURN_LEFT;
+	else if (keycode == ARROW_RIGHT)
+		data->player.movement = data->player.movement | TURN_RIGHT;
 	return (0);
 }
 
@@ -92,5 +100,9 @@ int	move_on_release(int keycode, t_data *data)
 		data->player.movement = data->player.movement & ~RIGHT;
 	else if (keycode == A_KEY)
 		data->player.movement = data->player.movement & ~LEFT;
+	else if (keycode == ARROW_LEFT)
+		data->player.movement = data->player.movement & ~TURN_LEFT;
+	else if (keycode == ARROW_RIGHT)
+		data->player.movement = data->player.movement & ~TURN_RIGHT;
 	return (0);
 }
