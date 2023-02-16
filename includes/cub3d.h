@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 02:06:05 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 12:12:57 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:23:18 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -191,7 +191,6 @@ typedef struct s_data
 }	t_data;
 
 /* general functions */
-void		init_texture(t_data *data, t_texture *texture, char *path);
 void		init(t_data *data);
 void		free_data(t_data *data);
 void		errno(int8_t nbr, char *msg, t_data *data);
@@ -221,6 +220,7 @@ int32_t		count_newlines_start(char *file);
 void		draw_vertical_line(t_data *data, t_texture *texture, \
 								t_wall *wall, t_intvector draw);
 void		draw_textures(t_data *data);
+void		init_texture(t_data *data, t_texture *texture, char *path);
 void		init_image(t_data *data, t_img *img);
 void		my_mlx_pixel_put(t_texture *data, int x, int y, int color);
 uint32_t	my_mlx_pixel_get(t_texture *texture, int x, int y);

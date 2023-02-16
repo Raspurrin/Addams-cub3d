@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:15:38 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 11:16:14 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:30:15 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int32_t	main(int argc, char *argv[])
 
 	init(&data);
 	init_image(&data, data.canvas.img);
+	mlx_mouse_hide();
 	data.texture->height = 0;
 	data.texture->width = 0;
 	error_check(&data, argc, argv);

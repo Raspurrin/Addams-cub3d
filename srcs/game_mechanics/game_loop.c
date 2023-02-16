@@ -6,7 +6,7 @@
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/16 01:14:04 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 12:16:36 by mialbert         ###   ########.fr       */
+/*   Updated: 2023/02/16 12:29:19 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ int	x_close(t_data *data)
 void	pause_game(t_data *data)
 {
 	if (data->pause == false)
-			data->pause = true;
+		mlx_mouse_show();
 	else
-		data->pause = false;
+		mlx_mouse_hide();
+	data->pause = !(data->pause);
 }
 
 int	game_loop(void *data2)
@@ -43,7 +44,6 @@ int	game_loop(void *data2)
 		mlx_hook(data->win, KEY_PRESS, 0, move_on_press, data);
 		mlx_hook(data->win, KEY_RELEASE, 0, move_on_release, data);
 		mlx_hook(data->win, RED_CROSS, 0, x_close, data);
-		mlx_mouse_hide();
 	}
 	return (0);
 }
