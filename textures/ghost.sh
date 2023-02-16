@@ -26,7 +26,7 @@ echo -e "              ${PURPLE}XX${RE}   XXx8       88 8X           )T8${PURPLE
 echo -e "              ${PURPLE}X${PINK} ydi${RE}XXX        XXX0X           )[8q             "
 echo -e "              ${PURPLE}X${PINK} pdd${RE}            XX%${PINK} dd${RE}          ]TN${PURPLE}8             "
 echo -e "              ${PURPLE}X${PINK} usd${RE}               ${PINK}ddddd${RE}        ][A${PURPLE}q             "
-echo -e "            ${PURPLE}XXX${RE}      ${RE}             ${PINK}dd ${RE}          T]F${PURPLE}8              "
+echo -e "            ${PURPLE}XXX${RE}      ${RE}              ${PINK}dd ${RE}         T]F${PURPLE}8              "
 echo -e "           ${PURPLE}XX X${RE}                                []T${PURPLE}Kq             "
 echo -e "          ${PURPLE}XX  X${RE}                X%               T[${PURPLE}T8            "
 echo -e "          ${PURPLE}X  XX${RE}               X%                )]8${PURPLE}8            "
