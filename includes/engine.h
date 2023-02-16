@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   engine.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 02:07:45 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 02:12:56 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ENGINE_H
 # define ENGINE_H
+
 # define RESET		"\033[0m"
 # define BLACK		"\033[0;30m"
 # define RED		"\033[0;31m"
@@ -65,11 +78,14 @@ double		calc_the_theorem(t_vector vect);
 void		single_ray(t_data *data, t_vector direction);
 /* useless_file_because_norminette */
 int			end_condition(t_data *data, t_vector vector);
-double		direction_check(t_data	*data, t_vector direction, double y, bool horiz);
-double		ratio_is_actually_distance(t_data *data, double dist, t_vector first, int cond);
-t_vector	cond_horiz_zero(t_data *data, t_vecstack vec, t_vector dir, double ratio);
-t_vector	cond_vert_zero(t_data *data, t_vecstack vec, t_vector dir, double ratio);
+double		direction_check(t_data *data, t_vector direction, \
+										double y, bool horiz);
+double		ratio_is_actually_distance(t_data *data, double dist, \
+										t_vector first, int cond);
+t_vector	cond_horiz_zero(t_data *data, t_vecstack vec, \
+								t_vector dir, double ratio);
+t_vector	cond_vert_zero(t_data *data, t_vecstack vec, \
+								t_vector dir, double ratio);
 t_vector	dir_smoler_zero(t_vector direction, t_vector strich, bool horiz);
-
 
 #endif

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   is_char_checks.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 01:14:44 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 02:14:26 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 bool	is_space_or_1(char c)
@@ -24,13 +36,13 @@ bool	is_player(t_data *data, t_player *player, int32_t x, int32_t y)
 	player->pos.x = x * TILE + (TILE / 2);
 	player->pos.y = y * TILE + (TILE / 2);
 	if (data->map[y][x] == 'N')
-		player->dir.y = -1 * DIR_VECTOR;
+		player->dir.y = -1 * TILE / 4;
 	if (data->map[y][x] == 'S')
-		player->dir.y =  DIR_VECTOR;
+		player->dir.y = TILE / 4;
 	if (data->map[y][x] == 'E')
-		player->dir.x =  DIR_VECTOR;
+		player->dir.x = TILE / 4;
 	if (data->map[y][x] == 'W')
-		player->dir.x = -1 * DIR_VECTOR;
+		player->dir.x = -1 * TILE / 4;
 	data->map[y][x] = '0';
 	return (true);
 }

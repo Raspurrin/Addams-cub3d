@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 01:15:33 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 02:17:14 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 void	init(t_data *data)
@@ -21,7 +33,6 @@ void	init_image(t_data *data, t_img *img)
 
 void	init_texture(t_data *data, t_texture *texture, char *path)
 {
-	printf("wot\n");
 	texture->img->ptr = mlx_xpm_file_to_image(data->mlx, path, \
 						&texture->width, &texture->height);
 	texture->img->data = mlx_get_data_addr(texture->img->ptr, \

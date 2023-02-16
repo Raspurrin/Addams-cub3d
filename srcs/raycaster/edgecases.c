@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   edgecases.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 01:15:16 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 01:43:48 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 t_vector	cond_horiz_zero(t_data *data, t_vecstack vec,
@@ -102,18 +114,5 @@ bool	is_wall(t_data *data, t_vector pos)
 	}
 	if (data->map[x][y] != '0')
 		return (true);
-	return (!true);
-}
-
-double	ratio_is_actually_distance(t_data *data, double dist,
-		t_vector first, int cond)
-{
-	if (cond == 2)
-		dist = A_VERY_VERY_BIG_NUMMER;
-	else
-	{
-		first = vector_substr(data->player.pos, first);
-		dist = sqrt(first.x * first.x + first.y * first.y);;
-	}
-	return (dist);
+	return (false);
 }

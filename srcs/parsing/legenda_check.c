@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   legenda_check.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 01:14:49 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 02:17:33 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static char	*skip_spaces(char **file)
@@ -31,7 +43,7 @@ static void	extract_colour(t_data *data, char *colour_str, t_colour *colour)
 	channel_count = ft_2darrlen(channels);
 	if (channel_count != 3)
 		errno(COLOUR, "", data);
-	colour->a = 0; 
+	colour->a = 0;
 	while (i >= 0)
 	{
 		colour_int = ft_atoi(channels[i]);
@@ -87,5 +99,4 @@ void	element_check(t_data *data, char **file)
 		*file += ft_strlen(path);
 		i++;
 	}
-	printf("texture check: %p\n", data->texture[NORTH].img->ptr);
 }

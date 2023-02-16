@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 01:15:38 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 01:15:39 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/cub3d.h"
 
 int32_t	main(int argc, char *argv[])
@@ -6,7 +18,6 @@ int32_t	main(int argc, char *argv[])
 
 	init(&data);
 	init_image(&data, data.canvas.img);
-
 	data.texture->height = 0;
 	data.texture->width = 0;
 	error_check(&data, argc, argv);

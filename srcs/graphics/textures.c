@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   textures.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 01:14:20 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 01:18:35 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 static double	get_column(t_wall *wall, t_texture *texture)
@@ -44,7 +56,8 @@ static void	draw_wall(t_data *data, t_texture *texture, t_intvector *draw)
 	}
 }
 
-void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, t_intvector draw)
+void	draw_vertical_line(t_data *data, t_texture *texture, \
+								t_wall *wall, t_intvector draw)
 {
 	wall->height = SCREEN_HEIGHT / wall->distance;
 	if (wall->height > SCREEN_HEIGHT)
@@ -52,7 +65,8 @@ void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, t_intvec
 	else
 		wall->offset = (SCREEN_HEIGHT - wall->height) / 2;
 	while ((uint32_t)draw.y < wall->offset)
-		my_mlx_pixel_put(&data->canvas, draw.x, draw.y++, data->ceiling->bgra_i);
+		my_mlx_pixel_put(&data->canvas, draw.x, draw.y++, \
+									data->ceiling->bgra_i);
 	draw_wall(data, texture, &draw);
 	wall->offset = wall->height + (wall->offset * 2);
 	while ((uint32_t)draw.y < wall->offset)

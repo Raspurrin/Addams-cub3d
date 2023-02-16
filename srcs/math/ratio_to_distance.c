@@ -1,24 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   normalize_vec.c                                    :+:      :+:    :+:   */
+/*   ratio_to_distance.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/02/16 01:14:26 by mialbert          #+#    #+#             */
-/*   Updated: 2023/02/16 01:14:27 by mialbert         ###   ########.fr       */
+/*   Created: 2023/02/16 01:44:27 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 01:44:29 by mialbert         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-t_vector	normalize_vec(t_vector vec)
+double	ratio_is_actually_distance(t_data *data, double dist, \
+		t_vector first, int cond)
 {
-	t_vector	out;
-	double		length;
-
-	length = sqrt(vec.x * vec.x + vec.y * vec.y);
-	out.x = vec.x / length;
-	out.y = vec.y / length;
-	return (out);
+	if (cond == OUT_BOUNDS)
+		dist = A_VERY_VERY_BIG_NUMMER;
+	else
+	{
+		first = vector_substr(data->player.pos, first);
+		dist = sqrt(first.x * first.x + first.y * first.y);
+	}
+	return (dist);
 }

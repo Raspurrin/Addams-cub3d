@@ -20,6 +20,7 @@ SRCS	=	./srcs/main.c \
 			./srcs/raycaster/angle.c \
 			./srcs/math/vectors.c \
 			./srcs/math/normalize_vec.c \
+			./srcs/math/ratio_to_distance.c \
 			./srcs/game_mechanics/game_loop.c \
 			./srcs/game_mechanics/movement.c
 

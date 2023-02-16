@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 02:06:05 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 02:14:59 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -21,7 +33,6 @@
 # define FOV 90
 # define RAY_COUNT WIDTH_FOR_CEDRIC
 
-# define DIR_VECTOR TILE / 4
 /* This is the distance you want to keep the player from the wall */
 # define BOUNDARY 10
 
@@ -32,6 +43,15 @@
 # define RED_CROSS 17
 # define MOUSE_MOVE 6
 # define MOUSE_DOWN 4
+
+// error
+# define OUT_BOUNDS 2
+
+// movement bool:
+# define UP 1
+# define DOWN 2
+# define LEFT 4
+# define RIGHT 8
 
 # if __linux__
 
@@ -75,15 +95,7 @@
 #  define S_KEY 1
 #  define D_KEY 2
 
-// movement bool:
-# define UP 1
-# define DOWN 2
-# define LEFT 4
-# define RIGHT 8
-
 # endif
-
-
 
 typedef enum errno
 {
@@ -121,7 +133,6 @@ typedef union s_colour
 	};
 }	t_colour;
 
-
 typedef struct s_intvector
 {
 	int32_t	x;
@@ -142,7 +153,7 @@ typedef struct s_texture
 	int32_t	height;
 }	t_texture;
 
-typedef struct	s_ratio
+typedef struct s_ratio
 {
 	int32_t	interval;
 	int32_t	repeat;
@@ -178,46 +189,47 @@ typedef struct s_data
 /* vector */
 t_vector	normalize_vec(t_vector vec);
 
-void	ray_the_caster(t_data *data);
+void		ray_the_caster(t_data *data);
 
 /* general functions */
-void	init(t_data *data);
-void	free_data(t_data *data);
-void	errno(int8_t nbr, char *msg, t_data *data);
+void		init(t_data *data);
+void		free_data(t_data *data);
+void		errno(int8_t nbr, char *msg, t_data *data);
 
 /* mlx */
-void	move(t_data *data, int32_t movement);
-void	key_hooks(t_data *data);
-int		x_close(t_data *data);
-int		move_on_press(int keycode, t_data *data);
-int		move_on_release(int keycode, t_data *data);
-void	check_mouse_movement(t_data *data);
+void		move(t_data *data, int32_t movement);
+void		key_hooks(t_data *data);
+int			x_close(t_data *data);
+int			move_on_press(int keycode, t_data *data);
+int			move_on_release(int keycode, t_data *data);
+void		check_mouse_movement(t_data *data);
 
 /* parsing */
-char	*read_file(int32_t fd);
-void	error_check(t_data *data, int32_t argc, char **argv);
-void	extract_map(t_data *data, char *file);
-void	element_check(t_data *data, char **file);
-void	init_texture(t_data *data, t_texture *texture, char *path);
-bool	is_space_or_1(char c);
-bool	is_valid_char(char c);
-bool	is_player(t_data *data, t_player *player, int32_t x, int32_t y);
-void	fill_str(char *str, size_t start, size_t end, char c);
-int32_t	count_newlines_end(char *file);
-int32_t	count_newlines_start(char *file);
+char		*read_file(int32_t fd);
+void		error_check(t_data *data, int32_t argc, char **argv);
+void		extract_map(t_data *data, char *file);
+void		element_check(t_data *data, char **file);
+void		init_texture(t_data *data, t_texture *texture, char *path);
+bool		is_space_or_1(char c);
+bool		is_valid_char(char c);
+bool		is_player(t_data *data, t_player *player, int32_t x, int32_t y);
+void		fill_str(char *str, size_t start, size_t end, char c);
+int32_t		count_newlines_end(char *file);
+int32_t		count_newlines_start(char *file);
 
 /* graphics */
-void	draw_textures(t_data *data);
-int32_t	rgb_to_int(int32_t r, int32_t g, int32_t b, int32_t a);
-int32_t	add_channel(int32_t colour, int32_t channel, int8_t bitshift);
-void	print_bits(int32_t nbr);
-void	init_image(t_data *data, t_img *img);
-int32_t	rev_colour(t_colour *colour);
+void		draw_textures(t_data *data);
+int32_t		rgb_to_int(int32_t r, int32_t g, int32_t b, int32_t a);
+int32_t		add_channel(int32_t colour, int32_t channel, int8_t bitshift);
+void		print_bits(int32_t nbr);
+void		init_image(t_data *data, t_img *img);
+int32_t		rev_colour(t_colour *colour);
 
-t_vector get_init_pos(t_player playa);
-int				game_loop(void *data2);
-double	vec_dot(t_vector one, t_vector two);
-unsigned int	my_mlx_pixel_get(t_texture *texture, int x, int y);
-void	draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, t_intvector draw);
-double get_next_angle(t_vector ini, t_player playa, int ray);
+t_vector	get_init_pos(t_player playa);
+int32_t		game_loop(void *data2);
+double		vec_dot(t_vector one, t_vector two);
+uint32_t	my_mlx_pixel_get(t_texture *texture, int x, int y);
+void		draw_vertical_line(t_data *data, t_texture *texture, t_wall *wall, \
+															t_intvector draw);
+double		get_next_angle(t_vector ini, t_player playa, int ray);
 #endif

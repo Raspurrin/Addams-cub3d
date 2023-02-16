@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   raycast.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mialbert <mialbert@student.42wolfsburg.de> +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/02/16 01:15:21 by mialbert          #+#    #+#             */
+/*   Updated: 2023/02/16 01:47:08 by mialbert         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/cub3d.h"
 
 int	end_condition(t_data *data, t_vector vector)
 {
 	if (vector.x < 0 || vector.y < 0 || vector.x > (data->map_width * TILE)
 		|| vector.y > (data->map_height * TILE))
-		return (2);
+		return (OUT_BOUNDS);
 	return (is_wall(data, vector));
 }
 
@@ -98,10 +110,11 @@ void	ray_the_caster(t_data *data)
 	draw.y = 0;
 	while (draw.x < RAY_COUNT)
 	{
-		tmp = rotatevectorlol(vector_substr(init_pos, data->player.pos), get_next_angle(init_pos, data->player, draw.x));
+		tmp = rotatevectorlol(vector_substr(init_pos, data->player.pos), \
+							get_next_angle(init_pos, data->player, draw.x));
 		single_ray(data, tmp);
 		if (draw.x != RAY_COUNT / 2)
-			data->wall.distance *=  vec_dot(data->player.dir, tmp);
+			data->wall.distance *= vec_dot(data->player.dir, tmp);
 		draw_vertical_line(data, &(data->texture)
 		[data->wall.direction], &data->wall, draw);
 		draw.x++;
