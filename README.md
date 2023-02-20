@@ -1,5 +1,13 @@
 # Escape Addam's cub3d
 
+### Index:
+
++ [Description](#description) 
++ [Controls](#controls) 
++ [Currently featuring](#currently-featuring)
++ [Future additions](#future-additions)
++ [Input](#input)
+
 ## Description
 This is a raycasting engine. It is pretty bare bones, I don't have enough time to make it amazing atm,
 BUT this will eventually become a Addam's family themed escape room! :D
@@ -14,12 +22,7 @@ BUT this will eventually become a Addam's family themed escape room! :D
 ## Currently featuring
 - Smoothment! You can press multiple movement keys at the same time with no delay!
 
-## Future additions: 
-- Minimap
-- Animated sprites
-- Doors
-- Audio
-- HUD
+https://user-images.githubusercontent.com/13866954/220087668-fa7b8233-d96a-4956-a566-6f538ef558c1.mp4
 
 ## Input
 To run the game type: 
@@ -35,5 +38,9 @@ This can be in any shape as long as the map is enclosed by walls.
 
 You can find more maps in the map folder, including wrong ones to showcase possible errors.
 
-https://user-images.githubusercontent.com/13866954/220087668-fa7b8233-d96a-4956-a566-6f538ef558c1.mp4
-
+## Future additions
+- Minimap
+- Animated sprites
+- Doors
+- Audio
+- HUD
