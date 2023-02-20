@@ -19,7 +19,9 @@ BUT this will eventually become a Addam's family themed escape room! :D
 - Spacebar for pausing the game and unlocking the cursor to be used freely.
 
 
-## Currently featuring
+## Bonus features
+- Collision (yes I also do not undersand why this is a bonus)
+- Mouse control.
 - Smoothment! You can press multiple movement keys at the same time with no delay!
 
 https://user-images.githubusercontent.com/13866954/220087668-fa7b8233-d96a-4956-a566-6f538ef558c1.mp4
