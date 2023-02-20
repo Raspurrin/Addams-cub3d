@@ -4,7 +4,7 @@
 
 + [Description](#description) 
 + [Controls](#controls) 
-+ [Currently featuring](#currently-featuring)
++ [Bonus features](#bonus-features)
 + [Future additions](#future-additions)
 + [Input](#input)
 
